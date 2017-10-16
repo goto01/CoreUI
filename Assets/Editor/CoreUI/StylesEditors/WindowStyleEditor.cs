@@ -23,7 +23,7 @@ namespace Assets.Editor.CoreUI.StylesEditors
         private int SelectedIndex
         {
             get { return _has9Tiles.boolValue ? 0 : 1; }
-            set { _has9Tiles.boolValue = value == 1; }
+            set { _has9Tiles.boolValue = value == 0; }
         }
 
         protected virtual void OnEnable()
