@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.UICore.StylesSystem.Styles;
 using UnityEngine;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
-   public abstract class BaseUICoreMesh
+   public abstract class BaseUICoreMesh<T> where T: BaseStyle
     {
         private Mesh _mesh;
         protected float _width;
@@ -16,22 +17,22 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         public Mesh Mesh { get { return _mesh; } }
 
-        public Vector3[] Vertices
+        public List<Vector3> Vertices
         {
-            get { return _mesh.vertices; }
-            set { _mesh.vertices = value; }
+            get { return _vertices; }
+            set { _vertices = value; }
         }
 
-        public Vector2[] Uv
+        public List<Vector2> Uv
         {
-            get { return _mesh.uv; }
-            set { _mesh.uv = value; }
+            get { return _uv; }
+            set { _uv = value; }
         }
 
-        public int[] Triangles
+        public List<int> Triangles
         {
-            get { return _mesh.triangles; }
-            set { _mesh.triangles = value; }
+            get { return _triangles; }
+            set { _triangles = value; }
         }
 
         public float Width
@@ -52,11 +53,36 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             _vertices = new List<Vector3>();
             _uv = new List<Vector2>();
             _triangles = new List<int>();
-            _width = 1;
-            _height = 1;
+            _width = .03125f * 50;
+            _height = .03125f * 30;
         }
 
-        public abstract void Init();
+        public abstract void Init(T style);
+
+        protected void PushUV(float uvx, float uvy)
+        {
+            PushUV(new Vector2(uvx, uvy));    
+        }
+
+        protected void PushUV(Vector2 uv)
+        {
+            _uv.Add(uv);    
+        }
+
+        protected void PushVertice(float x, float y)
+        {
+            PushVertice(new Vector3(x, y));
+        }
+
+        protected void PushVertice(Vector3 vertice)
+        {
+            _vertices.Add(vertice);    
+        }
+
+        protected void PushVertice(float x, float y, float uvx, float uvy)
+        {
+            PushVertice(new Vector3(x, y), new Vector2(uvx, uvy));
+        }
 
         protected void PushVertice(Vector3 vertice, Vector2 uv)
         {

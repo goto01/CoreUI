@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using Assets.Scripts.UICore.StylesSystem.Styles;
+using Assets.Scripts.UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
 namespace Assets.Scripts.UICore
@@ -9,6 +10,8 @@ namespace Assets.Scripts.UICore
         private MeshRenderer _meshRenderer;
         private MeshFilter _meshFilter;
         [SerializeField] private Mesh _mesh;
+        [SerializeField] private bool _orderable;
+        [SerializeField] private WindowStyle _windowStyle;
 
         protected virtual void Awake()
         {
@@ -16,9 +19,15 @@ namespace Assets.Scripts.UICore
             _meshFilter = GetComponent<MeshFilter>();
 
             var window = new WindowMesh();
-            window.BorderWidth = .1f;
-            window.Init();
+            window.BorderWidth = .03125f * 4;
+            window.Init(_windowStyle);
             _meshFilter.mesh = window.Mesh;
+        }
+
+        protected virtual void Update()
+        {
+            if (_orderable && Input.GetKeyDown(KeyCode.UpArrow)) _meshRenderer.material.renderQueue++;
+            if (_orderable && Input.GetKeyDown(KeyCode.DownArrow)) _meshRenderer.material.renderQueue--;
         }
     }
 }

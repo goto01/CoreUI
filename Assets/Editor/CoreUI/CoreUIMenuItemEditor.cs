@@ -6,9 +6,9 @@ namespace Assets.Editor.CoreUI
 {
     public class CoreUIMenuItemEditor : ScriptableObject
     {
-        private const string Menu = "Assets/Create/Core UI/";
-
-        [MenuItem(Menu + "Window style", false, 0)]
+        private const string Menu = "Assets/Create/Core UI";
+        
+        [MenuItem(Menu + "/Window style", false, 1000)]
         public static void CreateWindowStyle()
         {
             ObjectCreatorHelper.CreateAsset(typeof (WindowStyle));
