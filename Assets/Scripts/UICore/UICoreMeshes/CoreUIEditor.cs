@@ -18,7 +18,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes
         protected virtual void Awake()
         {
             _factory = new MeshesFactory(_repository);
-            var window = Window(new Rect(0, 0, 1, 1), "Wood Window Style");
+            var window = Window(new Rect(0, 0, 1, 1.40625f*2));
             _meshRenderer = GetComponent<MeshRenderer>();
             _meshFilter = GetComponent<MeshFilter>();
             _meshFilter.mesh = window.Mesh;

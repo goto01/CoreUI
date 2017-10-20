@@ -46,6 +46,8 @@ namespace Assets.Editor.CoreUI.StylesEditors
         protected override void DrawInspector()
         {
             GUI.DrawTexture(_rect, SelectedLayout);
+            if (_has9Tiles.boolValue) EditorGUILayout.LabelField(string.Format("Tile's size: {0} x {1}", TextureSize.x / 2, TextureSize.y / 5));
+            else EditorGUILayout.LabelField(string.Format("Tile's size: {0} x {1}", TextureSize.x / 2, TextureSize.y / 2));
             SelectedIndex = EditorGUILayout.Popup("Window's style layout", SelectedIndex, _variants);
         }
     }
