@@ -1,26 +1,22 @@
-﻿using Assets.Scripts.UICore.Controls.Containers;
+﻿using Assets.Scripts.Singleton;
+using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.StylesSystem.Repository;
 using Assets.Scripts.UICore.UICoreMeshes.Factory;
 using UnityEngine;
 
 namespace Assets.Scripts.UICore
 {
-    public class CoreUIEditor : MonoBehaviour
+    public class CoreUIEditor : SingletonMonoBahaviour<CoreUIEditor>
     {
         private const string DefaultWindow = "Default Window Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
-        private MeshRenderer _meshRenderer;
-        private MeshFilter _meshFilter;
-
-        protected virtual void Awake()
+        
+        public override void AwakeSingleton()
         {
             _factory = new MeshesFactory(_repository);
-            var window = Window(new Rect(0, 0, 1, 1.40625f*2));
-            _meshRenderer = GetComponent<MeshRenderer>();
-            _meshFilter = GetComponent<MeshFilter>();
-            _meshFilter.mesh = window.Mesh;
+            DontDestroyOnLoad(gameObject);
         }
 
         public CoreUIWindow Window(Rect rect, string styleName = DefaultWindow)
