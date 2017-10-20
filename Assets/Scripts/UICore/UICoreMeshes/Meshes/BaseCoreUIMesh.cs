@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Assets.Scripts.UICore.StylesSystem.Styles;
 using UnityEngine;
 
@@ -9,11 +7,11 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
    public abstract class BaseCoreUIMesh
     {
         private Mesh _mesh;
-        protected Rect _rect;
+        private Vector2 _position;
+        private Vector2 _size;   
         private List<Vector3> _vertices;
         private List<Vector2> _uv;
         private List<int> _triangles;
-        private List<Vector3> _normals; 
 
         public Mesh Mesh { get { return _mesh; } }
 
@@ -37,26 +35,34 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         public float X
         {
-            get { return _rect.x; }
-             set { _rect.y = value; }
+            get { return _position.x; }
+            set
+            {
+                _position.x = value;
+                UpdatePositions();
+            }
         }
 
         public float Y
         {
-            get { return _rect.y; }
-             set { _rect.y = value; }
+            get { return _position.y; }
+            set
+            {
+                _position.y = value; 
+                UpdatePositions();
+            }
         }
 
         public float Width
         {
-            get { return _rect.width; }
-            set { _rect.width = value; }
+            get { return _size.x; }
+            set { _size.x = value; }
         }
 
         public float Height
         {
-            get { return _rect.height; }
-            set { _rect.height = value; }
+            get { return _size.y; }
+            set { _size.y = value; }
         }
 
         protected BaseCoreUIMesh()
@@ -65,12 +71,12 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             _vertices = new List<Vector3>();
             _uv = new List<Vector2>();
             _triangles = new List<int>();
-            _normals = new List<Vector3>();
         }
 
         public void Init(BaseStyle style, Rect rect)
         {
-            _rect = rect;
+            _position = rect.position;
+            _size = rect.size;
             Generate(style);
         }
 
@@ -105,15 +111,25 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         {
             _vertices.Add(vertice);
             _uv.Add(uv);
-            //_normals.Add(Vector3.forward);
         }
 
         protected void UpdateMeshInfo()
         {
-            _mesh.SetVertices(_vertices);
+            UpdatePositions();
             _mesh.SetUVs(0, _uv);
             _mesh.SetTriangles(_triangles, 0);
-            //_mesh.SetNormals(_normals);
+        }
+
+        protected void UpdatePositions()
+        {
+            _mesh.SetVertices(_vertices);
+            var vertices = _mesh.vertices;
+            for (var index = 0; index < _mesh.vertexCount; index++)
+            {
+                vertices[index].x += X;
+                vertices[index].y += Y;
+            }
+            _mesh.vertices = vertices;
         }
     }
 }

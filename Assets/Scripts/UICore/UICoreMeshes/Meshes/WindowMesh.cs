@@ -50,50 +50,50 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         private void CreateMesh()
         {
-            PushVertice(X, Y - BorderWidth);
-            PushVertice(X, Y);
-            PushVertice(X + BorderWidth, Y);
-            PushVertice(X + BorderWidth, Y - BorderWidth);
-
-            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
-            PushVertice(X + Width - BorderWidth, Y);
-            PushVertice(X + Width, Y);
-            PushVertice(X + Width, Y - BorderWidth);
-
-            PushVertice(X, Y - Height);
-            PushVertice(X, Y - Height + BorderWidth);
-            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
-            PushVertice(X + BorderWidth, Y - Height);
-
-            PushVertice(X + Width - BorderWidth, Y - Height);
-            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
-            PushVertice(X + Width, Y - Height + BorderWidth);
-            PushVertice(X + Width, Y - Height);
-
-            PushVertice(X, Y - Height + BorderWidth);
-            PushVertice(X, Y - BorderWidth);
-            PushVertice(X + BorderWidth, Y - BorderWidth);
-            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
-
-            PushVertice(X + BorderWidth, Y - BorderWidth);
-            PushVertice(X + BorderWidth, Y);
-            PushVertice(X + Width - BorderWidth, Y);
-            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
-
-            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
-            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
-            PushVertice(X + Width, Y - BorderWidth);
-            PushVertice(X + Width, Y - Height + BorderWidth);
-
-            PushVertice(X + BorderWidth, Y - Height);
-            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
-            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
-            PushVertice(X + Width - BorderWidth, Y - Height);
-
-            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
-            PushVertice(X + BorderWidth, Y - BorderWidth);
-            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
-            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
+            PushVertice(0, - BorderWidth);
+            PushVertice(0, 0);
+            PushVertice(BorderWidth, 0);
+            PushVertice(BorderWidth, - BorderWidth);
+                        
+            PushVertice(Width - BorderWidth, - BorderWidth);
+            PushVertice(Width - BorderWidth, 0);
+            PushVertice(Width, 0);
+            PushVertice(Width, - BorderWidth);
+                        
+            PushVertice(0, 0 - Height);
+            PushVertice(0, 0 - Height + BorderWidth);
+            PushVertice(BorderWidth, - Height + BorderWidth);
+            PushVertice(BorderWidth, - Height);
+                        
+            PushVertice(Width - BorderWidth, - Height);
+            PushVertice(Width - BorderWidth, - Height + BorderWidth);
+            PushVertice(Width, - Height + BorderWidth);
+            PushVertice(Width, - Height);
+                        
+            PushVertice(0, - Height + BorderWidth);
+            PushVertice(0, - BorderWidth);
+            PushVertice(BorderWidth, - BorderWidth);
+            PushVertice(BorderWidth, - Height + BorderWidth);
+                        
+            PushVertice(BorderWidth, - BorderWidth);
+            PushVertice(BorderWidth, 0);
+            PushVertice(Width - BorderWidth, 0);
+            PushVertice(Width - BorderWidth, 0 - BorderWidth);
+                        
+            PushVertice(Width - BorderWidth, 0 - Height + BorderWidth);
+            PushVertice(Width - BorderWidth, 0 - BorderWidth);
+            PushVertice(Width, 0 - BorderWidth);
+            PushVertice(Width, 0 - Height + BorderWidth);
+                        
+            PushVertice(BorderWidth, 0 - Height);
+            PushVertice(BorderWidth, 0 - Height + BorderWidth);
+            PushVertice(Width - BorderWidth, 0 - Height + BorderWidth);
+            PushVertice(Width - BorderWidth, 0 - Height);
+                        
+            PushVertice(BorderWidth, 0 - Height + BorderWidth);
+            PushVertice(BorderWidth, 0 - BorderWidth);
+            PushVertice(Width - BorderWidth, 0 - BorderWidth);
+            PushVertice(Width - BorderWidth, 0 - Height + BorderWidth);
         }
 
         private void ApplyUV3Laytout()
