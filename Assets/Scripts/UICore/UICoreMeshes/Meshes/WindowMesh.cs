@@ -33,7 +33,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
             Triangles = new List<int>()
             {
-                0, 1, 2, 0, 2, 3,           // left botttom corner
+                0, 1, 2 , 0, 2, 3,          // left botttom corner
                 4, 5, 6, 4, 6 , 7,          // left top corner
                 8, 9, 10, 8, 10, 11,        // right top corner
                 12, 13, 14, 12, 14, 15,     // right bottom corner
@@ -49,68 +49,68 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         private void CreateMesh()
         {
-            PushVertice(0, 0);
-            PushVertice(0, BorderWidth);
-            PushVertice(BorderWidth, BorderWidth);
-            PushVertice(BorderWidth, 0);
+            PushVertice(X, Y - BorderWidth);
+            PushVertice(X, Y);
+            PushVertice(X + BorderWidth, Y);
+            PushVertice(X + BorderWidth, Y - BorderWidth);
 
-            PushVertice(0, _height - _borderWidth);
-            PushVertice(0, _height);
-            PushVertice(_borderWidth, _height);
-            PushVertice(_borderWidth, _height - _borderWidth);
+            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
+            PushVertice(X + Width - BorderWidth, Y);
+            PushVertice(X + Width, Y);
+            PushVertice(X + Width, Y - BorderWidth);
 
-            PushVertice(_width - _borderWidth, _height - _borderWidth);
-            PushVertice(_width - _borderWidth, _height);
-            PushVertice(_width, _height);
-            PushVertice(_width, _height - _borderWidth);
+            PushVertice(X, Y - Height);
+            PushVertice(X, Y - Height + BorderWidth);
+            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
+            PushVertice(X + BorderWidth, Y - Height);
 
-            PushVertice(_width - _borderWidth, 0);
-            PushVertice(_width - _borderWidth, _borderWidth);
-            PushVertice(_width, _borderWidth);
-            PushVertice(_width, 0);
+            PushVertice(X + Width - BorderWidth, Y - Height);
+            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
+            PushVertice(X + Width, Y - Height + BorderWidth);
+            PushVertice(X + Width, Y - Height);
 
-            PushVertice(0, _borderWidth);
-            PushVertice(0, _height - _borderWidth);
-            PushVertice(_borderWidth, _height - _borderWidth);
-            PushVertice(_borderWidth, _borderWidth);
+            PushVertice(X, Y - Height + BorderWidth);
+            PushVertice(X, Y - BorderWidth);
+            PushVertice(X + BorderWidth, Y - BorderWidth);
+            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
 
-            PushVertice(_borderWidth, _height - _borderWidth);
-            PushVertice(_borderWidth, _height);
-            PushVertice(_width - _borderWidth, _height);
-            PushVertice(_width - _borderWidth, _height - _borderWidth);
+            PushVertice(X + BorderWidth, Y - BorderWidth);
+            PushVertice(X + BorderWidth, Y);
+            PushVertice(X + Width - BorderWidth, Y);
+            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
 
-            PushVertice(_width - _borderWidth, _borderWidth);
-            PushVertice(_width - _borderWidth, _height - _borderWidth);
-            PushVertice(_width, _height - _borderWidth);
-            PushVertice(_width, _borderWidth);
+            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
+            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
+            PushVertice(X + Width, Y - BorderWidth);
+            PushVertice(X + Width, Y - Height + BorderWidth);
 
-            PushVertice(_borderWidth, 0);
-            PushVertice(_borderWidth, _borderWidth);
-            PushVertice(_width - _borderWidth, _borderWidth);
-            PushVertice(_width - _borderWidth, 0);
+            PushVertice(X + BorderWidth, Y - Height);
+            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
+            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
+            PushVertice(X + Width - BorderWidth, Y - Height);
 
-            PushVertice(_borderWidth, _borderWidth);
-            PushVertice(_borderWidth, _height - _borderWidth);
-            PushVertice(_width - _borderWidth, _height - _borderWidth);
-            PushVertice(_width - _borderWidth, _borderWidth);
+            PushVertice(X + BorderWidth, Y - Height + BorderWidth);
+            PushVertice(X + BorderWidth, Y - BorderWidth);
+            PushVertice(X + Width - BorderWidth, Y - BorderWidth);
+            PushVertice(X + Width - BorderWidth, Y - Height + BorderWidth);
         }
 
         private void ApplyUV3Laytout()
         {
-            PushUV(0, .5f);
-            PushUV(0, 1);
-            PushUV(.5f, 1);
-            PushUV(0.5f, .5f);
-
             PushUV(.5f, .5f);
             PushUV(0, .5f);
             PushUV(0, 1);
-            PushUV(.5f, 1);
+            PushUV(.5f, 1f);
 
             PushUV(.5f, 1);
             PushUV(.5f, .5f);
             PushUV(0, .5f);
             PushUV(0, 1);
+
+            PushUV(0, .5f);
+            PushUV(0, 1);
+            PushUV(.5f, 1);
+            PushUV(.5f, .5f);
 
             PushUV(0, 1);
             PushUV(.5f, 1);
@@ -145,25 +145,25 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         private void ApplyUV9Laytout()
         {
-            PushUV(0, .8f);
-            PushUV(0, 1);
-            PushUV(.5f, 1);
-            PushUV(0.5f, .8f);
-            
             PushUV(0, .6f);
             PushUV(0, .8f);
             PushUV(.5f, .8f);
             PushUV(0.5f, .6f);
-
+            
             PushUV(0, .4f);
             PushUV(0, .6f);
             PushUV(.5f, .6f);
             PushUV(0.5f, .4f);
 
+            PushUV(0, .8f);
+            PushUV(0, 1f);
+            PushUV(.5f, 1f);
+            PushUV(0.5f, .8f);
+
             PushUV(0, .2f);
             PushUV(0, .4f);
             PushUV(.5f, .4f);
-            PushUV(0.5f, .2f);
+            PushUV(.5f, .2f);
 
             PushUV(.5f, .6f);
             PushUV(.5f, .8f);

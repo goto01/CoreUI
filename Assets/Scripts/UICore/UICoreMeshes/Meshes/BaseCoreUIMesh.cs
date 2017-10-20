@@ -9,11 +9,11 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
    public abstract class BaseCoreUIMesh
     {
         private Mesh _mesh;
-        protected float _width;
-        protected float _height;
+        protected Rect _rect;
         private List<Vector3> _vertices;
         private List<Vector2> _uv;
         private List<int> _triangles;
+        private List<Vector3> _normals; 
 
         public Mesh Mesh { get { return _mesh; } }
 
@@ -35,16 +35,28 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             set { _triangles = value; }
         }
 
+        public float X
+        {
+            get { return _rect.x; }
+             set { _rect.y = value; }
+        }
+
+        public float Y
+        {
+            get { return _rect.y; }
+             set { _rect.y = value; }
+        }
+
         public float Width
         {
-            get { return _width; }
-            set { _width = value; }
+            get { return _rect.width; }
+            set { _rect.width = value; }
         }
 
         public float Height
         {
-            get { return _height; }
-            set { _height = value; }
+            get { return _rect.height; }
+            set { _rect.height = value; }
         }
 
         protected BaseCoreUIMesh()
@@ -53,12 +65,12 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             _vertices = new List<Vector3>();
             _uv = new List<Vector2>();
             _triangles = new List<int>();
+            _normals = new List<Vector3>();
         }
 
-        public void Init(BaseStyle style, float width, float height)
+        public void Init(BaseStyle style, Rect rect)
         {
-            _width = width;
-            _height = height;
+            _rect = rect;
             Generate(style);
         }
 
@@ -93,6 +105,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         {
             _vertices.Add(vertice);
             _uv.Add(uv);
+            //_normals.Add(Vector3.forward);
         }
 
         protected void UpdateMeshInfo()
@@ -100,6 +113,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             _mesh.SetVertices(_vertices);
             _mesh.SetUVs(0, _uv);
             _mesh.SetTriangles(_triangles, 0);
+            //_mesh.SetNormals(_normals);
         }
     }
 }

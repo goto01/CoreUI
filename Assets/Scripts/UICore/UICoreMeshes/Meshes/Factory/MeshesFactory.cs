@@ -7,8 +7,6 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes.Factory
 {
     public class MeshesFactory
     {
-        private const string DefaultWindow = "Default Window Style";
-
         private Dictionary<string, BaseStyle> _styles;
 
         public MeshesFactory(StylesRepository repository)
@@ -16,15 +14,15 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes.Factory
             InitStyles(repository);
         }
 
-        public WindowMesh CreateWindow(float width, float height, string windowStyleName = DefaultWindow)
+        public WindowMesh CreateWindow(Rect rect, string windowStyleName)
         {
-            return CreateMesh<WindowMesh>(windowStyleName, width, height);
+            return CreateMesh<WindowMesh>(windowStyleName, rect);
         }
 
-        public T CreateMesh<T>(string styleName, float width, float height) where T: BaseCoreUIMesh, new()
+        public T CreateMesh<T>(string styleName, Rect rect) where T: BaseCoreUIMesh, new()
         {
             var mesh = new T();
-            mesh.Init(_styles[styleName], width, height);
+            mesh.Init(_styles[styleName], rect);
             return mesh;
         }
 

@@ -23,7 +23,7 @@ namespace Assets.Scripts.UICore
 
             var window = new WindowMesh();
             window.BorderWidth = .03125f * 4;
-            window.Init(_windowStyle, 1, 1);
+            window.Init(_windowStyle, new Rect(0, 0, 1, 1));
             _meshFilter.mesh = window.Mesh;
         }
 
