@@ -78,6 +78,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             _position = rect.position;
             _size = rect.size;
             Generate(style);
+            UpdateMeshInfo();
         }
 
         protected abstract void Generate(BaseStyle style);

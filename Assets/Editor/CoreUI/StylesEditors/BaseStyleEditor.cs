@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Editor.CoreUI.StylesEditors
 {
     [CustomEditor(typeof (BaseStyle), true)]
-    public abstract class BaseStyleEditor : UnityEditor.Editor
+    public class BaseStyleEditor : UnityEditor.Editor
     {
         private SerializedProperty _texture;
         private SerializedProperty _pixelWidth;
@@ -28,6 +28,7 @@ namespace Assets.Editor.CoreUI.StylesEditors
         {
             FindSerializedProperties();
             DrawTextureInspector();
+            if (Texture == null) return;
             DrawInspector();
             serializedObject.ApplyModifiedPropertiesWithoutUndo();
         }
@@ -66,6 +67,6 @@ namespace Assets.Editor.CoreUI.StylesEditors
             return _textureHeight;
         }
 
-        protected abstract void DrawInspector();
+        protected virtual void DrawInspector() { }
     }
 }

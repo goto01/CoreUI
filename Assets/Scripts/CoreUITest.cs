@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.UICore;
+using Assets.Scripts.UICore.Controls;
 using Assets.Scripts.UICore.Controls.Containers;
 using UnityEngine;
 
@@ -14,27 +15,8 @@ namespace Assets.Scripts
         {
             _meshFilter = GetComponent<MeshFilter>();
 
-            var instance = CoreUIEditor.Instance;
-            _window = instance.Window(new Rect(1, 1, 2, 2));
+            _window = CoreUIEditor.Instance.Window(new Rect(0, 0, 1, 1), "Item Window Style");
             _meshFilter.mesh = _window.Mesh;
-        }
-
-        protected virtual void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _space = !_space;
-                if (_space)
-                {
-                    _window.X = 1;
-                    _window.Y = 1;
-                }
-                else
-                {
-                    _window.X = -1;
-                    _window.Y = -1;
-                }
-            }
         }
     }
 }

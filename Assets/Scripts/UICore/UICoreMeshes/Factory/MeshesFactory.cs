@@ -20,6 +20,11 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
             return CreateMesh<WindowMesh>(windowStyleName, rect);
         }
 
+        public RectangleMesh CreateImage(Rect rect, string imageStyleName)
+        {
+            return CreateMesh<RectangleMesh>(imageStyleName, rect);
+        }
+
         public T CreateMesh<T>(string styleName, Rect rect) where T: BaseCoreUIMesh, new()
         {
             var mesh = new T();

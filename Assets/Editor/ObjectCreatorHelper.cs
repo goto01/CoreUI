@@ -10,7 +10,6 @@ namespace Assets.Editor
         {
             var asset = ScriptableObject.CreateInstance(type);
             ProjectWindowUtil.CreateAsset(asset, string.Format("{0}.asset", type.Name));
-            Debug.Log("CREATED");
             return asset;
         }
     }

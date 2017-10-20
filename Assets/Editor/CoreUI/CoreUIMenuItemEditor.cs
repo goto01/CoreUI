@@ -9,11 +9,18 @@ namespace Assets.Editor.CoreUI
     {
         private const string Menu = "Assets/Create/Core UI";
         
-        [MenuItem(Menu + "/Window style", false, 1001)]
+        [MenuItem(Menu + "/Window style", false, 1101)]
         public static void CreateWindowStyle()
         {
             ObjectCreatorHelper.CreateAsset(typeof (WindowStyle));
         }
+
+        [MenuItem(Menu + "/Image style", false, 1102)]
+        public static void CreateImageStyle()
+        {
+            ObjectCreatorHelper.CreateAsset(typeof(ImageStyle));
+        }
+
 
         [MenuItem(Menu + "/Styles repository", false, 1000)]
         public static void CreateStylesRepository()

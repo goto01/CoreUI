@@ -44,8 +44,6 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
                 28, 29, 30, 28, 30, 31,     // bottom border
                 32, 33, 34, 32, 34, 35,     // content area
             };
-
-            UpdateMeshInfo();
         }
 
         private void CreateMesh()

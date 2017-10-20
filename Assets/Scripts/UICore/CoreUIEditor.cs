@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Singleton;
+using Assets.Scripts.UICore.Controls;
 using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.StylesSystem.Repository;
 using Assets.Scripts.UICore.UICoreMeshes.Factory;
@@ -8,7 +9,8 @@ namespace Assets.Scripts.UICore
 {
     public class CoreUIEditor : SingletonMonoBahaviour<CoreUIEditor>
     {
-        private const string DefaultWindow = "Default Window Style";
+        private const string DefaultWindowStyle = "Default Window Style";
+        private const string DefaultImageStyle = "Default Image Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -19,10 +21,16 @@ namespace Assets.Scripts.UICore
             DontDestroyOnLoad(gameObject);
         }
 
-        public CoreUIWindow Window(Rect rect, string styleName = DefaultWindow)
+        public CoreUIWindow Window(Rect rect, string styleName = DefaultWindowStyle)
         {
             var mesh = _factory.CreateWindow(rect, styleName);
             return new CoreUIWindow(mesh);
+        }
+
+        public CoreUIImage Image(Rect rect, Texture2D texture, string styleName = DefaultImageStyle)
+        {
+            var mesh = _factory.CreateImage(rect, styleName);
+            return new CoreUIImage(mesh);
         }
     }
 }
