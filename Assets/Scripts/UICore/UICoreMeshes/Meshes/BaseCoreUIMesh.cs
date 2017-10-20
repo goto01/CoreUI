@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
-   public abstract class BaseUICoreMesh<T> where T: BaseStyle
+   public abstract class BaseCoreUIMesh
     {
         private Mesh _mesh;
         protected float _width;
@@ -47,17 +47,22 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             set { _height = value; }
         }
 
-        protected BaseUICoreMesh()
+        protected BaseCoreUIMesh()
         {
             _mesh = new Mesh();
             _vertices = new List<Vector3>();
             _uv = new List<Vector2>();
             _triangles = new List<int>();
-            _width = .03125f * 50;
-            _height = .03125f * 30;
         }
 
-        public abstract void Init(T style);
+        public void Init(BaseStyle style, float width, float height)
+        {
+            _width = width;
+            _height = height;
+            Generate(style);
+        }
+
+        protected abstract void Generate(BaseStyle style);
 
         protected void PushUV(float uvx, float uvy)
         {

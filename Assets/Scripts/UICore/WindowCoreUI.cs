@@ -9,9 +9,12 @@ namespace Assets.Scripts.UICore
     {
         private MeshRenderer _meshRenderer;
         private MeshFilter _meshFilter;
-        [SerializeField] private Mesh _mesh;
-        [SerializeField] private bool _orderable;
-        [SerializeField] private WindowStyle _windowStyle;
+        [SerializeField]
+        private Mesh _mesh;
+        [SerializeField]
+        private bool _orderable;
+        [SerializeField]
+        private WindowStyle _windowStyle;
 
         protected virtual void Awake()
         {
@@ -20,7 +23,7 @@ namespace Assets.Scripts.UICore
 
             var window = new WindowMesh();
             window.BorderWidth = .03125f * 4;
-            window.Init(_windowStyle);
+            window.Init(_windowStyle, 1, 1);
             _meshFilter.mesh = window.Mesh;
         }
 

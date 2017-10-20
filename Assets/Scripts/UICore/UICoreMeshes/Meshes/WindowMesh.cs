@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
-    class WindowMesh : BaseUICoreMesh<WindowStyle>
+    public class WindowMesh : BaseCoreUIMesh
     {
         private float _borderWidth;
 
@@ -14,8 +14,19 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             set { _borderWidth = value; }
         }
 
-        public override void Init(WindowStyle style)
+        protected override void Generate(BaseStyle style)
         {
+            if (!(style is WindowStyle))
+            {
+                Debug.LogErrorFormat("Can't generate window mesh because style {0} isn't a window's style", style.name);
+                return;
+            }
+            Generate(style as WindowStyle);
+        }
+
+        private void Generate(WindowStyle style)
+        {
+            BorderWidth = 1f/32*4;
             CreateMesh();
             if (style.Has9Tiles) ApplyUV9Laytout();
             else ApplyUV3Laytout();
