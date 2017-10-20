@@ -27,7 +27,6 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         private void Generate(WindowStyle style)
         {
             BorderWidth = style.BorderWidth;
-            Debug.Log(BorderWidth);
             CreateMesh();
             if (style.Has9Tiles) ApplyUV9Laytout();
             else ApplyUV3Laytout();
