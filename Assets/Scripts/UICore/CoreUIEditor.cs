@@ -1,10 +1,9 @@
 ﻿using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.StylesSystem.Repository;
-using Assets.Scripts.UICore.UICoreMeshes.Meshes.Factory;
-using UnityEditor;
+using Assets.Scripts.UICore.UICoreMeshes.Factory;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.UICoreMeshes
+namespace Assets.Scripts.UICore
 {
     public class CoreUIEditor : MonoBehaviour
     {
