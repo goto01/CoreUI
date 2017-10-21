@@ -9,6 +9,8 @@ namespace Assets.Scripts.UICore.Controls
 
         public Mesh Mesh { get { return _coreUIMesh.Mesh; } }
 
+        public Texture2D Texture { get { return _coreUIMesh.Texture; } }
+
         public float X
         {
             get { return _coreUIMesh.X; }

@@ -12,6 +12,9 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         private List<Vector3> _vertices;
         private List<Vector2> _uv;
         private List<int> _triangles;
+        private Texture2D _terxture;
+
+        public Texture2D Texture { get { return _terxture;} }
 
         public Mesh Mesh { get { return _mesh; } }
 
@@ -83,6 +86,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         public void Init(BaseStyle style, Rect rect)
         {
+            _terxture = style.Texture;
             _position = rect.position;
             _size = rect.size;
             Generate(style);
