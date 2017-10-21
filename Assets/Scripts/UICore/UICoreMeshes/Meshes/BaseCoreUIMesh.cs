@@ -56,13 +56,21 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         public float Width
         {
             get { return _size.x; }
-            set { _size.x = value; }
+            set
+            {
+                _size.x = value;
+                ApplySize();
+            }
         }
 
         public float Height
         {
             get { return _size.y; }
-            set { _size.y = value; }
+            set
+            {
+                _size.y = value;
+                ApplySize();
+            }
         }
 
         protected BaseCoreUIMesh()
@@ -80,8 +88,6 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             Generate(style);
             UpdateMeshInfo();
         }
-
-        protected abstract void Generate(BaseStyle style);
 
         protected void PushUV(float uvx, float uvy)
         {
@@ -132,5 +138,13 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             }
             _mesh.vertices = vertices;
         }
+
+        protected void Clear()
+        {
+            _vertices.Clear();
+        }
+
+        protected abstract void Generate(BaseStyle style);
+        protected abstract void ApplySize();
     }
 }

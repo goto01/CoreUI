@@ -7,8 +7,10 @@ namespace Assets.Editor.CoreUI.StylesEditors
     [CustomEditor(typeof (BaseStyle), true)]
     public class BaseStyleEditor : UnityEditor.Editor
     {
-        private SerializedProperty _texture;
-        private SerializedProperty _pixelWidth;
+        protected const string StyleStaffPath = "CoreUI/StylesStaff/";
+
+        protected SerializedProperty _texture;
+        protected SerializedProperty _pixelWidth;
         private float _textureHeight;
         protected Rect _rect;
         private bool _foldout;
@@ -39,7 +41,7 @@ namespace Assets.Editor.CoreUI.StylesEditors
             _pixelWidth= serializedObject.FindProperty("_pixelWidth");
         }
 
-        private void DrawTextureInspector()
+        protected virtual void DrawTextureInspector()
         {
             EditorGUILayout.PropertyField(_pixelWidth);
             EditorGUILayout.ObjectField(_texture, typeof (Texture2D));
@@ -48,7 +50,7 @@ namespace Assets.Editor.CoreUI.StylesEditors
             DrawTexturePreview(texture);
         }
 
-        private void DrawTexturePreview(Texture2D texture)
+        protected virtual void DrawTexturePreview(Texture2D texture)
         {
             EditorGUILayout.LabelField(string.Format("Texture's size: {0} x {1}", texture.width, texture.height));
             _foldout = EditorGUILayout.Foldout(_foldout, "Texture");

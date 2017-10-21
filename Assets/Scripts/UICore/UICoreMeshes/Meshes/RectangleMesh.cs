@@ -23,5 +23,10 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
                 2, 1, 3,
             };
         }
+
+        protected override void ApplySize()
+        {
+
+        }
     }
 }

@@ -10,7 +10,6 @@ namespace Assets.Editor.CoreUI.StylesEditors
     {
         private const string NineTiles = "9 Tiles";
         private const string ThreeTiles = "3 Tiles";
-        private const string StyleStaffPath = "CoreUI/StylesStaff/Window/";
 
         private SerializedProperty _has9Tiles;
         private readonly string[] _variants = { NineTiles, ThreeTiles };
@@ -28,8 +27,8 @@ namespace Assets.Editor.CoreUI.StylesEditors
 
         protected virtual void OnEnable()
         {
-            _nineTilesTexture = EditorGUIUtility.Load(StyleStaffPath + "9TilesLayout.png") as Texture2D;
-            _threeTilesTexture = EditorGUIUtility.Load(StyleStaffPath + "3TilesLayout.png") as Texture2D;
+            _nineTilesTexture = EditorGUIUtility.Load(StyleStaffPath + "Window9TilesLayout.png") as Texture2D;
+            _threeTilesTexture = EditorGUIUtility.Load(StyleStaffPath + "Window3TilesLayout.png") as Texture2D;
             _selectedLayoutTexture = new Dictionary<int, Texture2D>()
             {
                 {0, _nineTilesTexture},

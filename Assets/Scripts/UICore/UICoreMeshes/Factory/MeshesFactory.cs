@@ -15,23 +15,32 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
             InitStyles(repository);
         }
 
-        public WindowMesh CreateWindow(Rect rect, string windowStyleName)
+        public WindowMesh CreateWindow(Rect rect, string styleName)
         {
-            return CreateMesh<WindowMesh>(windowStyleName, rect);
+            var window = new WindowMesh();
+            window.Init(GetStyle(styleName), rect);
+            return window;
         }
 
-        public RectangleMesh CreateImage(Rect rect, string imageStyleName)
+        public RectangleMesh CreateImage(Rect rect, string styleName)
         {
-            return CreateMesh<RectangleMesh>(imageStyleName, rect);
+            var image = new RectangleMesh();
+            image.Init(GetStyle(styleName), rect);
+            return image;
         }
 
-        public T CreateMesh<T>(string styleName, Rect rect) where T: BaseCoreUIMesh, new()
+        public FlexibleImageMesh CreateFlexibleImage(Rect rect, FlexiblaImageOrientation orientation, string styleName)
         {
-            var mesh = new T();
-            mesh.Init(_styles[styleName], rect);
-            return mesh;
+            var flexibleImage = new FlexibleImageMesh(orientation);
+            flexibleImage.Init(GetStyle(styleName), rect);
+            return flexibleImage;
         }
 
+        private BaseStyle GetStyle(string styleName)
+        {
+            return _styles[styleName];
+        }
+        
         private void InitStyles(StylesRepository repository)
         {
             _styles = new Dictionary<string, BaseStyle>();

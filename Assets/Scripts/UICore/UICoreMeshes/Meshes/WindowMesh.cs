@@ -188,5 +188,10 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             PushUV(1, .2f);
             PushUV(1, 0);
         }
+        
+        protected override void ApplySize()
+        {
+
+        }
     }
 }

@@ -4,6 +4,7 @@ using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.Presentation;
 using Assets.Scripts.UICore.StylesSystem.Repository;
 using Assets.Scripts.UICore.UICoreMeshes.Factory;
+using Assets.Scripts.UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
 namespace Assets.Scripts.UICore
@@ -12,6 +13,7 @@ namespace Assets.Scripts.UICore
     {
         private const string DefaultWindowStyle = "Default Window Style";
         private const string DefaultImageStyle = "Default Image Style";
+        private const string DefaultFlexibleImageStyle = "Default Flexible Image Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -37,6 +39,19 @@ namespace Assets.Scripts.UICore
             var element = new CoreUIImage(mesh);
             CreatePresentationItem(element);
             return element;
+        }
+
+        public CoreUIFlexibleImage FlexibleImage(Rect rect, FlexiblaImageOrientation orientation, string styleName = DefaultFlexibleImageStyle)
+        {
+            var mesh = _factory.CreateFlexibleImage(rect, orientation, styleName);
+            var element = new CoreUIFlexibleImage(mesh);
+            CreatePresentationItem(element);
+            return element;
+        }
+
+        public CoreUIFlexibleImage FlexibleImage(Rect rect, string styleName = DefaultFlexibleImageStyle)
+        {
+            return FlexibleImage(rect, FlexiblaImageOrientation.Horizontal, styleName);
         }
 
         private void CreatePresentationItem(CoreUIElement element)
