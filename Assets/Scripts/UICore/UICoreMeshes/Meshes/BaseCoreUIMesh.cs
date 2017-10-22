@@ -148,6 +148,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             UpdatePositions();
             _mesh.SetUVs(0, _uv);
             _mesh.SetTriangles(_triangles, 0);
+            _mesh.bounds = new Bounds(new Vector3(-100, -100), new Vector3(200, 200));
         }
 
         protected void UpdatePositions()

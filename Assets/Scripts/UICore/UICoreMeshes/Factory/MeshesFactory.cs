@@ -27,8 +27,8 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
         {
             var image = new RectangleMesh();
             var style = GetStyle(styleName);
-            image.Texture = texture;
             image.Init(style, rect);
+            image.Texture = texture;
             return image;
         }
 

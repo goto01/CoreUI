@@ -14,7 +14,6 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
                 base.Texture = value;
                 if (value == null) return;
                 Resize(Texture.width * _pixelWidth, Texture.height * _pixelWidth);
-                ApplySize();
             }
         }
 
