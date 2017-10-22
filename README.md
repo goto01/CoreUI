@@ -10,3 +10,7 @@ Simple UI system for Unity
 ## Implemented elements
 - Window
 - Image
+- Flexible Image (Progress bar)
+- Slider
+
+[Tileset](http://pixeljoint.com/pixelart/73768.htm)
