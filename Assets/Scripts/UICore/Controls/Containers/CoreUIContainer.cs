@@ -19,9 +19,15 @@ namespace Assets.Scripts.UICore.Controls.Containers
             _elements.Add(element);
         }
 
-        public override void Update()
+        public override bool Update(CoreUIEvent e)
         {
-            for (var index = 0; index < _elements.Count; index++) _elements[index].Update();
+            var focused = false;
+            for (var index = 0; index < _elements.Count; index++)
+            {
+                var elementFocus = _elements[index].Update(e);
+                if (!focused && elementFocus) focused = true;
+            }
+            return focused || base.Update(e);
         }
     }
 }

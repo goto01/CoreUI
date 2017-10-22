@@ -46,7 +46,17 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             set { _triangles = value; }
         }
 
-        public float X
+        public Rect Rect
+        {
+            get
+            {
+                var rect = _position;
+                rect.y -= rect.height;
+                return rect;
+            }
+        }
+
+       public float X
         {
             get { return _position.x; }
             set

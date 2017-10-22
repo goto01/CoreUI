@@ -7,10 +7,5 @@ namespace Assets.Scripts.UICore.Controls
         public CoreUIImage(RectangleMesh mesh) : base(mesh)
         {
         }
-
-        public override void Update()
-        {
-            
-        }
     }
 }

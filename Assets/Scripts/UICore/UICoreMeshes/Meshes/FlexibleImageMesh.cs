@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Assets.Scripts.UICore.StylesSystem.Styles;
+using Debug = UnityEngine.Debug;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
@@ -57,38 +59,38 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         private void GenerateHorizontal()
         {
-            PushVertice(X, Y - _borderHeight);
-            PushVertice(X, Y);
-            PushVertice(X + _borderWidth, Y);
-            PushVertice(X + _borderWidth, Y - _borderHeight);
-
-            PushVertice(X + _borderWidth, Y - _borderHeight);
-            PushVertice(X + _borderWidth, Y);
-            PushVertice(X + Width - _borderWidth, Y);
-            PushVertice(X + Width - _borderWidth, Y - _borderHeight);
-
-            PushVertice(X + Width - _borderWidth, Y - _borderHeight);
-            PushVertice(X + Width - _borderWidth, Y);
-            PushVertice(X + Width, Y);
-            PushVertice(X + Width, Y - _borderHeight);
+            PushVertice(0, -_borderHeight);
+            PushVertice(0, 0);
+            PushVertice(0 + _borderWidth, 0);
+            PushVertice(0 + _borderWidth, - _borderHeight);
+                        
+            PushVertice(0 + _borderWidth, - _borderHeight);
+            PushVertice(0 + _borderWidth, 0);
+            PushVertice(0 + Width - _borderWidth, 0);
+            PushVertice(0 + Width - _borderWidth, - _borderHeight);
+                        
+            PushVertice(0 + Width - _borderWidth, - _borderHeight);
+            PushVertice(0 + Width - _borderWidth, 0);
+            PushVertice(0 + Width, 0);
+            PushVertice(0 + Width, - _borderHeight);
         }
 
         private void GenerateVertical()
         {
-            PushVertice(X, Y);
-            PushVertice(X + Width, Y);
-            PushVertice(X + Width, Y - _borderWidth);
-            PushVertice(X, Y - _borderWidth);
-
-            PushVertice(X, Y - _borderWidth);
-            PushVertice(X + Width, Y - _borderWidth);
-            PushVertice(X + Width, Y - Height + _borderWidth);
-            PushVertice(X, Y - Height + _borderWidth);
-
-            PushVertice(X, Y - Height + _borderWidth);
-            PushVertice(X + Width, Y - Height + _borderWidth);
-            PushVertice(X + Width, Y - Height);
-            PushVertice(X, Y - Height);
+            PushVertice(0, 0);
+            PushVertice(0 + Width, 0);
+            PushVertice(0 + Width, - _borderWidth);
+            PushVertice(0, - _borderWidth);
+                        
+            PushVertice(0, - _borderWidth);
+            PushVertice(0 + Width, - _borderWidth);
+            PushVertice(0 + Width, - Height + _borderWidth);
+            PushVertice(0, - Height + _borderWidth);
+                        
+            PushVertice(0, - Height + _borderWidth);
+            PushVertice(0 + Width, - Height + _borderWidth);
+            PushVertice(0 + Width, - Height);
+            PushVertice(0, - Height);
         }
 
         private void ApplyUV()

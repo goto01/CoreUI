@@ -15,16 +15,18 @@ namespace Assets.Scripts
 
         protected virtual void Awake()
         {
-            _slider1 = CoreUIEditor.Instance.Slider(new Rect(0, 0, 3, 0), "RPG Slider Style");
-            _slider2 = CoreUIEditor.Instance.Slider(new Rect(0, 0, 3, 0), CoreUIOrientation.Vertical, "RPG Slider Style");
+            _slider1 = CoreUIEditor.Instance.Slider(new Rect(0, 0, 3, 0),"RPG Slider Style");
+            _slider2 = CoreUIEditor.Instance.Slider(new Rect(1, 1, 3, 0), CoreUIOrientation.Vertical, "RPG Slider Style");
+            _slider2 = CoreUIEditor.Instance.Slider(new Rect(-1, -1, 3, 0), CoreUIOrientation.Vertical, "RPG Slider Style");
+            //CoreUIEditor.Instance.FlexibleImage(new Rect(1, 1, 3, 0));
         }
 
         protected virtual void Update()
         {
             if (Input.GetKeyDown(KeyCode.P)) _value += _valueDelta;
             if (Input.GetKeyDown(KeyCode.M)) _value -= _valueDelta;
-            _slider1.Value = _value;
-            _slider2.Value = _value;
+            //_slider1.Value = _value;
+            //_slider2.Value = _value;
         }
     }
 }

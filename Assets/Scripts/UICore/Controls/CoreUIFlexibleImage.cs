@@ -9,10 +9,5 @@ namespace Assets.Scripts.UICore.Controls
         public CoreUIFlexibleImage(FlexibleImageMesh mesh) : base(mesh)
         {
         }
-
-        public override void Update()
-        {
-            
-        }
     }
 }

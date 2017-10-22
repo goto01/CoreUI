@@ -24,7 +24,13 @@ namespace Assets.Scripts.UICore.Presentation
 
         protected virtual void Update()
         {
-            _element.Update();
+            _element.Update(new CoreUIEvent()
+            {
+                PointerPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                ScrollDir = Input.mouseScrollDelta.y,
+                PointerDown = Input.GetMouseButtonDown(0),
+                PointerUp = Input.GetMouseButtonUp(0),
+            });
             UpdateTexture();
         }
 

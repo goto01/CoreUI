@@ -5,6 +5,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
 {
     public class CoreUISlider : CoreUIContainer
     {
+        private float _delta = .1f;
         private float _value = .5f;
         private float _borderWidth;
         private CoreUIOrientation _orientation;
@@ -25,10 +26,13 @@ namespace Assets.Scripts.UICore.Controls.Containers
             AddElement(point);
         }
 
-        public override void Update()
+        public override bool Update(CoreUIEvent e)
         {
+            var focus = base.Update(e);
+            if (focus) HandleEvent(e);
+            HandleMouse(e);
             UpdatePointPosition();
-            base.Update();
+            return focus;
         }
 
         private void UpdatePointPosition()
@@ -39,7 +43,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
 
         private void UpdateHorizontalPointPosition()
         {
-            var x = X + Mathf.Lerp(X + _borderWidth, X + Width - _borderWidth, _value);
+            var x = Mathf.Lerp(X + _borderWidth, X + Width - _borderWidth, _value);
             var y = Y - Height / 2f;
             Point.CenterX = x;
             Point.CenterY = y;
@@ -48,9 +52,21 @@ namespace Assets.Scripts.UICore.Controls.Containers
         private void UpdateVerticalPointPosition()
         {
             var x = X + Width/2;
-            var y = Mathf.Lerp(Y - _borderWidth, Y - Height + _borderWidth, _value);
+            var y = Mathf.Lerp(Y - _borderWidth, Y - Height + _borderWidth, 1-_value);
             Point.CenterX = x;
             Point.CenterY = y;
+        }
+
+        private void HandleEvent(CoreUIEvent e)
+        {
+            Value = Value + e.ScrollDir*_delta;
+        }
+
+        private void HandleMouse(CoreUIEvent e)
+        {
+            if (!Point.Dragged) return;
+            if (_orientation == CoreUIOrientation.Horizontal) Value = Mathf.InverseLerp(X + _borderWidth, X + Width - _borderWidth, e.PointerPosition.x);
+            else Value = Mathf.InverseLerp(Y - Height + _borderWidth, Y - _borderWidth, e.PointerPosition.y);
         }
     }
 }

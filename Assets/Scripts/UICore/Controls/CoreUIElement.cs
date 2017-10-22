@@ -6,6 +6,10 @@ namespace Assets.Scripts.UICore.Controls
     public abstract class CoreUIElement
     {
         protected BaseCoreUIMesh _coreUIMesh;
+        private bool _focused;
+        private bool _dragged;
+
+        public bool Dragged { get { return _dragged; } }
 
         public BaseCoreUIMesh CoreUIMesh { get { return _coreUIMesh; } }
 
@@ -59,7 +63,13 @@ namespace Assets.Scripts.UICore.Controls
             set { Y = value + Height/2f; }
         }
 
-        public abstract void Update();
+        public virtual bool Update(CoreUIEvent e)
+        {
+            var focus = _coreUIMesh.Rect.Contains(e.PointerPosition);
+            if (focus && e.PointerDown) _dragged = true;
+            if (e.PointerUp) _dragged = false;
+            return focus;
+        }
         
         protected CoreUIElement(BaseCoreUIMesh mesh)
         {
