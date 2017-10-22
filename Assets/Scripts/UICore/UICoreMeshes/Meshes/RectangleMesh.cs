@@ -1,10 +1,23 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.UICore.StylesSystem.Styles;
+using UnityEngine;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
     public class RectangleMesh : BaseCoreUIMesh
     {
+        public override Texture2D Texture
+        {
+            get { return base.Texture; }
+            set
+            {
+                base.Texture = value;
+                if (value == null) return;
+                Resize(Texture.width * _pixelWidth, Texture.height * _pixelWidth);
+                ApplySize();
+            }
+        }
+
         protected override void Generate(BaseStyle style)
         {
             GenerateMesh();
@@ -12,10 +25,8 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         private void GenerateMesh()
         {
-            PushVertice(0, 0, 0, 1);
-            PushVertice(Width, 0, 1, 1);
-            PushVertice(0, -Height, 0, 0);
-            PushVertice(Width, -Height, 1, 0);
+            GenerateVertices();
+            GenerateUV();   
 
             Triangles = new List<int>()
             {
@@ -24,9 +35,27 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             };
         }
 
+        private void GenerateVertices()
+        {
+            PushVertice(0, 0);
+            PushVertice(Width, 0);
+            PushVertice(0, -Height);
+            PushVertice(Width, -Height);
+        }
+
+        private void GenerateUV()
+        {
+            PushUV(0, 1);
+            PushUV(1, 1);
+            PushUV(0, 0);
+            PushUV(1, 0);
+        }
+
         protected override void ApplySize()
         {
-
+            Clear();
+            GenerateVertices();
+            UpdatePositions();
         }
     }
 }

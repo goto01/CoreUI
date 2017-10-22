@@ -7,14 +7,24 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
    public abstract class BaseCoreUIMesh
     {
         private Mesh _mesh;
-        private Vector2 _position;
-        private Vector2 _size;   
+        private Rect _position;
         private List<Vector3> _vertices;
         private List<Vector2> _uv;
         private List<int> _triangles;
         private Texture2D _terxture;
+        protected float _pixelWidth;
 
-        public Texture2D Texture { get { return _terxture;} }
+        public bool TextureChanged { get; set; }
+
+        public virtual Texture2D Texture
+        {
+            get { return _terxture;}
+            set
+            {
+                _terxture = value;
+                TextureChanged = true;
+            }
+        }
 
         public Mesh Mesh { get { return _mesh; } }
 
@@ -58,22 +68,14 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
         public float Width
         {
-            get { return _size.x; }
-            set
-            {
-                _size.x = value;
-                ApplySize();
-            }
+            get { return _position.width; }
+            set { _position.width = value; }
         }
 
         public float Height
         {
-            get { return _size.y; }
-            set
-            {
-                _size.y = value;
-                ApplySize();
-            }
+            get { return _position.height; }
+            set { _position.height = value; }
         }
 
         protected BaseCoreUIMesh()
@@ -84,13 +86,20 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             _triangles = new List<int>();
         }
 
-        public void Init(BaseStyle style, Rect rect)
+        public virtual void Init(BaseStyle style, Rect rect)
         {
             _terxture = style.Texture;
-            _position = rect.position;
-            _size = rect.size;
+            _pixelWidth = style.PixelWidth;
+            _position = rect;
             Generate(style);
             UpdateMeshInfo();
+        }
+
+        public void Resize(float width, float height)
+        {
+            Width = width;
+            Height = height;
+            ApplySize();
         }
 
         protected void PushUV(float uvx, float uvy)

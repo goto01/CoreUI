@@ -14,6 +14,7 @@ namespace Assets.Scripts.UICore
         private const string DefaultWindowStyle = "Default Window Style";
         private const string DefaultImageStyle = "Default Image Style";
         private const string DefaultFlexibleImageStyle = "Default Flexible Image Style";
+        private const string DefaultSliderStyle= "Default Slider Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -35,13 +36,14 @@ namespace Assets.Scripts.UICore
 
         public CoreUIImage Image(Rect rect, Texture2D texture, string styleName = DefaultImageStyle)
         {
-            var mesh = _factory.CreateImage(rect, styleName);
+            var mesh = _factory.CreateImage(rect, texture, styleName);
+            mesh.Texture = texture;
             var element = new CoreUIImage(mesh);
             CreatePresentationItem(element);
             return element;
         }
 
-        public CoreUIFlexibleImage FlexibleImage(Rect rect, FlexiblaImageOrientation orientation, string styleName = DefaultFlexibleImageStyle)
+        public CoreUIFlexibleImage FlexibleImage(Rect rect, CoreUIOrientation orientation, string styleName = DefaultFlexibleImageStyle)
         {
             var mesh = _factory.CreateFlexibleImage(rect, orientation, styleName);
             var element = new CoreUIFlexibleImage(mesh);
@@ -51,7 +53,21 @@ namespace Assets.Scripts.UICore
 
         public CoreUIFlexibleImage FlexibleImage(Rect rect, string styleName = DefaultFlexibleImageStyle)
         {
-            return FlexibleImage(rect, FlexiblaImageOrientation.Horizontal, styleName);
+            return FlexibleImage(rect, CoreUIOrientation.Horizontal, styleName);
+        }
+
+        public CoreUISlider Slider(Rect rect, CoreUIOrientation orientation, string styleName = DefaultSliderStyle)
+        {
+            var mesh = _factory.CreateSlider(rect, orientation, styleName);
+            var point = Image(rect, null);
+            var element = new CoreUISlider(mesh, point, orientation);
+            CreatePresentationItem(element);
+            return element;
+        }
+
+        public CoreUISlider Slider(Rect rect, string styleName = DefaultSliderStyle)
+        {
+            return Slider(rect, CoreUIOrientation.Horizontal, styleName);
         }
 
         private void CreatePresentationItem(CoreUIElement element)

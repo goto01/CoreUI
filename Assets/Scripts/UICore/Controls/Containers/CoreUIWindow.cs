@@ -5,7 +5,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
 {
     public class CoreUIWindow : CoreUIContainer
     {
-        public CoreUIWindow(BaseCoreUIMesh mesh) : base(mesh)
+        public CoreUIWindow(WindowMesh mesh) : base(mesh)
         {
         }
     }

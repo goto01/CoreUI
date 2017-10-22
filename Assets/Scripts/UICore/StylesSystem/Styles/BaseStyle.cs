@@ -10,5 +10,6 @@ namespace Assets.Scripts.UICore.StylesSystem.Styles
         [SerializeField] protected float _pixelWidth = 1f / 32;
 
         public Texture2D Texture { get { return _texture; } }
+        public float PixelWidth { get { return _pixelWidth; } }
     }
 }

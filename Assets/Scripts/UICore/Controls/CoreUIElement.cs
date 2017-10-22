@@ -7,9 +7,21 @@ namespace Assets.Scripts.UICore.Controls
     {
         protected BaseCoreUIMesh _coreUIMesh;
 
+        public BaseCoreUIMesh CoreUIMesh { get { return _coreUIMesh; } }
+
         public Mesh Mesh { get { return _coreUIMesh.Mesh; } }
 
-        public Texture2D Texture { get { return _coreUIMesh.Texture; } }
+        public Texture2D Texture
+        {
+            get { return _coreUIMesh.Texture; }
+            set { _coreUIMesh.Texture = value; }
+        }
+
+        public bool TextureChanged
+        {
+            get { return _coreUIMesh.TextureChanged; }
+            set { _coreUIMesh.TextureChanged = value; }
+        }
 
         public float X
         {
@@ -33,6 +45,18 @@ namespace Assets.Scripts.UICore.Controls
         {
             get { return _coreUIMesh.Height; }
             set { _coreUIMesh.Height = value; }
+        }
+
+        public float CenterX
+        {
+            get { return X + Width/2f; }
+            set { X = value - Width/2f; }
+        }
+
+        public float CenterY
+        {
+            get { return Y - Height/2f; }
+            set { Y = value + Height/2f; }
         }
 
         public abstract void Update();

@@ -6,7 +6,7 @@ namespace Assets.Scripts.UICore.Controls
     {
         public float MinWidth{get { return ((FlexibleImageMesh) _coreUIMesh).MinWidth; } }
 
-        public CoreUIFlexibleImage(BaseCoreUIMesh mesh) : base(mesh)
+        public CoreUIFlexibleImage(FlexibleImageMesh mesh) : base(mesh)
         {
         }
 

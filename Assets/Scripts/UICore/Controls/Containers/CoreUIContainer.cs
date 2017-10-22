@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.UICore.UICoreMeshes.Meshes;
-using UnityEngine;
 
 namespace Assets.Scripts.UICore.Controls.Containers
 {
     public abstract class CoreUIContainer : CoreUIElement
     {
-        private List<CoreUIElement> _elements;
+        protected List<CoreUIElement> _elements;
 
         public List<CoreUIElement> Elements { get { return _elements; } }
 

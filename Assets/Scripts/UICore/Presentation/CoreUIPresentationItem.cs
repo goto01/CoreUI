@@ -25,13 +25,24 @@ namespace Assets.Scripts.UICore.Presentation
         protected virtual void Update()
         {
             _element.Update();
+            UpdateTexture();
         }
 
         private void InitMaterial()
         {
             var material = new Material(Shader.Find(ShaderPath));
-            material.SetTexture(TextureName, _element.Texture);
             _renderer.material = material;
+            SetTexture();
+        }
+
+        private void UpdateTexture()
+        {
+            if (_element.TextureChanged) SetTexture();
+        }
+        
+        private void SetTexture()
+        {
+            _renderer.material.SetTexture(TextureName, _element.Texture);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Assets.Scripts.UICore.Controls
 {
     public class CoreUIImage : CoreUIElement
     {
-        public CoreUIImage(BaseCoreUIMesh mesh) : base(mesh)
+        public CoreUIImage(RectangleMesh mesh) : base(mesh)
         {
         }
 

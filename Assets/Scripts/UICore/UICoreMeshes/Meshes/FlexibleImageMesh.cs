@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.Scripts.UICore.StylesSystem.Styles;
-using UnityEngine;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
-    public enum FlexiblaImageOrientation
+    public enum CoreUIOrientation
     {
         Horizontal,
         Vertical
@@ -13,18 +11,20 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 
     public class FlexibleImageMesh : BaseCoreUIMesh
     {
-        private FlexiblaImageOrientation _orientation;
+        private CoreUIOrientation _orientation;
         private float _borderWidth;
         private float _borderHeight;
 
         public float MinWidth { get { return _borderWidth*2; } }
+
+        public float BorderWidth { get { return _borderWidth; } }
         
         private FlexibleImageMesh() : base()
         {
             
         }
 
-        public FlexibleImageMesh(FlexiblaImageOrientation orientation) : this()
+        public FlexibleImageMesh(CoreUIOrientation orientation) : this()
         {
             _orientation = orientation;
         }
@@ -34,8 +34,17 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             var flexibleImageStyle = style as FlexibleImageStyle;
             _borderWidth = flexibleImageStyle.BorderWidth;
             _borderHeight = flexibleImageStyle.BorderHeight;
-            if (_orientation == FlexiblaImageOrientation.Horizontal) GenerateHorizontal();
-            else GenerateVertical();
+            if (_orientation == CoreUIOrientation.Horizontal)
+            {
+                Height = _borderHeight;
+                GenerateHorizontal();
+            }
+            else
+            {
+                Height = Width;
+                Width = _borderHeight;
+                GenerateVertical();
+            }
             ApplyUV();
 
             Triangles = new List<int>()
@@ -67,19 +76,19 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         private void GenerateVertical()
         {
             PushVertice(X, Y);
-            PushVertice(X + _borderHeight, Y);
-            PushVertice(X + _borderHeight, Y - _borderWidth);
+            PushVertice(X + Width, Y);
+            PushVertice(X + Width, Y - _borderWidth);
             PushVertice(X, Y - _borderWidth);
 
             PushVertice(X, Y - _borderWidth);
-            PushVertice(X + _borderHeight, Y - _borderWidth);
-            PushVertice(X + _borderHeight, Y - Width + _borderWidth);
-            PushVertice(X, Y - Width + _borderWidth);
+            PushVertice(X + Width, Y - _borderWidth);
+            PushVertice(X + Width, Y - Height + _borderWidth);
+            PushVertice(X, Y - Height + _borderWidth);
 
-            PushVertice(X, Y - Width + _borderWidth);
-            PushVertice(X + _borderHeight, Y - Width + _borderWidth);
-            PushVertice(X + _borderHeight, Y - Width);
-            PushVertice(X, Y - Width);
+            PushVertice(X, Y - Height + _borderWidth);
+            PushVertice(X + Width, Y - Height + _borderWidth);
+            PushVertice(X + Width, Y - Height);
+            PushVertice(X, Y - Height);
         }
 
         private void ApplyUV()
@@ -103,7 +112,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
         protected override void ApplySize()
         {
             Clear();
-            if (_orientation == FlexiblaImageOrientation.Horizontal) GenerateHorizontal();
+            if (_orientation == CoreUIOrientation.Horizontal) GenerateHorizontal();
             else GenerateVertical();
             UpdatePositions();
         }

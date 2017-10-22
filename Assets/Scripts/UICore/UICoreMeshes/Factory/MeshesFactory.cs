@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.UICore.StylesSystem.Repository;
 using Assets.Scripts.UICore.StylesSystem.Styles;
 using Assets.Scripts.UICore.UICoreMeshes.Meshes;
@@ -22,18 +23,27 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
             return window;
         }
 
-        public RectangleMesh CreateImage(Rect rect, string styleName)
+        public RectangleMesh CreateImage(Rect rect, Texture2D texture, string styleName)
         {
             var image = new RectangleMesh();
-            image.Init(GetStyle(styleName), rect);
+            var style = GetStyle(styleName);
+            image.Texture = texture;
+            image.Init(style, rect);
             return image;
         }
 
-        public FlexibleImageMesh CreateFlexibleImage(Rect rect, FlexiblaImageOrientation orientation, string styleName)
+        public FlexibleImageMesh CreateFlexibleImage(Rect rect, CoreUIOrientation orientation, string styleName)
         {
             var flexibleImage = new FlexibleImageMesh(orientation);
             flexibleImage.Init(GetStyle(styleName), rect);
             return flexibleImage;
+        }
+
+        public SliderMesh CreateSlider(Rect rect, CoreUIOrientation orientation, string styleName)
+        {
+            var slider = new SliderMesh(orientation);
+            slider.Init(GetStyle(styleName), rect);
+            return slider;
         }
 
         private BaseStyle GetStyle(string styleName)

@@ -27,6 +27,12 @@ namespace Assets.Editor.CoreUI
             ObjectCreatorHelper.CreateAsset(typeof(FlexibleImageStyle));
         }
 
+        [MenuItem(Menu + "/Slider style", false, 1103)]
+        public static void CreateSliderStyle()
+        {
+            ObjectCreatorHelper.CreateAsset(typeof(SliderStyle));
+        }
+
         [MenuItem(Menu + "/Styles repository", false, 1000)]
         public static void CreateStylesRepository()
         {
