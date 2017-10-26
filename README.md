@@ -12,5 +12,6 @@ Simple UI system for Unity
 - Image
 - Flexible Image (Progress bar)
 - Slider
+- Button
 
 [Tileset](http://pixeljoint.com/pixelart/73768.htm)
