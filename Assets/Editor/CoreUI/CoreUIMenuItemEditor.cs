@@ -33,6 +33,12 @@ namespace Assets.Editor.CoreUI
             ObjectCreatorHelper.CreateAsset(typeof(SliderStyle));
         }
 
+        [MenuItem(Menu + "/Button style", false, 1104)]
+        public static void CreateButtonStyle()
+        {
+            ObjectCreatorHelper.CreateAsset(typeof (ButtonStyle));
+        }
+
         [MenuItem(Menu + "/Styles repository", false, 1000)]
         public static void CreateStylesRepository()
         {

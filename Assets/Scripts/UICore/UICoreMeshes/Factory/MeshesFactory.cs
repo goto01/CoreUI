@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.Scripts.UICore.StylesSystem.Repository;
 using Assets.Scripts.UICore.StylesSystem.Styles;
 using Assets.Scripts.UICore.UICoreMeshes.Meshes;
@@ -44,6 +43,13 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
             var slider = new SliderMesh(orientation);
             slider.Init(GetStyle(styleName), rect);
             return slider;
+        }
+
+        public ButtonMesh CreateButton(Rect rect, string styleName)
+        {
+            var button = new ButtonMesh();
+            button.Init(GetStyle(styleName), rect);
+            return button;
         }
 
         private BaseStyle GetStyle(string styleName)

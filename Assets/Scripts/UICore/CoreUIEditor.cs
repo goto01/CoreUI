@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Singleton;
+﻿using System;
+using Assets.Scripts.Singleton;
 using Assets.Scripts.UICore.Controls;
 using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.Presentation;
@@ -15,6 +16,7 @@ namespace Assets.Scripts.UICore
         private const string DefaultImageStyle = "Default Image Style";
         private const string DefaultFlexibleImageStyle = "Default Flexible Image Style";
         private const string DefaultSliderStyle= "Default Slider Style";
+        private const string DefaultButtonStyle = "Default Button Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -68,6 +70,19 @@ namespace Assets.Scripts.UICore
         public CoreUISlider Slider(Rect rect, string styleName = DefaultSliderStyle)
         {
             return Slider(rect, CoreUIOrientation.Horizontal, styleName);
+        }
+
+        public CoreUIButton Button(Rect rect, string styleName = DefaultButtonStyle)
+        {
+            return Button(rect, null, styleName);
+        }
+
+        public CoreUIButton Button(Rect rect, Action action, string styleName = DefaultButtonStyle)
+        {
+            var mesh = _factory.CreateButton(rect, styleName);
+            var element = new CoreUIButton(mesh, action);
+            CreatePresentationItem(element);
+            return element;
         }
 
         private void CreatePresentationItem(CoreUIElement element)

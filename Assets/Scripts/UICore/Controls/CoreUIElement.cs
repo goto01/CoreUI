@@ -7,9 +7,9 @@ namespace Assets.Scripts.UICore.Controls
     {
         protected BaseCoreUIMesh _coreUIMesh;
         private bool _focused;
-        private bool _dragged;
+        private bool _pressed;
 
-        public bool Dragged { get { return _dragged; } }
+        public bool Pressed { get { return _pressed; } }
 
         public BaseCoreUIMesh CoreUIMesh { get { return _coreUIMesh; } }
 
@@ -66,8 +66,8 @@ namespace Assets.Scripts.UICore.Controls
         public virtual bool Update(CoreUIEvent e)
         {
             var focus = _coreUIMesh.Rect.Contains(e.PointerPosition);
-            if (focus && e.PointerDown) _dragged = true;
-            if (e.PointerUp) _dragged = false;
+            if (focus && e.PointerDown) _pressed = true;
+            if (e.PointerUp) _pressed = false;
             return focus;
         }
         

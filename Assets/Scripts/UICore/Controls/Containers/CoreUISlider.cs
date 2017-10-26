@@ -64,7 +64,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
 
         private void HandleMouse(CoreUIEvent e)
         {
-            if (!Point.Dragged) return;
+            if (!Point.Pressed) return;
             if (_orientation == CoreUIOrientation.Horizontal) Value = Mathf.InverseLerp(X + _borderWidth, X + Width - _borderWidth, e.PointerPosition.x);
             else Value = Mathf.InverseLerp(Y - Height + _borderWidth, Y - _borderWidth, e.PointerPosition.y);
         }
