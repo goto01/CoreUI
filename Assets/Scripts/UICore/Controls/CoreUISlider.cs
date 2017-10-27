@@ -1,14 +1,15 @@
 ﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Controls.Containers
+namespace Assets.Scripts.UICore.Controls
 {
-    public class CoreUISlider : CoreUIContainer
+    public class CoreUISlider : CoreUIElement
     {
         private float _delta = .1f;
         private float _value = .5f;
         private float _borderWidth;
         private CoreUIOrientation _orientation;
+        private CoreUIElement _point;
 
         public float Value
         {
@@ -16,14 +17,17 @@ namespace Assets.Scripts.UICore.Controls.Containers
             set { _value = Mathf.Clamp01(value); }
         }
 
-        private CoreUIElement Point { get { return _elements[0]; } }
+        private CoreUIElement Point
+        {
+            get { return _point; }
+            set { _point = value; }
+        }
 
         public CoreUISlider(SliderMesh mesh, CoreUIImage point, CoreUIOrientation orientation) : base(mesh)
         {
             _orientation = orientation;
             _borderWidth = mesh.BorderWidth;
-            point.Texture = mesh.Point;
-            AddElement(point);
+            _point = point;
         }
 
         public override bool Update(CoreUIEvent e)

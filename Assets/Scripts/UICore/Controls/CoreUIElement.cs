@@ -8,6 +8,13 @@ namespace Assets.Scripts.UICore.Controls
         protected BaseCoreUIMesh _coreUIMesh;
         private bool _focused;
         private bool _pressed;
+        private int _order;
+
+        public virtual int Order
+        {
+            get { return _order; }
+            set { _order = value; }
+        }
 
         public bool Pressed { get { return _pressed; } }
 

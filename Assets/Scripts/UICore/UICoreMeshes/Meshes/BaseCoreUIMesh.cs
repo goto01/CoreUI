@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
-   public abstract class BaseCoreUIMesh
+    public abstract class BaseCoreUIMesh
     {
         private Mesh _mesh;
         private Rect _position;

@@ -1,19 +1,19 @@
 ﻿using Assets.Scripts.UICore.Controls;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Presentation
+namespace Assets.Scripts.UICore.Presentation.Presentations
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-    class CoreUIPresentationItem : MonoBehaviour
+    public class CoreUISimplePresentation : MonoBehaviour
     {
         private const string ShaderPath = "CoreUI/CoreUISimpleShader";
         private const string TextureName = "_MainTex";
 
         private MeshFilter _mesh;
         private MeshRenderer _renderer;
-        private CoreUIElement _element;
+        protected CoreUIElement _element;
 
-        public void Init(CoreUIElement element)
+        public virtual void Init(CoreUIElement element)
         {
             _mesh = GetComponent<MeshFilter>();
             _renderer = GetComponent<MeshRenderer>();
@@ -22,16 +22,10 @@ namespace Assets.Scripts.UICore.Presentation
             InitMaterial();
         }
 
-        protected virtual void Update()
+        public virtual void UpdateSelf(CoreUIEvent e)
         {
-            _element.Update(new CoreUIEvent()
-            {
-                PointerPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                ScrollDir = Input.mouseScrollDelta.y,
-                PointerDown = Input.GetMouseButtonDown(0),
-                PointerUp = Input.GetMouseButtonUp(0),
-            });
             UpdateTexture();
+            UpdateQueue();
         }
 
         private void InitMaterial()
@@ -45,10 +39,15 @@ namespace Assets.Scripts.UICore.Presentation
         {
             if (_element.TextureChanged) SetTexture();
         }
-        
+
         private void SetTexture()
         {
             _renderer.material.SetTexture(TextureName, _element.Texture);
+        }
+
+        private void UpdateQueue()
+        {
+            _renderer.material.renderQueue = CoreUIPresentation.CoreUIQueue + _element.Order;
         }
     }
 }

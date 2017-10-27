@@ -3,6 +3,7 @@ using Assets.Scripts.Singleton;
 using Assets.Scripts.UICore.Controls;
 using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.Presentation;
+using Assets.Scripts.UICore.Presentation.Presentations;
 using Assets.Scripts.UICore.StylesSystem.Repository;
 using Assets.Scripts.UICore.UICoreMeshes.Factory;
 using Assets.Scripts.UICore.UICoreMeshes.Meshes;
@@ -20,7 +21,6 @@ namespace Assets.Scripts.UICore
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
-        [SerializeField] private CoreUIPresentationItem _presentationPrefab;
         
         public override void AwakeSingleton()
         {
@@ -32,63 +32,62 @@ namespace Assets.Scripts.UICore
         {
             var mesh = _factory.CreateWindow(rect, styleName);
             var element = new CoreUIWindow(mesh);
-            CreatePresentationItem(element);
+            CoreUIPresentation.Instance.CreateContainerPresentation(element);
             return element;
         }
 
-        public CoreUIImage Image(Rect rect, Texture2D texture, string styleName = DefaultImageStyle)
+        public CoreUIImage Image(Rect rect, CoreUIContainer container, Texture2D texture, string styleName = DefaultImageStyle)
         {
             var mesh = _factory.CreateImage(rect, texture, styleName);
             mesh.Texture = texture;
             var element = new CoreUIImage(mesh);
-            CreatePresentationItem(element);
+            container.AddElement(element);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
             return element;
         }
 
-        public CoreUIFlexibleImage FlexibleImage(Rect rect, CoreUIOrientation orientation, string styleName = DefaultFlexibleImageStyle)
+        public CoreUIFlexibleImage FlexibleImage(Rect rect, CoreUIContainer container, CoreUIOrientation orientation, string styleName = DefaultFlexibleImageStyle)
         {
             var mesh = _factory.CreateFlexibleImage(rect, orientation, styleName);
             var element = new CoreUIFlexibleImage(mesh);
-            CreatePresentationItem(element);
+            container.AddElement(element);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
             return element;
         }
 
-        public CoreUIFlexibleImage FlexibleImage(Rect rect, string styleName = DefaultFlexibleImageStyle)
+        public CoreUIFlexibleImage FlexibleImage(Rect rect, CoreUIContainer container, string styleName = DefaultFlexibleImageStyle)
         {
-            return FlexibleImage(rect, CoreUIOrientation.Horizontal, styleName);
+            return FlexibleImage(rect, container, CoreUIOrientation.Horizontal, styleName);
         }
 
-        public CoreUISlider Slider(Rect rect, CoreUIOrientation orientation, string styleName = DefaultSliderStyle)
+        public CoreUISlider Slider(Rect rect, CoreUIContainer container, CoreUIOrientation orientation, string styleName = DefaultSliderStyle)
         {
             var mesh = _factory.CreateSlider(rect, orientation, styleName);
-            var point = Image(rect, null);
+            var point = Image(rect, container, null);
+            point.Texture = mesh.Point;
             var element = new CoreUISlider(mesh, point, orientation);
-            CreatePresentationItem(element);
+            container.AddElementBefore(element, point);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
             return element;
         }
 
-        public CoreUISlider Slider(Rect rect, string styleName = DefaultSliderStyle)
+        public CoreUISlider Slider(Rect rect, CoreUIContainer container, string styleName = DefaultSliderStyle)
         {
-            return Slider(rect, CoreUIOrientation.Horizontal, styleName);
+            return Slider(rect, container, CoreUIOrientation.Horizontal, styleName);
         }
 
-        public CoreUIButton Button(Rect rect, string styleName = DefaultButtonStyle)
+        public CoreUIButton Button(Rect rect, CoreUIContainer container, string styleName = DefaultButtonStyle)
         {
-            return Button(rect, null, styleName);
+            return Button(rect, container, null, styleName);
         }
 
-        public CoreUIButton Button(Rect rect, Action action, string styleName = DefaultButtonStyle)
+        public CoreUIButton Button(Rect rect, CoreUIContainer container, Action action, string styleName = DefaultButtonStyle)
         {
             var mesh = _factory.CreateButton(rect, styleName);
             var element = new CoreUIButton(mesh, action);
-            CreatePresentationItem(element);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
+            container.AddElement(element);
             return element;
-        }
-
-        private void CreatePresentationItem(CoreUIElement element)
-        {
-            var presentationItem = Instantiate(_presentationPrefab);
-            presentationItem.Init(element);
         }
     }
 }

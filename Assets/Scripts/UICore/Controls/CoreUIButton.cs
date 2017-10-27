@@ -19,6 +19,7 @@ namespace Assets.Scripts.UICore.Controls
             _pressed = mesh.Texture;
             _unpressed = ((ButtonMesh)mesh).UnpressedTexture;
             _action = action;
+            _coreUIMesh.Texture = _unpressed;
         }
 
         public override bool Update(CoreUIEvent e)
