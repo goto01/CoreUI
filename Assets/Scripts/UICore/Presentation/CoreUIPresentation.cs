@@ -35,6 +35,7 @@ namespace Assets.Scripts.UICore.Presentation
         {
             var presentation = CreateSimplePresentation();
             presentation.Init(element);
+            element.Active = true;
             return presentation;
         }
 
@@ -43,7 +44,7 @@ namespace Assets.Scripts.UICore.Presentation
             var presentation = CreateContainerPresentation();
             presentation.Init(element);
             element.Order = GetContainerOrder();
-            element.ContainerFocused = true;
+            element.Active = true;
             return presentation;
         }
 

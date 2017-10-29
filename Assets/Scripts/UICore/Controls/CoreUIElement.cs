@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using System;
+using Assets.Scripts.UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
 namespace Assets.Scripts.UICore.Controls
@@ -9,6 +10,23 @@ namespace Assets.Scripts.UICore.Controls
         private bool _focused;
         private bool _pressed;
         private int _order;
+        private bool _active;
+
+        public virtual Vector2 Position
+        {
+            get { return _coreUIMesh.Position; }
+            set { _coreUIMesh.Position = value; }
+        }
+
+        public virtual bool Active
+        {
+            get { return _active;}
+            set
+            {
+                _active = value;
+                _pressed = false;
+            }
+        }
 
         public virtual int Order
         {
@@ -22,7 +40,7 @@ namespace Assets.Scripts.UICore.Controls
 
         public Mesh Mesh { get { return _coreUIMesh.Mesh; } }
 
-        public Texture2D Texture
+        public virtual Texture2D Texture
         {
             get { return _coreUIMesh.Texture; }
             set { _coreUIMesh.Texture = value; }
@@ -34,13 +52,13 @@ namespace Assets.Scripts.UICore.Controls
             set { _coreUIMesh.TextureChanged = value; }
         }
 
-        public float X
+        public virtual float X
         {
             get { return _coreUIMesh.X; }
             set { _coreUIMesh.X = value; }
         }
 
-        public float Y
+        public virtual float Y
         {
             get { return _coreUIMesh.Y; }
             set { _coreUIMesh.Y = value; }
@@ -76,6 +94,11 @@ namespace Assets.Scripts.UICore.Controls
             if (focus && e.PointerDown) _pressed = true;
             if (e.PointerUp) _pressed = false;
             return focus;
+        }
+
+        public virtual void ResetParentPosition(Vector2 oldPosition, Vector2 newPosition)
+        {
+            _coreUIMesh.ResetParentPosition(oldPosition, newPosition);
         }
         
         protected CoreUIElement(BaseCoreUIMesh mesh)

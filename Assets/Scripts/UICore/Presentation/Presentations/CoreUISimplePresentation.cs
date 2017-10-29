@@ -8,10 +8,19 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
     {
         private const string ShaderPath = "CoreUI/CoreUISimpleShader";
         private const string TextureName = "_MainTex";
+        private const string Color = "_Color";
+        private Color _inactiveColor = new Color(.6f, .6f, .6f);
+        private Color _activeColor = new Color(1,1,1f);
 
         private MeshFilter _mesh;
         private MeshRenderer _renderer;
         protected CoreUIElement _element;
+        
+        public bool Active
+        {
+            get { return _element.Active; }
+            set { _element.Active = value; }
+        }
 
         public virtual void Init(CoreUIElement element)
         {
@@ -26,6 +35,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
         {
             UpdateTexture();
             UpdateQueue();
+            UpdateActive();
         }
 
         private void InitMaterial()
@@ -48,6 +58,11 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
         private void UpdateQueue()
         {
             _renderer.material.renderQueue = CoreUIPresentation.CoreUIQueue + _element.Order;
+        }
+
+        private void UpdateActive()
+        {
+            _renderer.material.SetColor(Color, Active ? _activeColor : _inactiveColor);
         }
     }
 }

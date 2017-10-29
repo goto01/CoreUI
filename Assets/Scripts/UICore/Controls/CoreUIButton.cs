@@ -10,6 +10,12 @@ namespace Assets.Scripts.UICore.Controls
         private Texture2D _unpressed;
         private Action _action;
 
+        public override Texture2D Texture
+        {
+            get { return Active ? base.Texture : _unpressed; }
+            set { base.Texture = value; }
+        }
+
         public CoreUIButton(BaseCoreUIMesh mesh) : this(mesh, null)
         {
         }
@@ -24,14 +30,14 @@ namespace Assets.Scripts.UICore.Controls
 
         public override bool Update(CoreUIEvent e)
         {
-            var focus = base.Update(e);
-            HandlePressing(e);
-            return focus;
+            var focused = base.Update(e);
+            HandlePressing(e, focused);
+            return focused;
         }
 
-        private void HandlePressing(CoreUIEvent e)
+        private void HandlePressing(CoreUIEvent e, bool focused)
         {
-            if (Pressed && e.PointerDown && _action != null) _action.Invoke(); 
+            if (Pressed && e.PointerDown && _action != null && focused) _action.Invoke(); 
             if (Pressed) _coreUIMesh.Texture = _pressed;
             else _coreUIMesh.Texture = _unpressed;
         }

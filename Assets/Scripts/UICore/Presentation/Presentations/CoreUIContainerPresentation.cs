@@ -8,13 +8,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
     class CoreUIContainerPresentation : CoreUISimplePresentation
     {
         private CoreUIContainer Container { get { return (CoreUIContainer) _element; } }
-
-        public bool ContainerFocused
-        {
-            get { return Container.ContainerFocused; }
-            set { Container.ContainerFocused = value; }
-        }
-
+        
         public override void Init(CoreUIElement element)
         {
             if (!(element is CoreUIContainer))
@@ -27,7 +21,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
         public override void UpdateSelf(CoreUIEvent e)
         {
             base.UpdateSelf(e);
-            if (!ContainerFocused) return;
+            if (!Active) return;
             var container = Container;
             for (var index = 0; index < container.Count; index++) container.Elements[index].Update(e);
         }

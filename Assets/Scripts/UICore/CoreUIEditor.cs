@@ -36,6 +36,15 @@ namespace Assets.Scripts.UICore
             return element;
         }
 
+        public CoreUIWindow Window(Rect rect, CoreUIContainer container, string styleName = DefaultWindowStyle)
+        {
+            var mesh = _factory.CreateWindow(rect, styleName);
+            var element = new CoreUIWindow(mesh);
+            container.AddElement(element);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
+            return element;
+        }
+
         public CoreUIImage Image(Rect rect, CoreUIContainer container, Texture2D texture, string styleName = DefaultImageStyle)
         {
             var mesh = _factory.CreateImage(rect, texture, styleName);

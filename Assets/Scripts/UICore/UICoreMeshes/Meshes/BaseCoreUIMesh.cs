@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.StylesSystem.Styles;
 using UnityEngine;
 
@@ -56,7 +58,17 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             }
         }
 
-       public float X
+        public Vector2 Position
+        {
+            get { return _position.position; }
+            set
+            {
+                _position.position = value;
+                UpdatePositions();
+            }
+        }
+
+        public float X
         {
             get { return _position.x; }
             set
@@ -110,6 +122,19 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             Width = width;
             Height = height;
             ApplySize();
+        }
+
+        public void SetPosition(float x, float y)
+        {
+            _position.x = x;
+            _position.y = y;
+            UpdatePositions();
+        }
+
+        public void ResetParentPosition(Vector2 oldPosition, Vector2 newPosition)
+        {
+            _position.position = _position.position - oldPosition + newPosition;
+            UpdatePositions();
         }
 
         protected void PushUV(float uvx, float uvy)
