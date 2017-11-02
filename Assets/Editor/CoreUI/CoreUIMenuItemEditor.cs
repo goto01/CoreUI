@@ -39,6 +39,12 @@ namespace Assets.Editor.CoreUI
             ObjectCreatorHelper.CreateAsset(typeof (ButtonStyle));
         }
 
+        [MenuItem(Menu + "/Scroll style", false, 1105)]
+        public static void CreateScrollStyle()
+        {
+            ObjectCreatorHelper.CreateAsset(typeof (ScrollStyle));
+        }
+
         [MenuItem(Menu + "/Styles repository", false, 1000)]
         public static void CreateStylesRepository()
         {

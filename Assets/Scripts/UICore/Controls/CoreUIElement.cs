@@ -11,6 +11,10 @@ namespace Assets.Scripts.UICore.Controls
         private bool _pressed;
         private int _order;
         private bool _active;
+        private float _verticalTopLimit;
+        private float _verticalBottomLimit;
+        private float _horizontalLeftLimit;
+        private float _horizontalRightLimit;
 
         public virtual Vector2 Position
         {
@@ -88,9 +92,33 @@ namespace Assets.Scripts.UICore.Controls
             set { Y = value + Height/2f; }
         }
 
+        public virtual float VerticalTopLimit
+        {
+            get { return _verticalTopLimit; }
+            set { _verticalTopLimit = value; }
+        }
+
+        public virtual float VerticalBottomLimit
+        {
+            get { return _verticalBottomLimit; }
+            set { _verticalBottomLimit = value; }
+        }
+
+        public virtual float HorizontalLeftLimit
+        {
+            get { return _horizontalLeftLimit; }
+            set { _horizontalLeftLimit = value; }
+        }
+
+        public virtual float HorizontalRightLimit
+        {
+            get { return _horizontalRightLimit;}
+            set { _horizontalRightLimit = value; }
+        }
+
         public virtual bool Update(CoreUIEvent e)
         {
-            var focus = _coreUIMesh.Rect.Contains(e.PointerPosition);
+            var focus = Contains(e.PointerPosition);
             if (focus && e.PointerDown) _pressed = true;
             if (e.PointerUp) _pressed = false;
             return focus;
@@ -104,6 +132,11 @@ namespace Assets.Scripts.UICore.Controls
         protected CoreUIElement(BaseCoreUIMesh mesh)
         {
             _coreUIMesh = mesh;
+        }
+
+        protected virtual bool Contains(Vector2 pos)
+        {
+            return _coreUIMesh.Rect.Contains(pos);
         }
     }
 }

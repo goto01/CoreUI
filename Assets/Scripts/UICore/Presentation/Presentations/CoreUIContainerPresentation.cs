@@ -23,7 +23,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
             base.UpdateSelf(e);
             if (!Active) return;
             var container = Container;
-            for (var index = 0; index < container.Count; index++) container.Elements[index].Update(e);
+            _element.Update(e);
         }
     }
 }

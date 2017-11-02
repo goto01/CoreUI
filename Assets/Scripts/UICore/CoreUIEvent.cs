@@ -8,5 +8,11 @@ namespace Assets.Scripts.UICore
         public float ScrollDir;
         public bool PointerDown;
         public bool PointerUp;
+
+        public void DropPointerData()
+        {
+            ScrollDir = 0;
+            PointerDown = false;
+        }
     }
 }

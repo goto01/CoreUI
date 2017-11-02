@@ -18,6 +18,7 @@ namespace Assets.Scripts.UICore
         private const string DefaultFlexibleImageStyle = "Default Flexible Image Style";
         private const string DefaultSliderStyle= "Default Slider Style";
         private const string DefaultButtonStyle = "Default Button Style";
+        private const string DefaultScrollStyle = "Default Scroll Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -96,6 +97,28 @@ namespace Assets.Scripts.UICore
             var element = new CoreUIButton(mesh, action);
             CoreUIPresentation.Instance.CreateSimplePresentation(element);
             container.AddElement(element);
+            return element;
+        }
+
+        public CoreUIScroll Scroll(Rect rect, float viewWidth, float viewHeight, string styleName = DefaultScrollStyle)
+        {
+            var mesh = _factory.CreateScroll(rect, styleName);
+            var element = new CoreUIScroll(viewWidth, viewHeight, mesh);    
+            element.OriginY = element.Position.y;
+            element.OriginX = element.Position.x;
+            Debug.Log(element.Position.x);
+            CoreUIPresentation.Instance.CreateContainerPresentation(element);
+            return element;
+        }
+
+        public CoreUIScroll Scroll(Rect rect, float viewWidth, float viewHeight, CoreUIContainer container, string styleName = DefaultScrollStyle)
+        {
+            var mesh = _factory.CreateScroll(rect, styleName);
+            var element = new CoreUIScroll(viewWidth, viewHeight, mesh);
+            container.AddElement(element);
+            element.OriginY = element.Position.y;
+            element.OriginX = element.Position.x;
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
             return element;
         }
     }

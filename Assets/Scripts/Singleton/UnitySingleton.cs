@@ -4,8 +4,6 @@ namespace Assets.Scripts.Singleton
 {
     public static class UnitySingleton<T> where T : MonoBehaviour, ISingletonMonoBehaviour
     {
-        private const string AwakeSingleton = "AwakeSingleton";
-
         private static T _instance;
 
         public static T Instance
@@ -38,7 +36,7 @@ namespace Assets.Scripts.Singleton
                 return null;
             }
             instance.AwakeSingleton();
-            return Instance;
+            return instance;
         }
     }
 }

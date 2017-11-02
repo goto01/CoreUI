@@ -7,6 +7,49 @@ namespace Assets.Scripts.UICore.Controls.Containers
     public class CoreUIContainer : CoreUIElement
     {
         protected List<CoreUIElement> _elements;
+        
+        public override float VerticalBottomLimit
+        {
+            get { return base.VerticalBottomLimit; }
+            set
+            {
+                base.VerticalBottomLimit = value;
+                ApplyChildrenLimits();
+            }
+        }
+
+        public override float VerticalTopLimit
+        {
+            get { return base.VerticalTopLimit; }
+            set
+            {
+                base.VerticalTopLimit = value;
+                ApplyChildrenLimits();
+            }
+        }
+
+        public override float HorizontalLeftLimit
+        {
+            get { return base.HorizontalLeftLimit; }
+            set
+            {
+                base.HorizontalLeftLimit = value;
+                ApplyChildrenLimits();
+            }
+        }
+
+        public override float HorizontalRightLimit
+        {
+            get
+            {
+                return base.HorizontalRightLimit;
+            }
+            set
+            {
+                base.HorizontalRightLimit = value;
+                ApplyChildrenLimits();
+            }
+        }
 
         public override Vector2 Position
         {
@@ -80,6 +123,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
             _elements.Add(element);
             element.Order = Order + _elements.Count;
             element.Position += Position;
+            ApplyLimits(element);
         }
 
         public void AddElementBefore(CoreUIElement element, CoreUIElement before)
@@ -94,17 +138,19 @@ namespace Assets.Scripts.UICore.Controls.Containers
             }
             element.Position += Position;
             Reorder();
+            ApplyLimits(element);
         }
 
         public override bool Update(CoreUIEvent e)
         {
-            var focused = false;
+            var focused = base.Update(e);
+            if (!focused) e.DropPointerData();
             for (var index = 0; index < _elements.Count; index++)
             {
                 var elementFocus = _elements[index].Update(e);
-                if (!focused && elementFocus) focused = true;
+                focused = focused || elementFocus;
             }
-            return focused || base.Update(e);
+            return focused;
         }
 
         private void Reorder()
@@ -124,6 +170,30 @@ namespace Assets.Scripts.UICore.Controls.Containers
         {
             base.ResetParentPosition(oldPosition, newPosition);
             UpdateChildrenPosition(oldPosition, newPosition);
+        }
+
+        private void ApplyChildrenLimits()
+        {
+            for (var index = 0; index < _elements.Count; index++)
+            {
+                _elements[index].VerticalBottomLimit = VerticalBottomLimit;
+                _elements[index].VerticalTopLimit = VerticalTopLimit;
+                _elements[index].HorizontalLeftLimit = HorizontalLeftLimit;
+                _elements[index].HorizontalRightLimit = HorizontalRightLimit;
+            }
+        }
+
+        private void ApplyLimits(CoreUIElement element)
+        {
+            element.VerticalTopLimit = VerticalTopLimit;
+            element.VerticalBottomLimit = VerticalBottomLimit;
+            element.HorizontalLeftLimit = HorizontalLeftLimit;
+            element.HorizontalRightLimit = HorizontalRightLimit;
+        }
+
+        protected virtual bool ElementEnable(CoreUIEvent e)
+        {
+            return _coreUIMesh.Rect.Contains(e.PointerPosition);
         }
     }
 }

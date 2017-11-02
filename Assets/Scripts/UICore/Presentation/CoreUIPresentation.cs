@@ -45,6 +45,10 @@ namespace Assets.Scripts.UICore.Presentation
             presentation.Init(element);
             element.Order = GetContainerOrder();
             element.Active = true;
+            element.VerticalTopLimit = UICoreCameraHandler.Instance.VerticalTopLimit;
+            element.VerticalBottomLimit = UICoreCameraHandler.Instance.VerticalBottomLimit;
+            element.HorizontalLeftLimit = UICoreCameraHandler.Instance.HorizontalLeftLimit;
+            element.HorizontalRightLimit = UICoreCameraHandler.Instance.HorizontalRightLimit;
             return presentation;
         }
 

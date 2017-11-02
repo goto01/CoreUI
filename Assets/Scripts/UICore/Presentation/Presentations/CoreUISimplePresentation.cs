@@ -8,6 +8,10 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
     {
         private const string ShaderPath = "CoreUI/CoreUISimpleShader";
         private const string TextureName = "_MainTex";
+        private const string YTopLimit = "_YTopLimit";
+        private const string YBottomLimit = "_YBottomLimit";
+        private const string XLeftLimit = "_XLeftLimit";
+        private const string XRightLimit = "_XRightLimit";
         private const string Color = "_Color";
         private Color _inactiveColor = new Color(.6f, .6f, .6f);
         private Color _activeColor = new Color(1,1,1f);
@@ -36,6 +40,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
             UpdateTexture();
             UpdateQueue();
             UpdateActive();
+            UpdateVertialLimit();
         }
 
         private void InitMaterial()
@@ -63,6 +68,14 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
         private void UpdateActive()
         {
             _renderer.material.SetColor(Color, Active ? _activeColor : _inactiveColor);
+        }
+
+        private void UpdateVertialLimit()
+        {
+            _renderer.material.SetFloat(YTopLimit, _element.VerticalTopLimit);
+            _renderer.material.SetFloat(YBottomLimit, _element.VerticalBottomLimit);
+            _renderer.material.SetFloat(XLeftLimit, _element.HorizontalLeftLimit);
+            _renderer.material.SetFloat(XRightLimit, _element.HorizontalRightLimit);
         }
     }
 }

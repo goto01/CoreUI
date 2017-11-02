@@ -52,6 +52,13 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
             return button;
         }
 
+        public ScrollMesh CreateScroll(Rect rect, string styleName)
+        {
+            var scroll = new ScrollMesh();
+            scroll.Init(GetStyle(styleName), rect);
+            return scroll;
+        }
+
         private BaseStyle GetStyle(string styleName)
         {
             return _styles[styleName];
