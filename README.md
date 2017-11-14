@@ -7,6 +7,13 @@ Simple UI system for Unity
   <img src="./Preview/Raw.png" Height="350"/>
 </p>
 
+Render windows, buttons, slider, progress bars and ... as tiles.
+
+Text rendering base on the texture of font. Easy font editor included.
+<p align="left">
+  <img src="./Preview/FontEditor.png" Height="200"/>
+</p>
+
 ## Implemented elements
 - Window
 - Image
@@ -14,5 +21,6 @@ Simple UI system for Unity
 - Slider
 - Button
 - Scroll
+- Label
 
 [Tileset](http://pixeljoint.com/pixelart/73768.htm)
