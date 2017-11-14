@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Assets.Scripts.UICore.Controls.Containers;
 using Assets.Scripts.UICore.StylesSystem.Styles;
 using UnityEngine;
 
@@ -8,7 +6,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
 {
     public abstract class BaseCoreUIMesh
     {
-        private Mesh _mesh;
+        protected Mesh _mesh;
         private Rect _position;
         private List<Vector3> _vertices;
         private List<Vector2> _uv;
@@ -173,7 +171,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
             UpdatePositions();
             _mesh.SetUVs(0, _uv);
             _mesh.SetTriangles(_triangles, 0);
-            _mesh.bounds = new Bounds(new Vector3(-100, -100), new Vector3(200, 200));
+            _mesh.RecalculateBounds();
         }
 
         protected void UpdatePositions()
@@ -186,6 +184,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
                 vertices[index].y += Y;
             }
             _mesh.vertices = vertices;
+            _mesh.RecalculateBounds();
         }
 
         protected void Clear()

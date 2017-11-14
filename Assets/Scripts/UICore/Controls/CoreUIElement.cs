@@ -15,6 +15,13 @@ namespace Assets.Scripts.UICore.Controls
         private float _verticalBottomLimit;
         private float _horizontalLeftLimit;
         private float _horizontalRightLimit;
+        private Color _color;
+
+        public Color Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
 
         public virtual Vector2 Position
         {
@@ -132,6 +139,7 @@ namespace Assets.Scripts.UICore.Controls
         protected CoreUIElement(BaseCoreUIMesh mesh)
         {
             _coreUIMesh = mesh;
+            _color = new Color(1,1,1,1);
         }
 
         protected virtual bool Contains(Vector2 pos)

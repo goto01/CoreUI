@@ -13,8 +13,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
         private const string XLeftLimit = "_XLeftLimit";
         private const string XRightLimit = "_XRightLimit";
         private const string Color = "_Color";
-        private Color _inactiveColor = new Color(.6f, .6f, .6f);
-        private Color _activeColor = new Color(1,1,1f);
+        private float _inactiveValue = .6f;
 
         private MeshFilter _mesh;
         private MeshRenderer _renderer;
@@ -67,7 +66,7 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
 
         private void UpdateActive()
         {
-            _renderer.material.SetColor(Color, Active ? _activeColor : _inactiveColor);
+            _renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * _inactiveValue);
         }
 
         private void UpdateVertialLimit()

@@ -2,6 +2,7 @@
 using Assets.Scripts.Singleton;
 using Assets.Scripts.UICore.Controls;
 using Assets.Scripts.UICore.Controls.Containers;
+using Assets.Scripts.UICore.Controls.Text;
 using Assets.Scripts.UICore.Presentation;
 using Assets.Scripts.UICore.Presentation.Presentations;
 using Assets.Scripts.UICore.StylesSystem.Repository;
@@ -19,6 +20,7 @@ namespace Assets.Scripts.UICore
         private const string DefaultSliderStyle= "Default Slider Style";
         private const string DefaultButtonStyle = "Default Button Style";
         private const string DefaultScrollStyle = "Default Scroll Style";
+        private const string DefaultFontName = "Default Font";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -119,6 +121,15 @@ namespace Assets.Scripts.UICore
             element.OriginY = element.Position.y;
             element.OriginX = element.Position.x;
             CoreUIPresentation.Instance.CreateSimplePresentation(element);
+            return element;
+        }
+
+        public CoreUILabel Label(Rect rect, string text, CoreUIContainer container, string fontName = DefaultFontName)
+        {
+            var mesh = _factory.CreateLabel(rect, text, fontName);
+            var element = new CoreUILabel(mesh);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
+            container.AddElement(element);
             return element;
         }
     }

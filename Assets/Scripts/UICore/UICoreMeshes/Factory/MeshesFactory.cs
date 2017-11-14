@@ -8,11 +8,12 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
 {
     public class MeshesFactory
     {
-        private Dictionary<string, BaseStyle> _styles;
+        private StylesRepository _repository;
 
         public MeshesFactory(StylesRepository repository)
         {
-            InitStyles(repository);
+            _repository = repository;
+            _repository.Init();
         }
 
         public WindowMesh CreateWindow(Rect rect, string styleName)
@@ -59,24 +60,16 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Factory
             return scroll;
         }
 
+        public Meshes.Text.TextMesh CreateLabel(Rect rect, string text, string fontName)
+        {
+            var label = new Meshes.Text.TextMesh(text);
+            label.Init(GetStyle(fontName), rect);
+            return label;
+        }
+
         private BaseStyle GetStyle(string styleName)
         {
-            return _styles[styleName];
-        }
-        
-        private void InitStyles(StylesRepository repository)
-        {
-            _styles = new Dictionary<string, BaseStyle>();
-            for (var index = 0; index < repository.Styles.Length; index++)
-            {
-                var style = repository.Styles[index];
-                if (_styles.ContainsKey(style.name))
-                {
-                    Debug.LogErrorFormat("You have several styles with name - {0}", style.name);
-                    return;
-                }
-                _styles[style.name] = style;
-            }
+            return _repository.GetStyle(styleName);
         }
     }
 }
