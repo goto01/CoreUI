@@ -24,7 +24,7 @@ namespace Assets.Scripts
             //_sliderHorizontal = CoreUIEditor.Instance.Slider( new Rect(_pixelSize*20, -_pixelSize*180, _pixelSize*180, 0), nw, CoreUIOrientation.Horizontal, "RPG Slider Style");
             ////var w = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), _scroll, "Item Window Style");
             //CoreUIEditor.Instance.Button(new Rect(0, 0, _pixelSize*300, 0), _scroll, () => { Debug.Log("BUTTON1"); });
-            CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "HELLO, MY FREIND (ANN)", nw, "Wave Font").Color = Color.blue;
+            CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "Gaze at this sentence for just about sixty seconds and then explain what makes it quite different from the average sentence. Quick!", nw, "Wave Font").Color = Color.blue;
         }
 
         protected virtual void Update()
