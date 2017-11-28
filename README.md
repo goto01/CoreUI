@@ -23,4 +23,7 @@ Text rendering base on the texture of font. Easy font editor included.
 - Scroll
 - Label
 
+## Development progress
+[workflowy](https://workflowy.com/s/HwM7.cApHYq98eb)
+
 [Tileset](http://pixeljoint.com/pixelart/73768.htm)
