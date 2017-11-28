@@ -158,7 +158,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
             for (var index = 0; index < _elements.Count; index++) _elements[index].Order = Order + 1 + index;
         }
 
-        private void UpdateChildrenPosition(Vector2 oldPosition, Vector2 newPosition)
+        protected void UpdateChildrenPosition(Vector2 oldPosition, Vector2 newPosition)
         {
             for (var index = 0; index < _elements.Count; index++)
             {

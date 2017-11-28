@@ -85,5 +85,12 @@ namespace Assets.Scripts.UICore.Controls.Containers
             //    _elements[index].HorizontalRightLimit = _originX + _viewWidth;
             //}
         }
+
+        public override void ResetParentPosition(Vector2 oldPosition, Vector2 newPosition)
+        {
+            OriginX = OriginX - oldPosition.x + newPosition.x;
+            OriginY = OriginY - oldPosition.y + newPosition.y;
+            base.ResetParentPosition(oldPosition, newPosition);
+        }
     }
 }

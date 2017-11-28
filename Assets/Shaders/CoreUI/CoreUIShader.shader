@@ -59,7 +59,7 @@
 				OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
 				OUT.texcoord = IN.texcoord;
 				OUT.color = IN.color * _Color;
-				OUT.originVertex = mul(unity_ObjectToWorld, IN.vertex);
+				OUT.originVertex = IN.vertex;
 				return OUT;
 			}
 	

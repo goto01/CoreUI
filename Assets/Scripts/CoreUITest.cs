@@ -16,6 +16,7 @@ namespace Assets.Scripts
         private CoreUISlider _sliderHorizontal;
         private CoreUIScroll _scroll;
         [SerializeField] private CoreUIFont _font;
+        private bool _mode;
 
         protected virtual void Awake()
         {
@@ -25,14 +26,16 @@ namespace Assets.Scripts
             _sliderHorizontal = CoreUIEditor.Instance.Slider( new Rect(_pixelSize*20, -_pixelSize*180, _pixelSize*180, 0), _window, CoreUIOrientation.Horizontal, "RPG Slider Style");
             var w = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), _scroll, "Item Window Style");
             CoreUIEditor.Instance.Button(new Rect(0, 0, _pixelSize*300, 0), _scroll, () => { Debug.Log("BUTTON1"); });
-            CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "The quick brown fox jumps over the lazy dog", _window, "Wave Font").Color = Color.blue;
+            CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "The quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dogThe quick brown fox jumps over the lazy dog", _window, "Wave Font").Color = Color.blue;
         }
 
         protected virtual void Update()
         {
-            //_scroll.ScrollVerticalValue = _slider.Value;
-            //_scroll.ScrollHorizontalValue = _sliderHorizontal.Value;
-            if (Input.GetKeyDown(KeyCode.Space)) _window.Active = !_window.Active;
+            
+            _scroll.ScrollVerticalValue = _slider.Value;
+            _scroll.ScrollHorizontalValue = _sliderHorizontal.Value;
+            if (Input.GetKeyDown(KeyCode.Space)) _mode = !_mode;
+            if (_mode) _window.Position = CoreUICameraHandler.Instance.PointerPosition;
         }
     }
 }
