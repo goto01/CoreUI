@@ -65,6 +65,12 @@ namespace Assets.Scripts.UICore.Controls.Containers
             X = Mathf.Lerp(_originX, _originX - (Width - _viewWidth), _scrollHorizontalValue);
         }
 
+        protected override void ApplyLimits(CoreUIElement element)
+        {
+            UpdateChildrenLimits();
+            base.ApplyLimits(element);
+        }
+
         private void UpdateChildrenLimits()
         {
             VerticalTopLimit = _originY;

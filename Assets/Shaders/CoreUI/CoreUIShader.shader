@@ -72,7 +72,7 @@
 				int bot = max(0, sign(IN.originVertex.y - _YBottomLimit));
 				int left = max(0, sign(IN.originVertex.x - _XLeftLimit));
 				int right = max(0, sign(_XRightLimit - IN.originVertex.x));
-				c.a = min(c.a, top & bot & left & right);
+				c.a = min(c.a, top * bot * left * right);
 				c.rgb *= c.a;
 				return c;
 			}

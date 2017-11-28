@@ -183,7 +183,7 @@ namespace Assets.Scripts.UICore.Controls.Containers
             }
         }
 
-        private void ApplyLimits(CoreUIElement element)
+        protected virtual void ApplyLimits(CoreUIElement element)
         {
             element.VerticalTopLimit = VerticalTopLimit;
             element.VerticalBottomLimit = VerticalBottomLimit;

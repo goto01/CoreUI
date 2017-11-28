@@ -8,23 +8,24 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Meshes.Text
 {
     public class TextMesh : BaseCoreUIMesh
     {
-        private CoreUITextGenerator _textGenerator;
         private string _text;
 
         public TextMesh(string text) : base()
         {
             _text = text;
-            _textGenerator = new CoreUITextGenerator();
         }
 
         protected override void Generate(BaseStyle style)
         {
             var font = style as CoreUIFont;
-            _textGenerator.Init(font);
-            _textGenerator.GenerateMeshData(_text, Color.white);
-            Vertices = _textGenerator.Vertices.ToList();
-            Triangles = _textGenerator.Triangles.ToList();
-            Uv = _textGenerator.UV.ToList();
+            using (var generator = new CoreUITextGenerator())
+            {
+                generator.Init(font);
+                generator.GenerateMeshData(_text, Color.white);
+                Vertices = generator.Vertices.ToList();
+                Triangles = generator.Triangles.ToList();
+                Uv = generator.UV.ToList();
+            }
         }
 
         protected override void ApplySize()
