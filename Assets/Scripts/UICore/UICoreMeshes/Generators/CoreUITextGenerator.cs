@@ -62,6 +62,7 @@ namespace Assets.Scripts.UICore.UICoreMeshes.Generators
             _symbolHandlers = new Dictionary<char, Action>()
             {
                 {' ', () => _horizontalOffset += _font.Space },
+                {' ', () => _horizontalOffset += _font.Space },
                 {'	', () => _horizontalOffset += _font.Space*4 },
                 {'\n', () => ShiftLine() },
                 {'\r', () => { }},
