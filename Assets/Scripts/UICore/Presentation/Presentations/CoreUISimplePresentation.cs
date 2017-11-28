@@ -66,7 +66,8 @@ namespace Assets.Scripts.UICore.Presentation.Presentations
 
         private void UpdateActive()
         {
-            _renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * _inactiveValue);
+            //_renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * _inactiveValue);
+            _renderer.enabled = Active;
         }
 
         private void UpdateVertialLimit()
