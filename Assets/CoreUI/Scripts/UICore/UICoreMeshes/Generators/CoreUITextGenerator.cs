@@ -17,7 +17,7 @@ namespace UICore.UICoreMeshes.Generators
         [SerializeField] private Color[] _colors;
         [SerializeField] private string _text;
         [SerializeField] private Color _color;
-        private IDictionary<char, Action> _symbolHandlers;
+        private IDictionary<char, Func<SymbolHandlerType>> _symbolHandlers;
 
         public Vector3[] Vertices { get { return _vertices; } }
         public int[] Triangles { get { return _triangles; } }
@@ -40,13 +40,18 @@ namespace UICore.UICoreMeshes.Generators
             
         }
 
-        public void GenerateMeshData(string text, Color color)
+        public void GenerateMeshData(string text, Color color, bool wrapping, float lineWidth)
         {
             if (_text.Equals(text)) return;
             _text = text;
             _color = color;
             ResetMeshData(text);
-            GenerateVertices(text);
+            GenerateVertices(text, wrapping, lineWidth);
+        }
+
+        public void GenerateMeshData(string text, Color color)
+        {
+            GenerateMeshData(text, color, false, -1);
         }
 
         public void UpdateColors(Color color)
@@ -59,24 +64,25 @@ namespace UICore.UICoreMeshes.Generators
 
         private void InitHandlers()
         {
-            _symbolHandlers = new Dictionary<char, Action>()
+            _symbolHandlers = new Dictionary<char, Func<SymbolHandlerType>>()
             {
-                {' ', () => _horizontalOffset += _font.Space },
-                {' ', () => _horizontalOffset += _font.Space },
-                {'	', () => _horizontalOffset += _font.Space*4 },
-                {'\n', () => ShiftLine() },
-                {'\r', () => { }},
+                {' ', () => { _horizontalOffset += _font.Space; return SymbolHandlerType.Separative; } },
+                {' ', () => { _horizontalOffset += _font.Space; return SymbolHandlerType.Separative; } },
+                {'	', () => { _horizontalOffset += _font.Space*4; return SymbolHandlerType.Separative; } },
+                {'\n', () => { ShiftLine(); return SymbolHandlerType.NotSeparative; } },
+                {'\r', () => { return SymbolHandlerType.NotSeparative;}},
             };
         }
 
-        private void GenerateVertices(string text)
+        private void GenerateVertices(string text, bool wrapping, float lineWidth)
         {
             for (var index = 0; index < text.Length; index++)
             {
                 var c = text[index];
                 if (CheckSymbolForHandler(c))
                 {
-                    HandleSymbol(c);
+                    var symbolHandlerType = HandleSymbol(c);
+                    if (wrapping && symbolHandlerType == SymbolHandlerType.Separative) PredictWidthOfWord(index, text, lineWidth);
                     continue;
                 }
                 var symbol = _font.GetSymbol(c);
@@ -85,14 +91,25 @@ namespace UICore.UICoreMeshes.Generators
             }
         }
 
+        private void PredictWidthOfWord(int index, string text, float lineWidth)
+        {
+            var predictHorizontalOffset = _horizontalOffset;
+            index++;
+            for (;index < text.Length && !CheckSymbolForHandler(text[index]); predictHorizontalOffset += _font.GetSymbol(text[index]).Width + _font.Interval ,index++);
+            if (predictHorizontalOffset >= lineWidth - Mathf.Epsilon)
+            {
+                ShiftLine();
+            }
+        }
+
         private bool CheckSymbolForHandler(char symbol)
         {
             return _symbolHandlers.ContainsKey(symbol);
         }
 
-        private void HandleSymbol(char symbol)
+        private SymbolHandlerType HandleSymbol(char symbol)
         {
-            _symbolHandlers[symbol].Invoke();
+            return _symbolHandlers[symbol].Invoke();
         }
         
         private void ResetMeshData(string text)

@@ -1,5 +1,7 @@
-﻿using UICore.StylesSystem.Styles.Font;
+﻿using System.Collections;
+using UICore.StylesSystem.Styles.Font;
 using UICore.UICoreMeshes.Generators;
+using UnityEditor;
 using UnityEngine;
 
 namespace UICore.Components
@@ -27,13 +29,14 @@ namespace UICore.Components
             if (_font == null) return;
             UpdateText();
             UpdateColors();
+            if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine(FadeOut());
         }
 
         private void UpdateText()
         {
             if (_generator.Text.Equals(_text)) return;
             InitSelf();
-            _generator.GenerateMeshData(_text, _color);
+            _generator.GenerateMeshData(_text, _color, true, 12.5f);
             ApplyMesh();
         }
 
@@ -58,5 +61,21 @@ namespace UICore.Components
             _meshFilter.sharedMesh.triangles = _generator.Triangles;
             _meshFilter.sharedMesh.colors = _generator.Colors;
         }
+
+        private IEnumerator FadeOut()
+        {
+            while (_color.a > 0)
+            {
+                _color.a -= .01f;
+                yield return new WaitForSeconds(Time.fixedDeltaTime);
+            }
+        }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Handles.DrawSolidRectangleWithOutline(new Rect(transform.position, new Vector2(12.5f, -20f)), new Color(1, 0, 0, .1f), Color.black);
+        }
+#endif
     }
 }
