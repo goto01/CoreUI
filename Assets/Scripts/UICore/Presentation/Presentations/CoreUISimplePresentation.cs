@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.UICore.Controls;
+﻿using UICore.Controls;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Presentation.Presentations
+namespace UICore.Presentation.Presentations
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class CoreUISimplePresentation : MonoBehaviour

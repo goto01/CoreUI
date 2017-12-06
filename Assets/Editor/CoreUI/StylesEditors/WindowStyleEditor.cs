@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.UICore.StylesSystem.Styles;
+using UICore.StylesSystem.Styles;
 using UnityEditor;
 using UnityEngine;
 

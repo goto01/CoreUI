@@ -1,16 +1,15 @@
 ﻿using System;
-using Assets.Scripts.Singleton;
-using Assets.Scripts.UICore.Controls;
-using Assets.Scripts.UICore.Controls.Containers;
-using Assets.Scripts.UICore.Controls.Text;
-using Assets.Scripts.UICore.Presentation;
-using Assets.Scripts.UICore.Presentation.Presentations;
-using Assets.Scripts.UICore.StylesSystem.Repository;
-using Assets.Scripts.UICore.UICoreMeshes.Factory;
-using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+using Singleton;
+using UICore.Controls;
+using UICore.Controls.Containers;
+using UICore.Controls.Text;
+using UICore.Presentation;
+using UICore.StylesSystem.Repository;
+using UICore.UICoreMeshes.Factory;
+using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore
+namespace UICore
 {
     public class CoreUIEditor : SingletonMonoBahaviour<CoreUIEditor>
     {

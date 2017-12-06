@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using Assets.Scripts.UICore.StylesSystem.Styles;
-using Assets.Scripts.UICore.StylesSystem.Styles.Font;
-using Assets.Scripts.UICore.UICoreMeshes.Generators;
+using UICore.StylesSystem.Styles;
+using UICore.StylesSystem.Styles.Font;
+using UICore.UICoreMeshes.Generators;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.UICoreMeshes.Meshes.Text
+namespace UICore.UICoreMeshes.Meshes.Text
 {
     public class TextMesh : BaseCoreUIMesh
     {

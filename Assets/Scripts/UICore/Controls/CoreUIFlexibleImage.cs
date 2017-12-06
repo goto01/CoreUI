@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using UICore.UICoreMeshes.Meshes;
 
-namespace Assets.Scripts.UICore.Controls
+namespace UICore.Controls
 {
     public class CoreUIFlexibleImage : CoreUIElement
     {

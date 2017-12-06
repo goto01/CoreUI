@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Assets.Scripts.UICore.StylesSystem.Styles.Font;
+using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scripts.UICore.StylesSystem.Styles;
+using UICore.StylesSystem.Styles;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.StylesSystem.Repository
+namespace UICore.StylesSystem.Repository
 {
     [Serializable]
     public class StylesRepository : ScriptableObject

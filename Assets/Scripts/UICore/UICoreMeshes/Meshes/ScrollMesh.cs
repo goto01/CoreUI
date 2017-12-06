@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Scripts.UICore.StylesSystem.Styles;
+﻿using System.Collections.Generic;
+using UICore.StylesSystem.Styles;
 
-namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
+namespace UICore.UICoreMeshes.Meshes
 {
     public class ScrollMesh : BaseCoreUIMesh
     {

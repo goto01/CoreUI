@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.StylesSystem.Styles.Font
+namespace UICore.StylesSystem.Styles.Font
 {
     [Serializable]
     public class CoreUIFont : BaseStyle

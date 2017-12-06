@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Controls
+namespace UICore.Controls
 {
     public class CoreUISlider : CoreUIElement
     {

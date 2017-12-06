@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Assets.Scripts.UICore.StylesSystem.Styles;
-using Debug = UnityEngine.Debug;
+using UICore.StylesSystem.Styles;
 
-namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
+namespace UICore.UICoreMeshes.Meshes
 {
     public enum CoreUIOrientation
     {

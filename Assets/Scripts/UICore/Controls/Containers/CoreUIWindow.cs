@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
-using UnityEngine;
+﻿using UICore.UICoreMeshes.Meshes;
 
-namespace Assets.Scripts.UICore.Controls.Containers
+namespace UICore.Controls.Containers
 {
     public class CoreUIWindow : CoreUIContainer
     {

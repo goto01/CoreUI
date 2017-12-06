@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design;
-using Assets.Scripts.Singleton;
-using Assets.Scripts.UICore.Controls;
-using Assets.Scripts.UICore.Controls.Containers;
-using Assets.Scripts.UICore.Presentation.Presentations;
-using Microsoft.Win32.SafeHandles;
+using Singleton;
+using UICore.Controls;
+using UICore.Controls.Containers;
+using UICore.Presentation.Presentations;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Presentation
+namespace UICore.Presentation
 {
     class CoreUIPresentation : SingletonMonoBahaviour<CoreUIPresentation>
     {

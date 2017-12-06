@@ -1,8 +1,7 @@
-﻿using Assets.Editor.CoreUI.Windows;
-using Assets.Editor.CoreUI.Windows.Font;
-using Assets.Scripts.UICore.StylesSystem.Repository;
-using Assets.Scripts.UICore.StylesSystem.Styles;
-using Assets.Scripts.UICore.StylesSystem.Styles.Font;
+﻿using Assets.Editor.CoreUI.Windows.Font;
+using UICore.StylesSystem.Repository;
+using UICore.StylesSystem.Styles;
+using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
 using UnityEngine;
 

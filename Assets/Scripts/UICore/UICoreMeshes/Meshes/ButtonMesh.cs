@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.UICore.StylesSystem.Styles;
+using UICore.StylesSystem.Styles;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.UICoreMeshes.Meshes
+namespace UICore.UICoreMeshes.Meshes
 {
     public class ButtonMesh : BaseCoreUIMesh
     {

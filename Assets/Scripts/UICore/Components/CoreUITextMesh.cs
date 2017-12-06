@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.UICore.StylesSystem.Styles.Font;
-using Assets.Scripts.UICore.UICoreMeshes.Generators;
+﻿using UICore.StylesSystem.Styles.Font;
+using UICore.UICoreMeshes.Generators;
 using UnityEngine;
 
 namespace UICore.Components

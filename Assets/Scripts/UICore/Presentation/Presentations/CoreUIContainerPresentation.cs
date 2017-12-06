@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.UICore.Controls;
-using Assets.Scripts.UICore.Controls.Containers;
+﻿using UICore.Controls;
+using UICore.Controls.Containers;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Presentation.Presentations
+namespace UICore.Presentation.Presentations
 {
     class CoreUIContainerPresentation : CoreUISimplePresentation
     {

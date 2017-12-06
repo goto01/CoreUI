@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.UICore
+namespace UICore
 {
     public struct CoreUIEvent
     {

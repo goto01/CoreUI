@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.UICore.StylesSystem.Styles
+﻿namespace UICore.StylesSystem.Styles
 {
     public class ScrollStyle : BaseStyle
     {

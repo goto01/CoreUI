@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.UICore.StylesSystem.Styles.Font;
+﻿using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
-using UnityEngine;
 
 namespace Assets.Editor.CoreUI.StylesEditors
 {

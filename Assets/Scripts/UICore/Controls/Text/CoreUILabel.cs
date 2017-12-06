@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using UICore.UICoreMeshes.Meshes;
 
-namespace Assets.Scripts.UICore.Controls.Text
+namespace UICore.Controls.Text
 {
     public class CoreUILabel : CoreUIElement
     {

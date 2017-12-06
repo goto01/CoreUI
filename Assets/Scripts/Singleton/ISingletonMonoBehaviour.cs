@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Singleton
+﻿namespace Singleton
 {
     public interface ISingletonMonoBehaviour
     {

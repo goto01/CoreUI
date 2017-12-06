@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.UICore.StylesSystem
+﻿namespace UICore.StylesSystem
 {
     class CoreUIStyles
     {

@@ -1,9 +1,7 @@
-﻿using System;
-using Assets.Scripts.UICore.Controls.Containers;
-using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Controls
+namespace UICore.Controls
 {
     public abstract class CoreUIElement
     {

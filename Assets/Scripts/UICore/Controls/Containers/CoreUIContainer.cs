@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.Controls.Containers
+namespace UICore.Controls.Containers
 {
     public class CoreUIContainer : CoreUIElement
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.StylesSystem.Styles
+namespace UICore.StylesSystem.Styles
 {
     [Serializable]
     public class WindowStyle : BaseStyle

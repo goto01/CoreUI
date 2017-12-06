@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.UICore.StylesSystem.Styles;
+﻿using UICore.StylesSystem.Styles;
 using UnityEditor;
 
 namespace Assets.Editor.CoreUI.StylesEditors

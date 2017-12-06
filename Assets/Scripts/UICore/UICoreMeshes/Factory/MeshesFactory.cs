@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.UICore.StylesSystem.Repository;
-using Assets.Scripts.UICore.StylesSystem.Styles;
-using Assets.Scripts.UICore.UICoreMeshes.Meshes;
+﻿using UICore.StylesSystem.Repository;
+using UICore.StylesSystem.Styles;
+using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.UICoreMeshes.Factory
+namespace UICore.UICoreMeshes.Factory
 {
     public class MeshesFactory
     {

@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Singleton;
+﻿using Singleton;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore
+namespace UICore
 { 
     class CoreUICameraHandler : SingletonMonoBahaviour<CoreUICameraHandler>
     {

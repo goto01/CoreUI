@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace Assets.Scripts.UICore.StylesSystem.Styles.Font
+namespace UICore.StylesSystem.Styles.Font
 {
     [Serializable]
     public class Sprite

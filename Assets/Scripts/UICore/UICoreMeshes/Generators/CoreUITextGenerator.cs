@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scripts.UICore.StylesSystem.Styles.Font;
+using UICore.StylesSystem.Styles.Font;
 using UnityEngine;
 
-namespace Assets.Scripts.UICore.UICoreMeshes.Generators
+namespace UICore.UICoreMeshes.Generators
 {
     [Serializable]
     public class CoreUITextGenerator : IDisposable
