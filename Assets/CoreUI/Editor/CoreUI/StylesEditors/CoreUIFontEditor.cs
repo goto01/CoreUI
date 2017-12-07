@@ -8,18 +8,21 @@ namespace Assets.Editor.CoreUI.StylesEditors
     {
         private SerializedProperty _pixelsInterval;
         private SerializedProperty _alphabet;
-
+        private SerializedProperty _material;
+        
         protected override void FindSerializedProperties()
         {
             base.FindSerializedProperties();
             _pixelsInterval = serializedObject.FindProperty("_pixelsInterval");
             _alphabet = serializedObject.FindProperty("_alphabet");
+            _material = serializedObject.FindProperty("_material");
         }
 
         protected override void DrawInspector()
         {
             EditorGUILayout.PropertyField(_pixelsInterval);
             EditorGUILayout.PropertyField(_alphabet, true);
+            EditorGUILayout.PropertyField(_material);
         }
     }
 }

@@ -11,10 +11,12 @@ namespace UICore.StylesSystem.Styles.Font
         [SerializeField] private int _pixelsInterval;
         [SerializeField] private int _pixelsSpace;
         [SerializeField] private int _pixelsHeight;
+        [SerializeField] private Material _material;
         [SerializeField] private SymbolDescription[] _alphabet;
         private Dictionary<char, SymbolDescription> _alphabetDictionary;
 
         public float FontHeight { get { return _pixelsHeight * _pixelWidth; } }
+        public Material Material { get { return _material; } }
 
         public int PixelsHeight
         {
@@ -42,8 +44,9 @@ namespace UICore.StylesSystem.Styles.Font
         
         public SymbolDescription GetSymbol(char symbol)
         {
+            if (_alphabetDictionary == null) InitSelf();
             if (_alphabetDictionary.ContainsKey(symbol)) return _alphabetDictionary[symbol];
-            Debug.LogErrorFormat(this, "Symbol '{0}' doesn't exist in the font '{1}'", symbol, name);
+            Debug.LogErrorFormat(this, "Symbol '{0}' doesn't exist in the font '{1}'", symbol, name); 
             return null;
         }
 

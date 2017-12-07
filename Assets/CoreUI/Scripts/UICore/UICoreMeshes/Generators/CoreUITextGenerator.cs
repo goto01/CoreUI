@@ -17,6 +17,7 @@ namespace UICore.UICoreMeshes.Generators
         [SerializeField] private Color[] _colors;
         [SerializeField] private string _text;
         [SerializeField] private Color _color;
+        [SerializeField] private bool _wrapping;
         private IDictionary<char, Func<SymbolHandlerType>> _symbolHandlers;
 
         public Vector3[] Vertices { get { return _vertices; } }
@@ -42,9 +43,10 @@ namespace UICore.UICoreMeshes.Generators
 
         public void GenerateMeshData(string text, Color color, bool wrapping, float lineWidth)
         {
-            if (_text.Equals(text)) return;
+            if (_text.Equals(text) && _wrapping == wrapping) return;
             _text = text;
             _color = color;
+            _wrapping = wrapping;
             ResetMeshData(text);
             GenerateVertices(text, wrapping, lineWidth);
         }

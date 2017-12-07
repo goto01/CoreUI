@@ -9,6 +9,8 @@ namespace CoreUI.Editor.ComponentEditors
         private SerializedProperty _text;
         private SerializedProperty _font;
         private SerializedProperty _color;
+        private SerializedProperty _lineWidth;
+        private SerializedProperty _textWrapping;
 
         public override void OnInspectorGUI()
         {
@@ -22,6 +24,8 @@ namespace CoreUI.Editor.ComponentEditors
             _text = serializedObject.FindProperty("_text");
             _font = serializedObject.FindProperty("_font");
             _color = serializedObject.FindProperty("_color");
+            _lineWidth = serializedObject.FindProperty("_lineWidth");
+            _textWrapping = serializedObject.FindProperty("_textWrapping");
         }
 
         private void DrawInspector()
@@ -33,7 +37,9 @@ namespace CoreUI.Editor.ComponentEditors
                 return;
             }
             EditorGUILayout.PropertyField(_text);
-            EditorGUILayout.PropertyField(_color);
+            if (!string.IsNullOrEmpty(_text.stringValue)) EditorGUILayout.PropertyField(_color);
+            EditorGUILayout.PropertyField(_textWrapping);
+            if (_textWrapping.boolValue) EditorGUILayout.PropertyField(_lineWidth);
         }
     }
 }

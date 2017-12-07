@@ -14,14 +14,16 @@ namespace UICore.Components
         [SerializeField] private Color _color;
         [SerializeField] private CoreUIFont _font;
         [SerializeField] private CoreUITextGenerator _generator;
-        private MeshFilter _meshFilter;
-        private MeshRenderer _meshRenderer;
+        [SerializeField] private MeshFilter _meshFilter;
+        [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private float _lineWidth;
+        [SerializeField] private bool _textWrapping;
 
         protected virtual void OnEnable()
         {
             _meshFilter = GetComponent<MeshFilter>();
             _meshRenderer = GetComponent<MeshRenderer>();
-            InitSelf();
+            if (!string.IsNullOrEmpty(_text)) GenerateData();
         }
 
         protected virtual void Update()
@@ -29,20 +31,28 @@ namespace UICore.Components
             if (_font == null) return;
             UpdateText();
             UpdateColors();
-            if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine(FadeOut());
         }
 
         private void UpdateText()
         {
             if (_generator.Text.Equals(_text)) return;
+            GenerateData();
+        }
+
+        private void GenerateData()
+        {
             InitSelf();
-            _generator.GenerateMeshData(_text, _color, true, 12.5f);
+            _generator.GenerateMeshData(_text, _color, _textWrapping, _lineWidth);
             ApplyMesh();
         }
 
         private void InitSelf()
         {
-            if (!_generator.Inited) _generator.Init(_font);
+            if (!_generator.Inited)
+            {
+                _generator.Init(_font);
+                ResetMesh();
+            }
         }
 
         private void UpdateColors()
@@ -54,7 +64,7 @@ namespace UICore.Components
 
         private void ApplyMesh()
         {
-            if (_meshFilter.sharedMesh == null) _meshFilter.sharedMesh = new Mesh();
+            if (_meshFilter.sharedMesh == null) ResetMesh();
             _meshFilter.sharedMesh.Clear();
             _meshFilter.sharedMesh.vertices = _generator.Vertices;
             _meshFilter.sharedMesh.uv = _generator.UV;
@@ -62,13 +72,10 @@ namespace UICore.Components
             _meshFilter.sharedMesh.colors = _generator.Colors;
         }
 
-        private IEnumerator FadeOut()
+        private void ResetMesh()
         {
-            while (_color.a > 0)
-            {
-                _color.a -= .01f;
-                yield return new WaitForSeconds(Time.fixedDeltaTime);
-            }
+            _meshFilter.sharedMesh = new Mesh();
+            _meshRenderer.material = _font.Material;
         }
 
 #if UNITY_EDITOR
