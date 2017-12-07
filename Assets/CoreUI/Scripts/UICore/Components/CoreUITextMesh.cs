@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UICore.StylesSystem.Styles.Font;
 using UICore.UICoreMeshes.Generators;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace UICore.Components
 {
@@ -19,6 +21,15 @@ namespace UICore.Components
         [SerializeField] private float _lineWidth;
         [SerializeField] private bool _textWrapping;
 
+        [SerializeField] private Color _fillRectangleJizmosColor = new Color(1, 0, 0, .1f);
+        [SerializeField] private Color _outlineRectangleGizmosColor = Color.black;
+        [SerializeField] private int _selectedMode;
+
+        protected virtual void Reset()
+        {
+            OnEnable();
+        }
+
         protected virtual void OnEnable()
         {
             _meshFilter = GetComponent<MeshFilter>();
@@ -28,6 +39,7 @@ namespace UICore.Components
 
         protected virtual void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine(FadeOut());
             if (_font == null) return;
             UpdateText();
             UpdateColors();
@@ -39,7 +51,8 @@ namespace UICore.Components
             GenerateData();
         }
 
-        private void GenerateData()
+        ///Only for editor
+        public void GenerateData()
         {
             InitSelf();
             _generator.GenerateMeshData(_text, _color, _textWrapping, _lineWidth);
@@ -78,10 +91,22 @@ namespace UICore.Components
             _meshRenderer.material = _font.Material;
         }
 
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
+        private IEnumerator FadeOut()
         {
-            Handles.DrawSolidRectangleWithOutline(new Rect(transform.position, new Vector2(12.5f, -20f)), new Color(1, 0, 0, .1f), Color.black);
+            _color.a = 1;
+            while (_color.a > 0)
+            {
+                _color.a -= .01f;
+                yield return new WaitForSeconds(Time.fixedDeltaTime);
+            }
+        }
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+        {
+            if (_textWrapping)
+                Handles.DrawSolidRectangleWithOutline(new Rect(transform.position, new Vector2(_lineWidth, -_meshRenderer.bounds.size.y)), _fillRectangleJizmosColor, _outlineRectangleGizmosColor);
         }
 #endif
     }
