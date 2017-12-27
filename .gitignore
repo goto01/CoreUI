@@ -54,6 +54,7 @@ ehthumbs.db
 *.sdf
 *.opensdf
 *.unsuccessfulbuild
+*.DotSettings
 ipch/
 [Oo]bj/
 [Bb]in
