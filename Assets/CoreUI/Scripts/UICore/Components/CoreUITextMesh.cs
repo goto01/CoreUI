@@ -23,6 +23,8 @@ namespace UICore.Components
         [SerializeField] private int _sinPixelsOffset = 4;
         [SerializeField] private int _sinSpeedOffset = 1;
         [SerializeField] private float _sinMultiplier = 1;
+        [SerializeField] private float _horizontalShakePixelsOffset;
+        [SerializeField] private float _verticalShakePixelsOffset;
         [SerializeField] private Color _fillRectangleJizmosColor = new Color(1, 0, 0, .1f);
         [SerializeField] private Color _outlineRectangleGizmosColor = Color.black;
         [SerializeField] private int _selectedMode;
@@ -70,7 +72,7 @@ namespace UICore.Components
                 _generator.Init(_font);
                 ResetMesh();
             }
-            _generator.InitEffects(_sinPixelsOffset, _sinSpeedOffset, _sinMultiplier);
+            _generator.InitEffects(_sinPixelsOffset, _sinSpeedOffset, _sinMultiplier, _horizontalShakePixelsOffset, _verticalShakePixelsOffset);
         }
 
         private void UpdateColors()

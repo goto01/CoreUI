@@ -18,6 +18,8 @@ namespace CoreUI.Editor.ComponentEditors
         private SerializedProperty _sinPixelsOffset;
         private SerializedProperty _sinSpeedOffset;
         private SerializedProperty _sinMultiplier;
+        private SerializedProperty _horizontalShakePixelsOffset;
+        private SerializedProperty _verticalShakePixelsOffset;
 
         private CoreUITextMesh Target { get { return target as CoreUITextMesh; } }
 
@@ -41,6 +43,8 @@ namespace CoreUI.Editor.ComponentEditors
             _sinPixelsOffset = serializedObject.FindProperty("_sinPixelsOffset");
             _sinSpeedOffset = serializedObject.FindProperty("_sinSpeedOffset");
             _sinMultiplier = serializedObject.FindProperty("_sinMultiplier");
+            _horizontalShakePixelsOffset = serializedObject.FindProperty("_horizontalShakePixelsOffset");
+            _verticalShakePixelsOffset = serializedObject.FindProperty("_verticalShakePixelsOffset");
         }
 
         private void DrawInspector()
@@ -102,6 +106,9 @@ namespace CoreUI.Editor.ComponentEditors
             EditorGUILayout.PropertyField(_sinPixelsOffset);
             EditorGUILayout.PropertyField(_sinSpeedOffset);
             EditorGUILayout.PropertyField(_sinMultiplier);
+            EditorGUILayout.LabelField("Shake effect settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_horizontalShakePixelsOffset);
+            EditorGUILayout.PropertyField(_verticalShakePixelsOffset);
             EditorGUILayout.LabelField("Debug settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_fillRectangleJizmosColor);
             EditorGUILayout.PropertyField(_outlineRectangleGizmosColor);

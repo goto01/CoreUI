@@ -26,6 +26,9 @@ namespace UICore.UICoreMeshes.Generators
         [SerializeField] private float _sinOffset;
         [SerializeField] private float _sinOffsetSpeed;
         [SerializeField] private float _sinMultiplier;
+        [SerializeField] private float _shakeHorizontalOffset;
+        [SerializeField] private float _shakeVerticalOffset;
+        [SerializeField] private List<int> _shakeOffsetIndices;
         private IDictionary<char, Func<SymbolHandlerType>> _symbolHandlers;
         
         public Vector3[] Vertices { get { return _outputVertices; } }
@@ -36,11 +39,14 @@ namespace UICore.UICoreMeshes.Generators
         public string Text { get { return _text; } }
         public bool Inited { get { return _font != null && _symbolHandlers != null; } }
 
-        public void InitEffects(int sinPixelsOffset, float sinOffsetSpeed, float sinMultiplier)
+        public void InitEffects(int sinPixelsOffset, float sinOffsetSpeed, float sinMultiplier,
+            float horizontalPixelsOffset, float verticalPixelsOffset)
         {
             _sinOffset = sinPixelsOffset * _font.PixelWidth;    
             _sinOffsetSpeed = sinOffsetSpeed;
             _sinMultiplier = sinMultiplier;
+            _shakeHorizontalOffset = _font.PixelWidth * horizontalPixelsOffset;
+            _shakeVerticalOffset = _font.PixelWidth * verticalPixelsOffset;
         }
         
         public void Init(CoreUIFont font)
@@ -55,6 +61,7 @@ namespace UICore.UICoreMeshes.Generators
         {
             if (_text.Equals(text) && _wrapping == wrapping) return;
             _sinOffsetIndices.Clear();
+            _shakeOffsetIndices.Clear();
             _sinMode = false;
             _index = 0;
             _text = text;
@@ -75,6 +82,7 @@ namespace UICore.UICoreMeshes.Generators
         public void ForceGenerateMeshData(string text, Color color, bool wrapping, float lineWidth)
         {
             _sinOffsetIndices.Clear();
+            _shakeOffsetIndices.Clear();
             _sinMode = false;
             _index = 0;
             _text = text;
@@ -95,6 +103,15 @@ namespace UICore.UICoreMeshes.Generators
                 _outputVertices[verticeIndex + 1].y = _vertices[verticeIndex+1].y + offset;
                 _outputVertices[verticeIndex + 2].y = _vertices[verticeIndex+2].y + offset;
                 _outputVertices[verticeIndex + 3].y = _vertices[verticeIndex+3].y + offset;
+            }
+            for (var index = 0; index < _shakeOffsetIndices.Count; index++)
+            {
+                var verticeIndex = _shakeOffsetIndices[index] * 4;
+                var offset = new Vector3(UnityEngine.Random.Range(-_shakeHorizontalOffset, _shakeHorizontalOffset), UnityEngine.Random.Range(-_shakeVerticalOffset, _shakeVerticalOffset));
+                _outputVertices[verticeIndex] = _vertices[verticeIndex] + offset;
+                _outputVertices[verticeIndex + 1] = _vertices[verticeIndex+1] + offset;
+                _outputVertices[verticeIndex + 2] = _vertices[verticeIndex+2] + offset;
+                _outputVertices[verticeIndex + 3] = _vertices[verticeIndex+3] + offset;
             }
         }
         
@@ -120,7 +137,8 @@ namespace UICore.UICoreMeshes.Generators
                 {'	', () => { _horizontalOffset += _font.Space*4; return SymbolHandlerType.Separative; } },
                 {'\n', () => { ShiftLine(); return SymbolHandlerType.NotSeparative; } },
                 {'\r', () => { return SymbolHandlerType.NotSeparative;}},
-                {'~', HandleSinOffset}
+                {'~', HandleSinOffset},
+                {'±', HandleShakeOffset},
             };
         }
 
@@ -233,7 +251,22 @@ namespace UICore.UICoreMeshes.Generators
             _sinOffsetIndices.Add(_index+1);
             _sinMode = true;
             return SymbolHandlerType.NotSeparative;
-        } 
+        }
+
+        private SymbolHandlerType HandleShakeOffset()
+        {
+            
+            if (_index >= _text.Length - 1 && !_sinMode) return SymbolHandlerType.NotSeparative;
+            if (_sinMode)
+            {
+                _sinMode = false;
+                for (var i = _shakeOffsetIndices.Last()+1; i < _index; i++) _shakeOffsetIndices.Add(i);
+                return SymbolHandlerType.NotSeparative;
+            }
+            _shakeOffsetIndices.Add(_index+1);
+            _sinMode = true;
+            return SymbolHandlerType.NotSeparative;
+        }
             
         public void Dispose()
         {
