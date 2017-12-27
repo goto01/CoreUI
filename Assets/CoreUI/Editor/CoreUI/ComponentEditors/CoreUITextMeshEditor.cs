@@ -15,6 +15,9 @@ namespace CoreUI.Editor.ComponentEditors
         private SerializedProperty _fillRectangleJizmosColor;
         private SerializedProperty _outlineRectangleGizmosColor;
         private SerializedProperty _selectedMode;
+        private SerializedProperty _sinPixelsOffset;
+        private SerializedProperty _sinSpeedOffset;
+        private SerializedProperty _sinMultiplier;
 
         private CoreUITextMesh Target { get { return target as CoreUITextMesh; } }
 
@@ -35,11 +38,15 @@ namespace CoreUI.Editor.ComponentEditors
             _fillRectangleJizmosColor = serializedObject.FindProperty("_fillRectangleJizmosColor");
             _outlineRectangleGizmosColor = serializedObject.FindProperty("_outlineRectangleGizmosColor");
             _selectedMode = serializedObject.FindProperty("_selectedMode");
+            _sinPixelsOffset = serializedObject.FindProperty("_sinPixelsOffset");
+            _sinSpeedOffset = serializedObject.FindProperty("_sinSpeedOffset");
+            _sinMultiplier = serializedObject.FindProperty("_sinMultiplier");
         }
 
         private void DrawInspector()
         {
             DrawModeSelector();
+            EditorGUILayout.BeginVertical(GUI.skin.box);
             switch (_selectedMode.intValue)
             {
                 case 0:
@@ -52,7 +59,12 @@ namespace CoreUI.Editor.ComponentEditors
                     DrawInfoEditor();
                     break;
             }
-            
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space();
+            GUI.enabled = !string.IsNullOrEmpty(_text.stringValue);
+            EditorGUILayout.PropertyField(_color);
+            if (GUILayout.Button("Regenerate text mesh")) Target.GenerateData();
+            GUI.enabled = true;
         }
 
         private void DrawModeSelector()
@@ -75,19 +87,22 @@ namespace CoreUI.Editor.ComponentEditors
                 EditorGUILayout.HelpBox("Select font in the settings tab!", MessageType.Error);
                 return;
             }
+            EditorGUILayout.LabelField("Content", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_text);
-            GUI.enabled = !string.IsNullOrEmpty(_text.stringValue);
-            EditorGUILayout.PropertyField(_color);
-            if (GUILayout.Button("Regenerate text mesh")) Target.GenerateData();
-            GUI.enabled = true;
         }
 
         private void DrawSettingsEditor()
         {
+            EditorGUILayout.LabelField("Text settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_font);
             EditorGUILayout.PropertyField(_textWrapping);
             GUI.enabled = _textWrapping.boolValue;
             EditorGUILayout.PropertyField(_lineWidth);
+            EditorGUILayout.LabelField("Sin wave effect settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_sinPixelsOffset);
+            EditorGUILayout.PropertyField(_sinSpeedOffset);
+            EditorGUILayout.PropertyField(_sinMultiplier);
+            EditorGUILayout.LabelField("Debug settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_fillRectangleJizmosColor);
             EditorGUILayout.PropertyField(_outlineRectangleGizmosColor);
             GUI.enabled = true;
@@ -95,6 +110,7 @@ namespace CoreUI.Editor.ComponentEditors
 
         private void DrawInfoEditor()
         {
+            EditorGUILayout.LabelField("Text info", EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Number of symbols");
             EditorGUILayout.LabelField(_text.stringValue.Length.ToString());

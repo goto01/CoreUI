@@ -20,7 +20,9 @@ namespace UICore.Components
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private float _lineWidth;
         [SerializeField] private bool _textWrapping;
-
+        [SerializeField] private int _sinPixelsOffset = 4;
+        [SerializeField] private int _sinSpeedOffset = 1;
+        [SerializeField] private float _sinMultiplier = 1;
         [SerializeField] private Color _fillRectangleJizmosColor = new Color(1, 0, 0, .1f);
         [SerializeField] private Color _outlineRectangleGizmosColor = Color.black;
         [SerializeField] private int _selectedMode;
@@ -39,10 +41,11 @@ namespace UICore.Components
 
         protected virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine(FadeOut());
             if (_font == null) return;
             UpdateText();
             UpdateColors();
+            _generator.Update();
+            ApplyMesh();
         }
 
         private void UpdateText()
@@ -51,12 +54,13 @@ namespace UICore.Components
             GenerateData();
         }
 
-        ///Only for editor
+        /// <summary>
+        /// Use only int Editor
+        /// </summary>
         public void GenerateData()
         {
             InitSelf();
-            _generator.GenerateMeshData(_text, _color, _textWrapping, _lineWidth);
-            ApplyMesh();
+            _generator.ForceGenerateMeshData(_text, _color, _textWrapping, _lineWidth);
         }
 
         private void InitSelf()
@@ -66,6 +70,7 @@ namespace UICore.Components
                 _generator.Init(_font);
                 ResetMesh();
             }
+            _generator.InitEffects(_sinPixelsOffset, _sinSpeedOffset, _sinMultiplier);
         }
 
         private void UpdateColors()
@@ -89,16 +94,6 @@ namespace UICore.Components
         {
             _meshFilter.sharedMesh = new Mesh();
             _meshRenderer.material = _font.Material;
-        }
-
-        private IEnumerator FadeOut()
-        {
-            _color.a = 1;
-            while (_color.a > 0)
-            {
-                _color.a -= .01f;
-                yield return new WaitForSeconds(Time.fixedDeltaTime);
-            }
         }
 
 
