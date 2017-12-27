@@ -11,14 +11,14 @@ sysinfo.txt
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 [Ee]xported[Oo]bj/
-/*.userprefs
-/*.csproj
-/*.pidb
-/*.suo
-/*.sln*
-/*.user
-/*.unityproj
-/*.booproj
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln*
+*.user
+*.unityproj
+*.booproj
  
 # ============ #
 # OS generated #
@@ -59,6 +59,7 @@ ipch/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
+.idea/
 Ankh.NoLoad
 Library/
 Launcher/InTheWallLauncher/packages/MahApps.Metro.1.2.4.0/lib/net45/MahApps.Metro.dll
