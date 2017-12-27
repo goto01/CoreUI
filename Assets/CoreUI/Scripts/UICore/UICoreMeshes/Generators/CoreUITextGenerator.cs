@@ -51,6 +51,8 @@ namespace UICore.UICoreMeshes.Generators
         
         public void Init(CoreUIFont font)
         {
+            _sinOffsetIndices = new List<int>();
+            _shakeOffsetIndices = new List<int>();
             _text = string.Empty;
             _font = font;
             ResetOffsets();

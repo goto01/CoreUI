@@ -40,6 +40,7 @@ namespace UICore.Presentation.Presentations
             UpdateQueue();
             UpdateActive();
             UpdateVertialLimit();
+            _mesh.mesh = _element.Mesh;
         }
 
         private void InitMaterial()

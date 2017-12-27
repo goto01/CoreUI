@@ -131,5 +131,15 @@ namespace UICore
             container.AddElement(element);
             return element;
         }
+        
+        public CoreUILabel Label(Rect rect, string text, CoreUIContainer container, int sinPixelsOffset, float sinOffsetSpeed, float sinMultiplier,
+            float horizontalPixelsOffset, float verticalPixelsOffset, string fontName = DefaultFontName)
+        {
+            var mesh = _factory.CreateLabel(rect, text, fontName);
+            var element = new CoreUILabel(mesh, sinPixelsOffset, sinOffsetSpeed, sinMultiplier, horizontalPixelsOffset, verticalPixelsOffset);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
+            container.AddElement(element);
+            return element;
+        }
     }
 }

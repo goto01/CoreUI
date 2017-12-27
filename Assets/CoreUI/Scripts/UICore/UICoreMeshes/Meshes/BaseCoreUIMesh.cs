@@ -166,7 +166,7 @@ namespace UICore.UICoreMeshes.Meshes
             _uv.Add(uv);
         }
 
-        protected void UpdateMeshInfo()
+        public void UpdateMeshInfo()
         {
             UpdatePositions();
             _mesh.SetUVs(0, _uv);
