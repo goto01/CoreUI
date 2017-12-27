@@ -93,6 +93,12 @@ namespace CoreUI.Editor.ComponentEditors
             }
             EditorGUILayout.LabelField("Content", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_text);
+            
+            EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
+            if (GUILayout.Button("Sin", EditorStyles.toolbarButton, GUILayout.Width(50))) GUIUtility.systemCopyBuffer = "~";
+            if (GUILayout.Button("Shake", EditorStyles.toolbarButton, GUILayout.Width(50))) GUIUtility.systemCopyBuffer = "±";
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawSettingsEditor()
@@ -102,6 +108,7 @@ namespace CoreUI.Editor.ComponentEditors
             EditorGUILayout.PropertyField(_textWrapping);
             GUI.enabled = _textWrapping.boolValue;
             EditorGUILayout.PropertyField(_lineWidth);
+            GUI.enabled = true;
             EditorGUILayout.LabelField("Sin wave effect settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_sinPixelsOffset);
             EditorGUILayout.PropertyField(_sinSpeedOffset);
@@ -112,7 +119,6 @@ namespace CoreUI.Editor.ComponentEditors
             EditorGUILayout.LabelField("Debug settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_fillRectangleJizmosColor);
             EditorGUILayout.PropertyField(_outlineRectangleGizmosColor);
-            GUI.enabled = true;
         }
 
         private void DrawInfoEditor()
