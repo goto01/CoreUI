@@ -128,6 +128,20 @@ namespace UICore.UICoreMeshes.Generators
                 if (!CheckSymbolForHandler(_text[index])) GenerateColors(index*4);
         }
 
+        public void ShowSymbols(int start, int symbols)
+        {
+            for (var index = 0; index < _text.Length; index++)
+            {
+                var alfa = 0;
+                if (index >= start && index < start + symbols) alfa = 1;
+                var verticeIndex = index * 4;
+                _colors[verticeIndex].a = alfa;
+                _colors[verticeIndex+1].a = alfa;
+                _colors[verticeIndex+2].a = alfa;
+                _colors[verticeIndex+3].a = alfa;
+            }
+        }
+        
         private void InitHandlers()
         {
             _symbolHandlers = new Dictionary<char, Func<SymbolHandlerType>>()
@@ -176,7 +190,7 @@ namespace UICore.UICoreMeshes.Generators
             }
         }
 
-        private bool CheckSymbolForHandler(char symbol)
+        public bool CheckSymbolForHandler(char symbol)
         {
             return _symbolHandlers.ContainsKey(symbol);
         }
