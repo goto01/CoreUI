@@ -43,6 +43,7 @@ namespace UICore.Components
 
         protected virtual void Update()
         {
+            UpdateScale();
             if (_font == null) return;
             UpdateText();
             UpdateColors();
@@ -50,6 +51,11 @@ namespace UICore.Components
             ApplyMesh();
         }
 
+        private void UpdateScale()
+        {
+            transform.localScale = Vector3.one;
+        }
+        
         private void UpdateText()
         {
             if (_generator.Text.Equals(_text)) return;
