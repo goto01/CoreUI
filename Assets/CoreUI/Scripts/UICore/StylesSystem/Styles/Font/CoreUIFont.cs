@@ -40,7 +40,7 @@ namespace UICore.StylesSystem.Styles.Font
 
         public float Space { get { return ToWorldCoords(_pixelsSpace); } }
 
-        public SymbolDescription[] Alphabet { get { return _alphabet;} }
+        public SymbolDescription[] Alphabet { get { return _alphabet ?? (_alphabet = new SymbolDescription[]{});} }
         
         public SymbolDescription GetSymbol(char symbol)
         {
