@@ -6,11 +6,12 @@ namespace Assets.Editor
 {
     public class ObjectCreatorHelper
     {
-        public static ScriptableObject CreateAsset(Type type)
+        public static T CreateAsset<T>(string name = null) where T:ScriptableObject
         {
-            var asset = ScriptableObject.CreateInstance(type);
-            ProjectWindowUtil.CreateAsset(asset, string.Format("{0}.asset", type.Name));
-            return asset;
+            if (name == null) name = typeof(T).Name;
+            var asset = ScriptableObject.CreateInstance<T>();
+            ProjectWindowUtil.CreateAsset(asset, string.Format("{0}.asset", name));
+            return (T)asset;
         }
     }
 }
