@@ -70,7 +70,7 @@ namespace Assets.Editor.CoreUI
         [MenuItem(CoreUIWindows + "/Font editor", false, 0)]
         public static void OpenFontEditorWindow()
         {
-            FontEditorWindow.Show();
+            FontEditorWindow.ShowSelf();
         }
     }
 }

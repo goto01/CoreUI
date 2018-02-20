@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Xml;
 using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
 using UnityEngine;
@@ -10,6 +11,10 @@ namespace Assets.Editor.CoreUI.Windows.Font
     class FontEditorWindow : EditorWindow
     {
         protected const string StyleStaffPath = "CoreUI/FontEditorStaff/";
+        private const float AlphabetGridWindowHorizontalDelta = .02f;
+        private const float AlphabetGridWindowWidthDelta = .46f;
+        private const float AlphabetGridWindowHeight = FontWindowHeight - SmallButtonSize * 2;
+        private const float AlphabetGridWindowVerticalSpace = 20 + SmallButtonSize * 2;
         private const float FontWindowHorizontalDelta = .5f;
         private const float FontWindowWidthDelta = .48f;
         private const float FontWindowHeight = 290;
@@ -18,8 +23,10 @@ namespace Assets.Editor.CoreUI.Windows.Font
         private const int ScaleMaxValue = 20;
         private const float BoundsButtonSize = 10;
         private const float SymbolSelectionMarkHeight = 20;
+        private const int AlphabetGridButtonSize = 20;
         private const char InitSymbol = '~';
         private const string SymbolSelectionMarkLabel = "Selected symbol";
+        private static readonly Color SelectedSymbolColor = Color.yellow;
 
         [SerializeField] private CoreUIFont _font;
         [SerializeField] private int _textureScale = 2;
@@ -34,6 +41,13 @@ namespace Assets.Editor.CoreUI.Windows.Font
 
         private float WindowWidth { get { return position.width; } }
         private float WindowHeight { get { return position.height; } }
+        
+        private float AlphabetGridWindowVerticalPos { get { return WindowHeight - AlphabetGridWindowHeight - AlphabetGridWindowVerticalSpace; } }
+        private float AlphabetGridWindowWidth{get { return WindowWidth * AlphabetGridWindowWidthDelta; }}
+        private Rect AlphabetGridWindowRect{get{return new Rect(WindowWidth * AlphabetGridWindowHorizontalDelta,
+            AlphabetGridWindowVerticalPos,
+            AlphabetGridWindowWidth,
+            AlphabetGridWindowHeight);}}
         private float FontWindowVerticalPos { get { return WindowHeight - FontWindowHeight - FontWindowVerticalSpace; } }
         private Rect FontWindowRect { get { return new Rect(WindowWidth * FontWindowHorizontalDelta,
             FontWindowVerticalPos,
@@ -52,7 +66,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
         private float TextureEditorVerticalSpace { get { return EditorGUIUtility.singleLineHeight; } }
         private Rect TextureEditorRect { get { return new Rect(0, 0, TextureEditorWidth, TextureEditorHeight);} }
         private Rect TextureScrollRect { get { return new Rect(0, TextureEditorVerticalSpace, WindowWidth, TextureEditorHeight + TextureEditorVerticalSpace * 2); } }
-        private Rect TextireViewEditorRect { get { return new Rect(0, 0, TextureEditorWidth, TextureEditorHeight);} }
+        private Rect TextureViewEditorRect { get { return new Rect(0, 0, TextureEditorWidth, TextureEditorHeight);} }
         private bool AlphabetEmpty { get { return _font.Alphabet.Length == 0; } }
 
         private SymbolDescription SelectedSymbol
@@ -64,7 +78,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
             }
         }
 
-        public static void Show()
+        public static void ShowSelf()
         {
             var window = EditorWindow.GetWindow<FontEditorWindow>(false, "Font Editor Window");
             window.Init();
@@ -87,11 +101,36 @@ namespace Assets.Editor.CoreUI.Windows.Font
         private void DrawFontEditorWindow()
         {
             BeginWindows();
-            GUI.Window(0, FontWindowRect, Func, "Font Editor");
+            GUI.Window(0, AlphabetGridWindowRect, DrawAlphabetWindow, "AlphabetGrid");
+            GUI.Window(1, FontWindowRect, DrawFontWindow, "Font Editor");
             EndWindows();
         }
 
-        private void Func(int id)
+        private void DrawAlphabetWindow(int id)
+        {
+            EditorGUILayout.BeginHorizontal();
+            var buttonsInLine = (int) ( AlphabetGridWindowWidth - 7) / AlphabetGridButtonSize;
+            var line = 0;
+            var style = EditorStyles.miniButtonLeft;
+            for (var index = 0; index < _font.Alphabet.Length; index++)
+            {
+                if (index / buttonsInLine > line)
+                {
+                    line++;
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal();
+                    style = EditorStyles.miniButtonLeft;
+                }
+                if (index == _font.Alphabet.Length - 1 || (index + 1) % buttonsInLine == 0) style = EditorStyles.miniButtonRight;
+                if (index == _selectedSymbolIndex) GUI.color = SelectedSymbolColor;
+                if (GUILayout.Button(_font.Alphabet[index].Symbol.ToString(), style, GUILayout.Width(AlphabetGridButtonSize))) _selectedSymbolIndex = index;
+                GUI.color = Color.white;
+                style = EditorStyles.miniButtonMid;
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private void DrawFontWindow(int id)
         {
             DrawGeneralFontInfo();
 
@@ -105,11 +144,11 @@ namespace Assets.Editor.CoreUI.Windows.Font
             _font.Texture = EditorGUILayout.ObjectField(_font.Texture, typeof (Texture2D), false) as Texture2D;
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Pixels interval", GUILayout.Width(90));
-            _font.PixelsInterval = EditorGUILayout.IntField(_font.PixelsInterval, GUILayout.Width(30));
+            _font.PixelsInterval = EditorGUILayout.IntField(_font.PixelsInterval, GUILayout.MinWidth(15));
             EditorGUILayout.LabelField("Pixels space", GUILayout.Width(90));
-            _font.PixelsSpace = EditorGUILayout.IntField(_font.PixelsSpace, GUILayout.Width(30));
+            _font.PixelsSpace = EditorGUILayout.IntField(_font.PixelsSpace, GUILayout.MinWidth(15));
             EditorGUILayout.LabelField("Pixels height", GUILayout.Width(90));
-            _font.PixelsHeight = EditorGUILayout.IntField(_font.PixelsHeight, GUILayout.Width(30));
+            _font.PixelsHeight = EditorGUILayout.IntField(_font.PixelsHeight, GUILayout.MinWidth(15));
             EditorGUILayout.EndHorizontal();
             DrawSymbolsSelector();
             if (AlphabetEmpty) return;
@@ -156,7 +195,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
         private void DrawTextureEditor()
         {
             if (_font == null) return;
-            _scroll = GUI.BeginScrollView(TextureScrollRect, _scroll, TextireViewEditorRect, true, false, GUI.skin.horizontalScrollbar, GUIStyle.none);
+            _scroll = GUI.BeginScrollView(TextureScrollRect, _scroll, TextureViewEditorRect, true, false, GUI.skin.horizontalScrollbar, GUIStyle.none);
             GUI.Box(TextureEditorRect, string.Empty);
             GUI.DrawTexture(TextureEditorRect, _font.Texture);
             if (!AlphabetEmpty) DrawSelectedSymbolBounds();
@@ -175,8 +214,8 @@ namespace Assets.Editor.CoreUI.Windows.Font
 
         private void DrawSymbolBounds(SymbolDescription symbol, bool drawButtons = true)
         {
-            var point0 = GetLeftBottomBoundsRect(symbol);
-            var point1 = GetRightTopBoundsRect(symbol);
+            var point0 = GetLeftBottomBoundsRect(symbol, drawButtons);
+            var point1 = GetRightTopBoundsRect(symbol, drawButtons);
             var boxRect = new Rect(GetActualLeftBottomBoundsRect(symbol).center, GetActualRightTopBoundsRect(symbol).center - GetActualLeftBottomBoundsRect(symbol).center);
             DrawBox(boxRect, symbol.Symbol);
             if (drawButtons) DrawSelectedMark(boxRect);
@@ -194,10 +233,9 @@ namespace Assets.Editor.CoreUI.Windows.Font
             GUI.Label(rect, SymbolSelectionMarkLabel);
         }
 
-        private void DrawVerticalOffset(Rect point0, Rect point1, SymbolDescription symbol, bool drawButtons = true)
+        private void DrawVerticalOffset(Rect point0, Rect point1, SymbolDescription symbol, bool drawButtons)
         {
-            if (_firstBoundsPointModified || _secondBoundsPointModified) return;
-            var rect = GetVerticalOffsetRect(symbol);
+            var rect = GetVerticalOffsetRect(symbol, drawButtons);
             if (drawButtons) _verticalOffsetPointModified = GUI.Toggle(rect, _verticalOffsetPointModified, string.Empty, GUI.skin.button);
             GUI.DrawTexture(new Rect(point0.center, new Vector2(point1.x - point0.x, GetActualVerticalOffsetRect(symbol).y - point0.y)), _verticalOffsetTexture);
         }
@@ -209,9 +247,9 @@ namespace Assets.Editor.CoreUI.Windows.Font
             symbol.PixelsVerticalOffset = Mathf.FloorToInt(pos.y);
         }
 
-        private Rect GetLeftBottomBoundsRect(SymbolDescription symbol)
+        private Rect GetLeftBottomBoundsRect(SymbolDescription symbol, bool applyValues)
         {
-            if (_firstBoundsPointModified)
+            if (_firstBoundsPointModified && applyValues)
             {
                 ApplyMousePositionToFirstPoint(symbol);
                 return GetMouseBoundsRect();
@@ -219,9 +257,9 @@ namespace Assets.Editor.CoreUI.Windows.Font
             return GetActualLeftBottomBoundsRect(symbol);
         }
 
-        private Rect GetRightTopBoundsRect(SymbolDescription symbol)
+        private Rect GetRightTopBoundsRect(SymbolDescription symbol, bool applyValues)
         {
-            if (_secondBoundsPointModified)
+            if (_secondBoundsPointModified && applyValues)
             {
                 ApplyMousePositionToSecondPoint(symbol);
                 return GetMouseBoundsRect();
@@ -229,9 +267,9 @@ namespace Assets.Editor.CoreUI.Windows.Font
             return GetActualRightTopBoundsRect(symbol);
         }
 
-        private Rect GetVerticalOffsetRect(SymbolDescription symbol)
+        private Rect GetVerticalOffsetRect(SymbolDescription symbol, bool applyValues)
         {
-            if (_verticalOffsetPointModified)
+            if (_verticalOffsetPointModified && applyValues)
             {
                 ApplyMousePositionToVerticalOffset(symbol);
                 return GetMouseBoundsRect();
