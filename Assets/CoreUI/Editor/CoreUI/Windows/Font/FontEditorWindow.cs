@@ -17,7 +17,9 @@ namespace Assets.Editor.CoreUI.Windows.Font
         private const int SmallButtonSize = 30;
         private const int ScaleMaxValue = 20;
         private const float BoundsButtonSize = 10;
+        private const float SymbolSelectionMarkHeight = 20;
         private const char InitSymbol = '~';
+        private const string SymbolSelectionMarkLabel = "Selected symbol";
 
         [SerializeField] private CoreUIFont _font;
         [SerializeField] private int _textureScale = 2;
@@ -28,6 +30,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
         [SerializeField] private bool _verticalOffsetPointModified;
         [SerializeField] private Texture2D _boundsTexture;
         [SerializeField] private Texture2D _verticalOffsetTexture;
+        [SerializeField] private Texture2D _symbolSelectionMarkTexture;
 
         private float WindowWidth { get { return position.width; } }
         private float WindowHeight { get { return position.height; } }
@@ -71,6 +74,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
         {
             _boundsTexture = EditorGUIUtility.Load(StyleStaffPath + "FontEditorBounds.png") as Texture2D;
             _verticalOffsetTexture = EditorGUIUtility.Load(StyleStaffPath + "FontEditorVerticalOffset.png") as Texture2D;
+            _symbolSelectionMarkTexture = EditorGUIUtility.Load(StyleStaffPath + "SymbolSelectionMark.png") as Texture2D;
         }
 
         protected virtual void OnGUI()
@@ -162,24 +166,39 @@ namespace Assets.Editor.CoreUI.Windows.Font
         private void DrawSelectedSymbolBounds()
         {
             DrawSymbolBounds(SelectedSymbol);
+            foreach (var symbolDescription in _font.Alphabet)
+            {
+                if (SelectedSymbol == symbolDescription) continue;
+                DrawSymbolBounds(symbolDescription, false);
+            }
         }
 
-        private void DrawSymbolBounds(SymbolDescription symbol)
+        private void DrawSymbolBounds(SymbolDescription symbol, bool drawButtons = true)
         {
             var point0 = GetLeftBottomBoundsRect(symbol);
             var point1 = GetRightTopBoundsRect(symbol);
             var boxRect = new Rect(GetActualLeftBottomBoundsRect(symbol).center, GetActualRightTopBoundsRect(symbol).center - GetActualLeftBottomBoundsRect(symbol).center);
             DrawBox(boxRect, symbol.Symbol);
-            DrawVerticalOffset(GetActualLeftBottomBoundsRect(symbol), GetActualRightTopBoundsRect(symbol), symbol);
+            if (drawButtons) DrawSelectedMark(boxRect);
+            DrawVerticalOffset(GetActualLeftBottomBoundsRect(symbol), GetActualRightTopBoundsRect(symbol), symbol, drawButtons);
+            if (!drawButtons) return;
             _firstBoundsPointModified = GUI.Toggle(point0, _firstBoundsPointModified, string.Empty, GUI.skin.button);
             _secondBoundsPointModified = GUI.Toggle(point1, _secondBoundsPointModified, string.Empty, GUI.skin.button);
         }
 
-        private void DrawVerticalOffset(Rect point0, Rect point1, SymbolDescription symbol)
+        private void DrawSelectedMark(Rect rect)
+        {
+            rect.y -= SymbolSelectionMarkHeight - rect.height;
+            rect.height = SymbolSelectionMarkHeight;
+            GUI.DrawTexture(rect, _symbolSelectionMarkTexture);
+            GUI.Label(rect, SymbolSelectionMarkLabel);
+        }
+
+        private void DrawVerticalOffset(Rect point0, Rect point1, SymbolDescription symbol, bool drawButtons = true)
         {
             if (_firstBoundsPointModified || _secondBoundsPointModified) return;
             var rect = GetVerticalOffsetRect(symbol);
-            _verticalOffsetPointModified = GUI.Toggle(rect, _verticalOffsetPointModified, string.Empty, GUI.skin.button);
+            if (drawButtons) _verticalOffsetPointModified = GUI.Toggle(rect, _verticalOffsetPointModified, string.Empty, GUI.skin.button);
             GUI.DrawTexture(new Rect(point0.center, new Vector2(point1.x - point0.x, GetActualVerticalOffsetRect(symbol).y - point0.y)), _verticalOffsetTexture);
         }
 
