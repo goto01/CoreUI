@@ -15,7 +15,11 @@ namespace UICore
         public float HorizontalRightLimit { get { return Width/2; } }
         public Vector3 CameraPosition { get { return _cameraTransform.position + Vector3.forward; } }
         public Vector2 PointerPosition { get { return Camera.main.ScreenToWorldPoint(Input.mousePosition) - CameraPosition;} }
-
+        public Vector3 LeftTopPosition { get { return CameraPosition + new Vector3(HorizontalLeftLimit, VerticalTopLimit, 0); }}
+        public Vector3 RightTopPosition {get { return CameraPosition + new Vector3(HorizontalRightLimit, VerticalTopLimit, 0); }}
+        public Vector3 LeftBottomPosition { get { return CameraPosition + new Vector3(HorizontalLeftLimit, VerticalBottomLimit, 0); }}
+        public Vector3 RightBottomPosition {get { return CameraPosition + new Vector3(HorizontalRightLimit, VerticalBottomLimit, 0); }}
+        
         public override void AwakeSingleton()
         {
             _camera = Camera.main;
