@@ -1,11 +1,23 @@
 ﻿using UICore.UICoreMeshes.Meshes;
-using UICore.UICoreMeshes.Meshes.Text;
+using UnityEngine;
+using TextMesh = UICore.UICoreMeshes.Meshes.Text.TextMesh;
 
 namespace UICore.Controls.Text
 {
 	public class CoreUIText : CoreUIElement
 	{
 		private TextMesh _textMesh;
+
+		public string Text
+		{
+			get { return _textMesh.TextGenerator.Text; }
+			set
+			{
+				_textMesh.TextGenerator.GenerateMeshData(value);
+				_textMesh.ApplyTextMesh();
+				_textMesh.UpdateMeshInfo();
+			}
+		}
 		
 		public CoreUIText(BaseCoreUIMesh mesh) : base(mesh)
 		{
@@ -23,7 +35,7 @@ namespace UICore.Controls.Text
 		{
 			_textMesh.TextGenerator.Update();
 			_textMesh.ApplyTextMesh();
-			_textMesh.UpdateMeshInfo();
+			_textMesh.UpdatePositions();
 			return base.Update(e);
 		}
 	}

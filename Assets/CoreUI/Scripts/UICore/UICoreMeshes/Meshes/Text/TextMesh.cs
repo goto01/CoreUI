@@ -31,9 +31,12 @@ namespace UICore.UICoreMeshes.Meshes.Text
 
         public void ApplyTextMesh()
         {
-            Vertices = _textGenerator.Vertices.ToList();
-            Triangles = _textGenerator.Triangles.ToList();
-            Uv = _textGenerator.UV.ToList();
+            Vertices.Clear();
+            Triangles.Clear();
+            Uv.Clear();
+            for (var index = 0; index < _textGenerator.Vertices.Length; index++) Vertices.Add(_textGenerator.Vertices[index]);
+            for (var index = 0; index < _textGenerator.Triangles.Length; index++) Triangles.Add(_textGenerator.Triangles[index]);
+            for (var index = 0; index < _textGenerator.UV.Length; index++) Uv.Add(_textGenerator.UV[index]);
         }
 
         protected override void ApplySize()

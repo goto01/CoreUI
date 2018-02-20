@@ -122,6 +122,11 @@ namespace UICore.UICoreMeshes.Generators
             GenerateMeshData(text, color, false, -1);
         }
 
+        public void GenerateMeshData(string text)
+        {
+            GenerateMeshData(text, _color, false, -1);
+        }
+
         public void UpdateColors(Color color)
         {
             if (_color == color) return;

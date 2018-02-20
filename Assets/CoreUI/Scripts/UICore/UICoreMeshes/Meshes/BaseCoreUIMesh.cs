@@ -168,13 +168,14 @@ namespace UICore.UICoreMeshes.Meshes
 
         public void UpdateMeshInfo()
         {
+            _mesh.Clear();
             UpdatePositions();
             _mesh.SetUVs(0, _uv);
             _mesh.SetTriangles(_triangles, 0);
             _mesh.RecalculateBounds();
         }
 
-        protected void UpdatePositions()
+        public void UpdatePositions()
         {
             _mesh.SetVertices(_vertices);
             var vertices = _mesh.vertices;
