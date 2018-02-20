@@ -1,4 +1,5 @@
 ﻿using Assets.Editor.CoreUI.Windows.Font;
+using Editor.CoreUI.Windows.DialogWindows;
 using UICore.StylesSystem.Repository;
 using UICore.StylesSystem.Styles;
 using UICore.StylesSystem.Styles.Font;
@@ -16,49 +17,54 @@ namespace Assets.Editor.CoreUI
         [MenuItem(CreateMenu + "/Window style", false, 1101)]
         public static void CreateWindowStyle()
         {
-            ObjectCreatorHelper.CreateAsset(typeof (WindowStyle));
+            ObjectCreatorHelper.CreateAsset<WindowStyle>();
         }
 
         [MenuItem(CreateMenu + "/Image style", false, 1102)]
         public static void CreateImageStyle()
         {
-            ObjectCreatorHelper.CreateAsset(typeof(ImageStyle));
+            ObjectCreatorHelper.CreateAsset<ImageStyle>();
         }
 
         [MenuItem(CreateMenu + "/Flexible image style", false, 1102)]
         public static void CreateFlexibleImageStyle()
         {
-            ObjectCreatorHelper.CreateAsset(typeof(FlexibleImageStyle));
+            ObjectCreatorHelper.CreateAsset<FlexibleImageStyle>();
         }
 
         [MenuItem(CreateMenu + "/Slider style", false, 1103)]
         public static void CreateSliderStyle()
         {
-            ObjectCreatorHelper.CreateAsset(typeof(SliderStyle));
+            ObjectCreatorHelper.CreateAsset<SliderStyle>();
         }
 
         [MenuItem(CreateMenu + "/Button style", false, 1104)]
         public static void CreateButtonStyle()
         {
-            ObjectCreatorHelper.CreateAsset(typeof (ButtonStyle));
+            ObjectCreatorHelper.CreateAsset<ButtonStyle>();
         }
 
         [MenuItem(CreateMenu + "/Scroll style", false, 1105)]
         public static void CreateScrollStyle()
         {
-            ObjectCreatorHelper.CreateAsset(typeof (ScrollStyle));
+            ObjectCreatorHelper.CreateAsset<ScrollStyle>();
         }
 
         [MenuItem(CreateMenu + "/Font", false, 1106)]
         public static void CreateFont()
         {
-            ObjectCreatorHelper.CreateAsset(typeof (CoreUIFont));
+            var window = Dialog.ShowDialog<CreateFontDialogWindow>("Create font", DialogType.YesNo);
+            window.Yes += sender =>
+            {
+                var font = ObjectCreatorHelper.CreateAsset<CoreUIFont>(sender.Name);
+                font.Texture = sender.Texture;
+            }; 
         }
 
         [MenuItem(CreateMenu + "/Styles repository", false, 1000)]
         public static void CreateStylesRepository()
         {
-            ObjectCreatorHelper.CreateAsset(typeof (StylesRepository));
+            ObjectCreatorHelper.CreateAsset<StylesRepository>();
         }
 
         [MenuItem(CoreUIWindows + "/Font editor", false, 0)]
