@@ -29,6 +29,12 @@ namespace UICore.Components
         [SerializeField] private Color _outlineRectangleGizmosColor = Color.black;
         [SerializeField] private int _selectedMode;
 
+        public string Text
+        {
+            get { return _text; }
+            set { _text = value; }
+        }
+        
         protected virtual void Reset()
         {
             OnEnable();
@@ -51,6 +57,11 @@ namespace UICore.Components
             ApplyMesh();
         }
 
+        public void ShowSymbols(int start, int symbols)
+        {
+            _generator.ShowSymbols(start, symbols);
+        }
+        
         private void UpdateScale()
         {
             transform.localScale = Vector3.one;

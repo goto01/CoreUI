@@ -52,8 +52,13 @@ namespace UICore.UICoreMeshes.Meshes.Text
                 _mesh.vertices = vertices;
                 _mesh.uv = _textGenerator.UV;
                 _mesh.triangles = _textGenerator.Triangles;
+                _mesh.colors = _textGenerator.Colors;
             }
-            else _mesh.vertices = vertices;
+            else
+            {
+                _mesh.colors = _textGenerator.Colors;
+                _mesh.vertices = vertices;
+            }
             _mesh.RecalculateBounds();
         }
 

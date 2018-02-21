@@ -37,5 +37,10 @@ namespace UICore.Controls.Text
 			_textMesh.ApplyTextMesh();
 			return base.Update(e);
 		}
+
+		public void ShowSymbols(int start, int symbols)
+		{
+			_textMesh.TextGenerator.ShowSymbols(start, symbols);
+		}
 	}
 }
