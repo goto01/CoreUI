@@ -35,7 +35,6 @@ namespace UICore.Controls.Text
 		{
 			_textMesh.TextGenerator.Update();
 			_textMesh.ApplyTextMesh();
-			_textMesh.UpdatePositions();
 			return base.Update(e);
 		}
 	}
