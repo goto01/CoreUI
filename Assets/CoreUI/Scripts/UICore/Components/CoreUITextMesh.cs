@@ -94,7 +94,7 @@ namespace UICore.Components
 
         private void UpdateColors()
         {
-            if (_color.Equals(_generator.Color)) return;
+            if (_color == _generator.Color) return;
             _generator.UpdateColors(_color);
             _meshFilter.sharedMesh.colors = _generator.Colors;
         }
