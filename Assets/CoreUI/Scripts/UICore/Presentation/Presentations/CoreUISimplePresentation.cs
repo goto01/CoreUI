@@ -68,6 +68,7 @@ namespace UICore.Presentation.Presentations
         private void UpdateActive()
         {
             //_renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * _inactiveValue);
+            _renderer.material.SetColor(Color, _element.Color);
             _renderer.enabled = Active;
         }
 

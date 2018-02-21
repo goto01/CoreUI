@@ -19,7 +19,7 @@ internal class CoreUITest: MonoBehaviour
     private bool _mode;
 
     private string _text =
-            "~The quick brown fox jumps ~"
+            "~The quick brown fox jumps~"
         ;
     
     protected virtual void Awake()
@@ -31,9 +31,10 @@ internal class CoreUITest: MonoBehaviour
         var w = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
         //CoreUIEditor.Instance.Button(new Rect(0, 0, _pixelSize*300, 0), _scroll, () => { Debug.Log("BUTTON1"); });
         _label = CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), 
-            "asdasd",
+            "~The quick brown fox jumps~",
             w,
             2, 1, 2, .3f, .3f, "Wave Font");
+        _label.Color = Color.blue;
         StartCoroutine(Write());
     }
 
@@ -42,7 +43,7 @@ internal class CoreUITest: MonoBehaviour
         var index = 0;
         while (index < _text.Length)
         {
-            _label.Text = _text.Substring(0, index++ + 1);
+            _label.ShowSymbols(0, index+++1);
             yield return new WaitForSeconds(.1f); 
         }
     }
