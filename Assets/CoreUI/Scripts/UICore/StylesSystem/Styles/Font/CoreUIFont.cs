@@ -95,5 +95,12 @@ namespace UICore.StylesSystem.Styles.Font
         {
             return value*_pixelWidth;
         }
+
+        public bool CheckSymbolForDuplicate(char symbol)
+        {
+            var counter = 0;
+            for (var index = 0; index < _alphabet.Length; index++) if (_alphabet[index].Symbol == symbol) counter++;
+            return counter > 1;
+        }
     }
 }

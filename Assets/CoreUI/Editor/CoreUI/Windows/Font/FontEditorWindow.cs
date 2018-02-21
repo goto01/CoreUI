@@ -183,6 +183,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
             var value = EditorGUILayout.TextField("SelectedSymbol", SelectedSymbol.Symbol.ToString());
             if (string.IsNullOrEmpty(value)) return;
             SelectedSymbol.Symbol = value[0];
+            if (_font.CheckSymbolForDuplicate(SelectedSymbol.Symbol)) SelectedSymbol.Symbol = InitSymbol;
             SelectedSymbol.PixelsVerticalOffset = EditorGUILayout.IntField("Symbol vertical offset", SelectedSymbol.PixelsVerticalOffset);
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Sprite info");
