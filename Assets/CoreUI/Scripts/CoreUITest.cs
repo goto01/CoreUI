@@ -22,7 +22,7 @@ internal class CoreUITest: MonoBehaviour
             "~The quick brown fox jumps~"
         ;
     
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         //_window = CoreUIEditor.Instance.Window(new Rect(-_pixelSize*100, _pixelSize*50, _pixelSize*200, _pixelSize*200), "Item Window Style");
         //_slider = CoreUIEditor.Instance.Slider(new Rect(_pixelSize*6, -_pixelSize*6, _pixelSize*188, 0), _window, CoreUIOrientation.Vertical, "RPG Slider Style");

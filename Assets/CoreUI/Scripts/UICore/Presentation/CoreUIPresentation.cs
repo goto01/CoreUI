@@ -19,6 +19,13 @@ namespace UICore.Presentation
         [SerializeField] private int _containerOrderStep = 100;
         private CoreUIContainer _defaultContainer;
         private Transform _presentationParent;
+
+        #if UNITY_EDITOR
+        protected virtual void Reset()
+        {
+            CoreUIInitializator.SetCoreUIExecutionOrder();
+        }
+        #endif
         
         public override void AwakeSingleton()
         {
