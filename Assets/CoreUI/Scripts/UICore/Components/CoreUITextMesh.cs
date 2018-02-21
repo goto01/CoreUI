@@ -73,9 +73,6 @@ namespace UICore.Components
             GenerateData();
         }
 
-        /// <summary>
-        /// Use only int Editor
-        /// </summary>
         public void GenerateData()
         {
             InitSelf();

@@ -29,6 +29,8 @@ namespace UICore.UICoreMeshes.Generators
         [SerializeField] private float _shakeHorizontalOffset;
         [SerializeField] private float _shakeVerticalOffset;
         [SerializeField] private List<int> _shakeOffsetIndices;
+        [SerializeField] private int _startShowSymbols;
+        [SerializeField] private int _showSymbols;
         private IDictionary<char, Func<SymbolHandlerType>> _symbolHandlers;
         
         public Vector3[] Vertices { get { return _outputVertices; } }
@@ -57,11 +59,15 @@ namespace UICore.UICoreMeshes.Generators
             _font = font;
             ResetOffsets();
             InitHandlers();
+            ResetMeshData(string.Empty);
+            CopyVertices();
         }
 
         public void GenerateMeshData(string text, Color color, bool wrapping, float lineWidth)
         {
             if (_text.Equals(text) && _wrapping == wrapping) return;
+            _startShowSymbols = 0;
+            _showSymbols = text.Length;
             _sinOffsetIndices.Clear();
             _shakeOffsetIndices.Clear();
             _sinMode = false;
@@ -83,6 +89,8 @@ namespace UICore.UICoreMeshes.Generators
         /// <param name="lineWidth"></param>
         public void ForceGenerateMeshData(string text, Color color, bool wrapping, float lineWidth)
         {
+            _startShowSymbols = 0;
+            _showSymbols = text.Length;
             _sinOffsetIndices.Clear();
             _shakeOffsetIndices.Clear();
             _sinMode = false;
@@ -132,20 +140,23 @@ namespace UICore.UICoreMeshes.Generators
             if (_color == color) return;
             _color = color;
             for (var index = 0; index < _text.Length; index++)
-                if (!CheckSymbolForHandler(_text[index])) GenerateColors(index*4);
+                if (!CheckSymbolForHandler(_text[index])) GenerateColors(index*4, GetAlphaByIndex(index));
         }
 
+        private void ForceUpdateColors(Color color)
+        {
+            _color = color;
+            for (var index = 0; index < _text.Length; index++)
+                if (!CheckSymbolForHandler(_text[index])) GenerateColors(index*4, GetAlphaByIndex(index));
+        }
+        
         public void ShowSymbols(int start, int symbols)
         {
+            _startShowSymbols = start;
+            _showSymbols = symbols;
             for (var index = 0; index < _text.Length; index++)
             {
-                var alfa = 0;
-                if (index >= start && index < start + symbols) alfa = 1;
-                var verticeIndex = index * 4;
-                _colors[verticeIndex].a = alfa;
-                _colors[verticeIndex+1].a = alfa;
-                _colors[verticeIndex+2].a = alfa;
-                _colors[verticeIndex+3].a = alfa;
+                GenerateColors(index*4, GetAlphaByIndex(index));
             }
         }
         
@@ -249,15 +260,17 @@ namespace UICore.UICoreMeshes.Generators
             _triangles[triangleStartIndex + 4] = verticesStartIndex + 2;
             _triangles[triangleStartIndex + 5] = verticesStartIndex + 3;
 
-            GenerateColors(verticesStartIndex);
+            GenerateColors(verticesStartIndex, GetAlphaByIndex(symbolIndex));
         }
 
-        private void GenerateColors(int index)
+        private void GenerateColors(int index, float alpha)
         {
-            _colors[index] = _color;
-            _colors[index + 1] = _color;
-            _colors[index + 2] = _color;
-            _colors[index + 3] = _color;
+            var color = _color;
+            color.a = alpha;
+            _colors[index] = color;
+            _colors[index + 1] = color;
+            _colors[index + 2] = color;
+            _colors[index + 3] = color;
         }
 
         private SymbolHandlerType HandleSinOffset()
@@ -287,6 +300,11 @@ namespace UICore.UICoreMeshes.Generators
             _shakeOffsetIndices.Add(_index+1);
             _sinMode = true;
             return SymbolHandlerType.NotSeparative;
+        }
+
+        private float GetAlphaByIndex(int index)
+        {
+            return (index >= _startShowSymbols && index < (_startShowSymbols + _showSymbols)) ? _color.a : 0;
         }
             
         public void Dispose()

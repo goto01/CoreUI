@@ -16,7 +16,7 @@ namespace UICore.Controls
         private float _horizontalRightLimit;
         private Color _color;
 
-        public Color Color
+        public virtual Color Color
         {
             get { return _color; }
             set { _color = value; }

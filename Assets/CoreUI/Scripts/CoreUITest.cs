@@ -31,20 +31,33 @@ internal class CoreUITest: MonoBehaviour
         var w = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
         //CoreUIEditor.Instance.Button(new Rect(0, 0, _pixelSize*300, 0), _scroll, () => { Debug.Log("BUTTON1"); });
         _label = CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), 
-            "~The quick brown fox jumps~",
+            string.Empty,
             w,
             2, 1, 2, .3f, .3f, "Wave Font");
         _label.Color = Color.blue;
         StartCoroutine(Write());
+        StartCoroutine(ChangeColor());
     }
 
     private IEnumerator Write()
     {
+        _label.Text = _text;
         var index = 0;
         while (index < _text.Length)
         {
             _label.ShowSymbols(0, index+++1);
             yield return new WaitForSeconds(.1f); 
+        }
+    }
+
+    private IEnumerator ChangeColor()
+    {
+        while (true)
+        {
+            _label.Color = Color.red;
+            yield return new WaitForSeconds(.1f);
+            _label.Color = Color.blue;
+            yield return new WaitForSeconds(.1f);
         }
     }
     

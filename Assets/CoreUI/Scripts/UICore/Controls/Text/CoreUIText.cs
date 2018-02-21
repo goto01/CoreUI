@@ -1,4 +1,5 @@
 ﻿using UICore.UICoreMeshes.Meshes;
+using UnityEditor.Graphs;
 using UnityEngine;
 using TextMesh = UICore.UICoreMeshes.Meshes.Text.TextMesh;
 
@@ -7,6 +8,19 @@ namespace UICore.Controls.Text
 	public class CoreUIText : CoreUIElement
 	{
 		private TextMesh _textMesh;
+
+		public override Color Color
+		{
+			get
+			{
+				return base.Color;
+			}
+			set
+			{
+				base.Color = value;
+				_textMesh.TextGenerator.UpdateColors(value);
+			}
+		}
 
 		public string Text
 		{
