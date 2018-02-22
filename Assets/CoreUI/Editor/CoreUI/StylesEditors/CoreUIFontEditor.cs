@@ -1,5 +1,6 @@
 ﻿using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
+using UnityEngine;
 
 namespace Assets.Editor.CoreUI.StylesEditors
 {
@@ -9,6 +10,8 @@ namespace Assets.Editor.CoreUI.StylesEditors
         private SerializedProperty _pixelsInterval;
         private SerializedProperty _alphabet;
         private SerializedProperty _material;
+        
+        private CoreUIFont Target{get { return (CoreUIFont) target; }}
         
         protected override void FindSerializedProperties()
         {
@@ -23,6 +26,8 @@ namespace Assets.Editor.CoreUI.StylesEditors
             EditorGUILayout.PropertyField(_pixelsInterval);
             EditorGUILayout.PropertyField(_alphabet, true);
             EditorGUILayout.PropertyField(_material);
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Regenerate dictionaty")) Target.InitSelf();
         }
     }
 }

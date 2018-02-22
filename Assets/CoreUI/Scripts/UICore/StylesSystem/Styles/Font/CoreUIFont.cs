@@ -74,7 +74,7 @@ namespace UICore.StylesSystem.Styles.Font
             InitSelf();
         }
 
-        private void InitSelf()
+        public void InitSelf()
         {
             if (_alphabet == null) return;
             _alphabetDictionary = new Dictionary<char, SymbolDescription>();
