@@ -38,6 +38,7 @@ internal class CoreUITest: MonoBehaviour
         _label.FontColor = Color.blue;
         StartCoroutine(Write());
         StartCoroutine(ChangeColor());
+        
         button.Active = false;
     }
 
