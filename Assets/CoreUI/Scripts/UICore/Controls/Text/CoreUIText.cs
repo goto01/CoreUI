@@ -1,5 +1,4 @@
 ﻿using UICore.UICoreMeshes.Meshes;
-using UnityEditor.Graphs;
 using UnityEngine;
 using TextMesh = UICore.UICoreMeshes.Meshes.Text.TextMesh;
 

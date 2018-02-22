@@ -1,8 +1,7 @@
-﻿using UICore.Presentation;
+﻿#if UNITY_EDITOR
+using UICore.Presentation;
 using UnityEditor;
 using UnityEngine;
-
-#if UNITY_EDITOR
 
 namespace UICore
 {
