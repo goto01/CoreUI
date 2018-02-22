@@ -23,6 +23,7 @@ namespace UICore
         public override void AwakeSingleton()
         {
             _camera = Camera.main;
+            if (_camera == null) Debug.LogError("Scene doesn't have camera with 'MainCamera' tag");
             _cameraTransform = _camera.transform;
         }
     }
