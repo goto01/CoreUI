@@ -25,22 +25,20 @@ internal class CoreUITest: MonoBehaviour
     
     protected virtual void Start()
     {
-        //_window = CoreUIEditor.Instance.Window(new Rect(-_pixelSize*100, _pixelSize*50, _pixelSize*200, _pixelSize*200), "Item Window Style");
-        //_slider = CoreUIEditor.Instance.Slider(new Rect(_pixelSize*6, -_pixelSize*6, _pixelSize*188, 0), _window, CoreUIOrientation.Vertical, "RPG Slider Style");
-        //_scroll = CoreUIEditor.Instance.Scroll(new Rect(_pixelSize * 20, -_pixelSize * 6, _pixelSize * 300, _pixelSize * 300), _pixelSize * 150, _pixelSize * 150, _window);
-        //_sliderHorizontal = CoreUIEditor.Instance.Slider( new Rect(_pixelSize*20, -_pixelSize*180, _pixelSize*180, 0), _window, CoreUIOrientation.Horizontal, "RPG Slider Style");
-        var w = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
-        CoreUIEditor.Instance.Button(new Rect(0, -20*_pixelSize, _pixelSize*300, 0), w, Action).Id = 1;
+        _window = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
+        var w = CoreUIEditor.Instance.Window(new Rect(5*_pixelSize, -5*_pixelSize, _pixelSize * 290, _pixelSize * 290), _window, "Item Window Style");
+        var button = CoreUIEditor.Instance.Button(new Rect(0, -20 * _pixelSize, _pixelSize * 300, 0), w, Action);
+        button.Id = 1;
         CoreUIEditor.Instance.Button(new Rect(0, -40*_pixelSize, _pixelSize*300, 0), w, Action).Id = 2;
         CoreUIEditor.Instance.Button(new Rect(0, -60*_pixelSize, _pixelSize*300, 0), w, Action).Id = 3;
         _label = CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), 
             string.Empty,
             w,
             2, 1, 2, .3f, .3f, "Wave Font");
-        _label.Color = Color.blue;
+        _label.FontColor = Color.blue;
         StartCoroutine(Write());
         StartCoroutine(ChangeColor());
-        
+        button.Active = false;
     }
 
     private void Action(int id)
@@ -63,18 +61,15 @@ internal class CoreUITest: MonoBehaviour
     {
         while (true)
         {
-            _label.Color = Color.red;
+            _label.FontColor = Color.red;
             yield return new WaitForSeconds(.1f);
-            _label.Color = Color.blue;
+            _label.FontColor = Color.blue;
             yield return new WaitForSeconds(.1f);
         }
     }
-    
+
     protected virtual void Update()
     {
-//        _scroll.ScrollVerticalValue = _slider.Value;
-//        _scroll.ScrollHorizontalValue = _sliderHorizontal.Value;
-//        if (Input.GetKeyDown(KeyCode.Space)) _mode = !_mode;
-//        if (_mode) _window.Position = CoreUICameraHandler.Instance.PointerPosition;
+        if (Input.GetKeyDown(KeyCode.Space)) _window.Active = !_window.Active;
     }
 }

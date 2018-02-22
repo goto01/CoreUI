@@ -9,17 +9,10 @@ namespace UICore.Controls.Text
 	{
 		private TextMesh _textMesh;
 
-		public override Color Color
+		public Color FontColor
 		{
-			get
-			{
-				return base.Color;
-			}
-			set
-			{
-				base.Color = value;
-				_textMesh.TextGenerator.UpdateColors(value);
-			}
+			get { return _textMesh.TextGenerator.Color; }
+			set { _textMesh.TextGenerator.UpdateColors(value); }
 		}
 
 		public string Text

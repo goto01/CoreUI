@@ -60,6 +60,11 @@ namespace UICore.UICoreMeshes.Meshes.Text
                 _mesh.vertices = vertices;
             }
             _mesh.RecalculateBounds();
+            for (var index = 0; index < vertices.Length; index++)
+            {
+                vertices[index].x -= X;
+                vertices[index].y -= Y;
+            }
         }
 
         protected override void ApplySize()
