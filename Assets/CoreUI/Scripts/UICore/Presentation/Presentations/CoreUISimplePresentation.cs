@@ -1,4 +1,5 @@
 ﻿using UICore.Controls;
+using UICore.Controls.Text;
 using UnityEngine;
 
 namespace UICore.Presentation.Presentations
@@ -69,7 +70,7 @@ namespace UICore.Presentation.Presentations
         {
             //_renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * _inactiveValue);
             _renderer.material.SetColor(Color, _element.Color);
-            _renderer.enabled = Active;
+            //_renderer.enabled = Active;
         }
 
         private void UpdateVertialLimit()

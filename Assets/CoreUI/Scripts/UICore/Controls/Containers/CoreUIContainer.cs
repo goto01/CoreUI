@@ -88,17 +88,6 @@ namespace UICore.Controls.Containers
             }
         }
 
-        public override bool Active
-        {
-            get { return base.Active; }
-            set
-            {
-                if (base.Active == value) return;
-                base.Active = value;
-                for (var index = 0; index < _elements.Count; index++) _elements[index].Active = value;
-            }
-        }
-
         public override int Order
         {
             get { return base.Order; }
@@ -143,10 +132,12 @@ namespace UICore.Controls.Containers
 
         public override bool Update(CoreUIEvent e)
         {
+            if (!Active) return false;
             var focused = base.Update(e);
             if (!focused) e.DropPointerData();
             for (var index = 0; index < _elements.Count; index++)
             {
+                if (!_elements[index].Active) continue;
                 var elementFocus = _elements[index].Update(e);
                 focused = focused || elementFocus;
             }

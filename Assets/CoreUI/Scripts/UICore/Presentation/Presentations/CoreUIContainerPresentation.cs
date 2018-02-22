@@ -20,8 +20,6 @@ namespace UICore.Presentation.Presentations
         public override void UpdateSelf(CoreUIEvent e)
         {
             base.UpdateSelf(e);
-            if (!Active) return;
-            var container = Container;
             _element.Update(e);
         }
     }
