@@ -18,6 +18,7 @@ internal class CoreUITest: MonoBehaviour
     private CoreUIScroll _scroll;
     private CoreUILabel _label;
     private bool _mode;
+    private CoreUIWindow _secondWindow;
 
     private string _text =
             "~The quick brown fox jumps~"
@@ -25,26 +26,28 @@ internal class CoreUITest: MonoBehaviour
     
     protected virtual void Start()
     {
-        _window = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
+        _window = CoreUIEditor.Instance.Window(new Rect(-150*_pixelSize, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
         var w = CoreUIEditor.Instance.Window(new Rect(5*_pixelSize, -5*_pixelSize, _pixelSize * 290, _pixelSize * 290), _window, "Item Window Style");
-        var button = CoreUIEditor.Instance.Button(new Rect(0, -20 * _pixelSize, _pixelSize * 300, 0), w, Action);
+        var button = CoreUIEditor.Instance.Button(new Rect(5 * _pixelSize, -20 * _pixelSize, _pixelSize * 280, 0), w, Action);
         button.Id = 1;
-        CoreUIEditor.Instance.Button(new Rect(0, -40*_pixelSize, _pixelSize*300, 0), w, Action).Id = 2;
-        CoreUIEditor.Instance.Button(new Rect(0, -60*_pixelSize, _pixelSize*300, 0), w, Action).Id = 3;
-        _label = CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), 
+        _label = CoreUIEditor.Instance.Label(new Rect(5 * _pixelSize, -5 * _pixelSize, 0, 0), 
             string.Empty,
             w,
             2, 1, 2, .3f, .3f, "Wave Font");
         _label.FontColor = Color.blue;
         StartCoroutine(Write());
         StartCoroutine(ChangeColor());
-        
-        button.Active = false;
+
+        _secondWindow = CoreUIEditor.Instance.Window(new Rect(_pixelSize * 155, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
+        CoreUIEditor.Instance.Label(new Rect(5 * _pixelSize, -6*_pixelSize, 0, 0), "±The quick brown fox jumps±", _secondWindow, 2, 1, 2, .3f, .3f, "Wave Font");
+        button = CoreUIEditor.Instance.Button(new Rect(5 * _pixelSize, -20 * _pixelSize, _pixelSize * 280, 0), _secondWindow, Action);
+        _secondWindow.Active = false;
     }
 
     private void Action(int id)
     {
-        Debug.Log(id);
+        _window.Active = !_window.Active;
+        _secondWindow.Active = !_secondWindow.Active;
     }
 
     private IEnumerator Write()

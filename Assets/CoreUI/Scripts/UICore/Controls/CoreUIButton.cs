@@ -10,6 +10,7 @@ namespace UICore.Controls
         private Texture2D _pressed;
         private Texture2D _unpressed;
         private Action<int> _action;
+        private bool _prevPressed;
 
         public int Id
         {
@@ -39,12 +40,13 @@ namespace UICore.Controls
         {
             var focused = base.Update(e);
             HandlePressing(e, focused);
+            _prevPressed = Pressed;
             return focused;
         }
 
         private void HandlePressing(CoreUIEvent e, bool focused)
         {
-            if (Pressed && e.PointerDown && _action != null && focused) _action.Invoke(_id); 
+            if (_prevPressed && e.PointerUp && _action != null && focused) _action.Invoke(_id); 
             if (Pressed) _coreUIMesh.Texture = _pressed;
             else _coreUIMesh.Texture = _unpressed;
         }
