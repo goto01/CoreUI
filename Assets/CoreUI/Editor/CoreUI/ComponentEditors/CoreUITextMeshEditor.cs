@@ -1,4 +1,5 @@
 ﻿using UICore.Components;
+using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace CoreUI.Editor.ComponentEditors
     [CustomEditor(typeof(CoreUITextMesh))]
     class CoreUITextMeshEditor : UnityEditor.Editor
     {
+        private bool _regenerateText;
+        
         private SerializedProperty _text;
         private SerializedProperty _font;
         private SerializedProperty _color;
@@ -28,6 +31,7 @@ namespace CoreUI.Editor.ComponentEditors
             FindProperties();
             DrawInspector();
             serializedObject.ApplyModifiedProperties();
+            if (_regenerateText) Target.GenerateDataEditor();
         }
 
         private void FindProperties()
@@ -104,7 +108,17 @@ namespace CoreUI.Editor.ComponentEditors
         private void DrawSettingsEditor()
         {
             EditorGUILayout.LabelField("Text settings", EditorStyles.boldLabel);
+            
+            EditorGUI.BeginChangeCheck();
+            var prevFont = _font.objectReferenceValue;
+            _regenerateText = false;
             EditorGUILayout.PropertyField(_font);
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (_font.objectReferenceValue == null) _font.objectReferenceValue = prevFont;
+                _regenerateText = true;
+            }
+            
             EditorGUILayout.PropertyField(_textWrapping);
             GUI.enabled = _textWrapping.boolValue;
             EditorGUILayout.PropertyField(_lineWidth);

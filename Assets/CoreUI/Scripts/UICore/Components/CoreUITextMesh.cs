@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UICore.StylesSystem.Styles.Font;
+﻿using UICore.StylesSystem.Styles.Font;
 using UICore.UICoreMeshes.Generators;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -78,6 +77,19 @@ namespace UICore.Components
             InitSelf();
             _generator.ForceGenerateMeshData(_text, _color, _textWrapping, _lineWidth);
         }
+
+        #if UNITY_EDITOR
+        
+        public void GenerateDataEditor()
+        {
+            _generator.Init(_font);
+            _generator.InitEffects(_sinPixelsOffset, _sinSpeedOffset, _sinMultiplier, _horizontalShakePixelsOffset, _verticalShakePixelsOffset);
+            _generator.ForceGenerateMeshData(_text, _color, _textWrapping, _lineWidth);
+            ResetMesh();
+            ApplyMesh();
+        }
+        
+        #endif
 
         private void InitSelf()
         {
