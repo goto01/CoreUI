@@ -19,6 +19,8 @@ internal class CoreUITest: MonoBehaviour
     private CoreUILabel _label;
     private bool _mode;
     private CoreUIWindow _secondWindow;
+    private CoreUIFlexibleImage _barHorizontal;
+    private CoreUIFlexibleImage _barVertical;
 
     private string _text =
             "~The quick brown fox jumps~"
@@ -39,9 +41,21 @@ internal class CoreUITest: MonoBehaviour
         StartCoroutine(ChangeColor());
 
         _secondWindow = CoreUIEditor.Instance.Window(new Rect(_pixelSize * 155, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
-        CoreUIEditor.Instance.Label(new Rect(5 * _pixelSize, -6*_pixelSize, 0, 0), "±The quick brown fox jumps±", _secondWindow, 2, 1, 2, .3f, .3f, "Wave Font");
+        CoreUIEditor.Instance.Label(new Rect(5 * _pixelSize, -5*_pixelSize, 0, 0), "±The quick brown fox jumps±", _secondWindow, 2, 1, 2, .3f, .3f, "Wave Font");
         button = CoreUIEditor.Instance.Button(new Rect(5 * _pixelSize, -20 * _pixelSize, _pixelSize * 280, 0), _secondWindow, Action);
         _secondWindow.Active = false;
+        _barHorizontal = CoreUIEditor.Instance.FlexibleImage(new Rect(5 * _pixelSize, -40 * _pixelSize, _pixelSize * 100, 0), _secondWindow, CoreUIOrientation.Horizontal ,"Health Bar Style");
+        _barVertical = CoreUIEditor.Instance.FlexibleImage(new Rect(105 * _pixelSize, -40 * _pixelSize, _pixelSize * 100, 0), _secondWindow, CoreUIOrientation.Vertical ,"Health Bar Style");
+        CoreUIEditor.Instance.Button(new Rect(5 * _pixelSize, -60 * _pixelSize, _pixelSize * 140, 0), _secondWindow, i =>
+        {
+            _barHorizontal.Value += .1f;
+            _barVertical.Value += .1f;
+        });
+        CoreUIEditor.Instance.Button(new Rect(145 * _pixelSize, -60 * _pixelSize, _pixelSize * 140, 0), _secondWindow, i =>
+        {
+            _barHorizontal.Value -= .1f;
+            _barVertical.Value -= .1f;
+        });
     }
 
     private void Action(int id)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UICore.StylesSystem.Styles;
+using UnityEngine;
 
 namespace UICore.UICoreMeshes.Meshes
 {
@@ -16,8 +17,8 @@ namespace UICore.UICoreMeshes.Meshes
         private float _borderHeight;
 
         public float MinWidth { get { return _borderWidth*2; } }
-
         public float BorderWidth { get { return _borderWidth; } }
+        public CoreUIOrientation Orientation{get { return _orientation; }}
         
         private FlexibleImageMesh() : base()
         {
@@ -28,7 +29,7 @@ namespace UICore.UICoreMeshes.Meshes
         {
             _orientation = orientation;
         }
-
+        
         protected override void Generate(BaseStyle style)
         {
             var flexibleImageStyle = style as FlexibleImageStyle;
@@ -111,10 +112,32 @@ namespace UICore.UICoreMeshes.Meshes
         
         protected override void ApplySize()
         {
-            Clear();
-            if (_orientation == CoreUIOrientation.Horizontal) GenerateHorizontal();
-            else GenerateVertical();
+            //Clear();
+            if (_orientation == CoreUIOrientation.Horizontal) ApplyHorizontal();
+            else ApplyVertical();
             UpdatePositions();
+        }
+
+        private void ApplyHorizontal()
+        {
+            Vertices[6] = new Vector3(Width - _borderWidth, 0);
+            Vertices[7] = new Vector3(Width - _borderWidth, - _borderHeight);
+            
+            Vertices[8] = new Vector3(Width - _borderWidth, -_borderHeight);
+            Vertices[9] = new Vector3(Width - _borderWidth, 0);
+            Vertices[10] = new Vector3(Width, 0);
+            Vertices[11] = new Vector3(Width, - _borderHeight);
+        }
+
+        private void ApplyVertical()
+        {
+            Vertices[6] = new Vector3(Width, - Height + _borderWidth);
+            Vertices[7] = new Vector3(0, - Height + _borderWidth);
+            
+            Vertices[8] = new Vector3(0, - Height + _borderWidth);
+            Vertices[9] = new Vector3(Width, - Height + _borderWidth);
+            Vertices[10] = new Vector3(Width, - Height);
+            Vertices[11] = new Vector3(0, - Height);
         }
     }
 }
