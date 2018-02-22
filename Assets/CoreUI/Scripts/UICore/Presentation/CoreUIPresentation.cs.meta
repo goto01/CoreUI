@@ -1,11 +1,17 @@
 fileFormatVersion: 2
 guid: bdb2b020418120c4196930e29fe005f0
-timeCreated: 1519296588
+timeCreated: 1519297011
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _presentationParentPrefab: {fileID: 4577108141436876, guid: 5732a1847aad6e249b4706d92785dbc1,
+      type: 2}
+  - _presentationPrefab: {fileID: 114891444596227288, guid: ee22dca3e502c1344979f57c5cfd0a33,
+      type: 2}
+  - _containerPrefab: {fileID: 114925841118811746, guid: 49733895e43105f48bafe4abd2bc87d8,
+      type: 2}
   executionOrder: 1
   icon: {instanceID: 0}
   userData: 

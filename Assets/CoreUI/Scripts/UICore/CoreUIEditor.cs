@@ -92,7 +92,7 @@ namespace UICore
             return Button(rect, container, null, styleName);
         }
 
-        public CoreUIButton Button(Rect rect, CoreUIContainer container, Action action, string styleName = DefaultButtonStyle)
+        public CoreUIButton Button(Rect rect, CoreUIContainer container, Action<int> action, string styleName = DefaultButtonStyle)
         {
             var mesh = _factory.CreateButton(rect, styleName);
             var element = new CoreUIButton(mesh, action);

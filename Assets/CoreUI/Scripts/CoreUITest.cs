@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UICore;
 using UICore.Controls;
@@ -29,7 +30,9 @@ internal class CoreUITest: MonoBehaviour
         //_scroll = CoreUIEditor.Instance.Scroll(new Rect(_pixelSize * 20, -_pixelSize * 6, _pixelSize * 300, _pixelSize * 300), _pixelSize * 150, _pixelSize * 150, _window);
         //_sliderHorizontal = CoreUIEditor.Instance.Slider( new Rect(_pixelSize*20, -_pixelSize*180, _pixelSize*180, 0), _window, CoreUIOrientation.Horizontal, "RPG Slider Style");
         var w = CoreUIEditor.Instance.Window(new Rect(0, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
-        //CoreUIEditor.Instance.Button(new Rect(0, 0, _pixelSize*300, 0), _scroll, () => { Debug.Log("BUTTON1"); });
+        CoreUIEditor.Instance.Button(new Rect(0, -20*_pixelSize, _pixelSize*300, 0), w, Action).Id = 1;
+        CoreUIEditor.Instance.Button(new Rect(0, -40*_pixelSize, _pixelSize*300, 0), w, Action).Id = 2;
+        CoreUIEditor.Instance.Button(new Rect(0, -60*_pixelSize, _pixelSize*300, 0), w, Action).Id = 3;
         _label = CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), 
             string.Empty,
             w,
@@ -37,6 +40,12 @@ internal class CoreUITest: MonoBehaviour
         _label.Color = Color.blue;
         StartCoroutine(Write());
         StartCoroutine(ChangeColor());
+        
+    }
+
+    private void Action(int id)
+    {
+        Debug.Log(id);
     }
 
     private IEnumerator Write()

@@ -6,10 +6,17 @@ namespace UICore.Controls
 {
     public class CoreUIButton : CoreUIElement
     {
+        private int _id;
         private Texture2D _pressed;
         private Texture2D _unpressed;
-        private Action _action;
+        private Action<int> _action;
 
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        
         public override Texture2D Texture
         {
             get { return Active ? base.Texture : _unpressed; }
@@ -20,7 +27,7 @@ namespace UICore.Controls
         {
         }
 
-        public CoreUIButton(BaseCoreUIMesh mesh, Action action) : base(mesh)
+        public CoreUIButton(BaseCoreUIMesh mesh, Action<int> action) : base(mesh)
         {
             _pressed = mesh.Texture;
             _unpressed = ((ButtonMesh)mesh).UnpressedTexture;
@@ -37,7 +44,7 @@ namespace UICore.Controls
 
         private void HandlePressing(CoreUIEvent e, bool focused)
         {
-            if (Pressed && e.PointerDown && _action != null && focused) _action.Invoke(); 
+            if (Pressed && e.PointerDown && _action != null && focused) _action.Invoke(_id); 
             if (Pressed) _coreUIMesh.Texture = _pressed;
             else _coreUIMesh.Texture = _unpressed;
         }
