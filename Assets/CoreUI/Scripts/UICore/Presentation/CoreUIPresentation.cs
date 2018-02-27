@@ -11,14 +11,14 @@ namespace UICore.Presentation
     {
         public const int CoreUIQueue = 3000;
 
-        [SerializeField] private Transform _presentationParentPrefab;
+        [SerializeField] private CoreUIPresentationParent _coreUiPresentationParentPrefab;
         [SerializeField] private CoreUISimplePresentation _presentationPrefab;
         [SerializeField] private CoreUIContainerPresentation _containerPrefab;
-        [SerializeField] private List<CoreUISimplePresentation> _presentations;
         [SerializeField] private int _containerOrder = 0;
         [SerializeField] private int _containerOrderStep = 100;
         private CoreUIContainer _defaultContainer;
-        private Transform _presentationParent;
+        [Space]
+        [SerializeField] private CoreUIPresentationParent _coreUiPresentationParent;
 
         #if UNITY_EDITOR
         protected virtual void Reset()
@@ -29,8 +29,19 @@ namespace UICore.Presentation
         
         public override void AwakeSingleton()
         {
+            Init();
+        }
+
+        private void InitIfRequired()
+        {
+            if (_coreUiPresentationParent == null) Init();
+        }
+        
+        private void Init()
+        {
+            _coreUiPresentationParent = Instantiate(_coreUiPresentationParentPrefab);
+            _coreUiPresentationParent.Init();
             _defaultContainer = CoreUIEditor.Instance.Window(new Rect(0, 0, 0, 0), "Empty Window Style");
-            _presentationParent = Instantiate(_presentationParentPrefab);
         }
 
         protected virtual void Update()
@@ -41,7 +52,7 @@ namespace UICore.Presentation
 
         protected virtual void LateUpdate()
         {
-            _presentationParent.position = CoreUICameraHandler.Instance.CameraPosition;
+            _coreUiPresentationParent.Position = CoreUICameraHandler.Instance.CameraPosition;
         }
 
         public CoreUISimplePresentation CreateSimplePresentation(CoreUIElement element)
@@ -67,17 +78,19 @@ namespace UICore.Presentation
 
         private CoreUISimplePresentation CreateSimplePresentation()
         {
+            InitIfRequired();
             var item = Instantiate(_presentationPrefab);
-            _presentations.Add(item);
-            item.transform.parent = _presentationParent;
+            _coreUiPresentationParent.Presentations.Add(item);
+            item.transform.parent = _coreUiPresentationParent.Transform;
             return item;
         }
 
         private CoreUIContainerPresentation CreateContainerPresentation()
         {
+            InitIfRequired();
             var container = Instantiate(_containerPrefab);
-            _presentations.Add(container);
-            container.transform.parent = _presentationParent;
+            _coreUiPresentationParent.Presentations.Add(container);
+            container.transform.parent = _coreUiPresentationParent.Transform;
             return container;
         }
 
@@ -94,7 +107,11 @@ namespace UICore.Presentation
 
         private void UpdatePresentation(CoreUIEvent e)
         {
-            for (var index = 0; index < _presentations.Count; index++) _presentations[index].UpdateSelf(e);
+            InitIfRequired();
+            for (var index = 0; index < _coreUiPresentationParent.Presentations.Count; index++)
+            {
+                _coreUiPresentationParent.Presentations[index].UpdateSelf(e);
+            }
         }
 
         private int GetContainerOrder()
