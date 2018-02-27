@@ -16,7 +16,12 @@ namespace UICore.StylesSystem.Styles.Font
         private Dictionary<char, SymbolDescription> _alphabetDictionary;
 
         public float FontHeight { get { return _pixelsHeight * _pixelWidth; } }
-        public Material Material { get { return _material; } }
+
+        public Material Material
+        {
+            get { return _material; } 
+            set { _material = value; }
+        }
 
         public int PixelsHeight
         {

@@ -57,6 +57,10 @@ namespace Assets.Editor.CoreUI
             window.Yes += sender =>
             {
                 var font = ObjectCreatorHelper.CreateAsset<CoreUIFont>(sender.Name);
+                var material = new Material(Shader.Find("CoreUI/CoreUITextMeshShader"));
+                material.SetTexture("_MainTex", sender.Texture);
+                font.Material = material;
+                ObjectCreatorHelper.CreateAsset(material, string.Format("{0}.mat", sender.Name));
                 font.Texture = sender.Texture;
             }; 
         }

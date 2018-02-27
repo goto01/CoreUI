@@ -13,5 +13,10 @@ namespace Assets.Editor
             ProjectWindowUtil.CreateAsset(asset, string.Format("{0}.asset", name));
             return (T)asset;
         }
+
+        public static void CreateAsset(UnityEngine.Object asset, string name)
+        {
+            ProjectWindowUtil.CreateAsset(asset, name);
+        }
     }
 }
