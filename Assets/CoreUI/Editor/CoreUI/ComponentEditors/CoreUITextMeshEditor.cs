@@ -1,5 +1,4 @@
 ﻿using UICore.Components;
-using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
 using UnityEngine;
 

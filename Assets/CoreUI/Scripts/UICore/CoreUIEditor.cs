@@ -14,6 +14,7 @@ namespace UICore
 {
     public class CoreUIEditor : SingletonMonoBahaviour<CoreUIEditor>
     {
+        public const string Version = "0.1.1";
         private const string DefaultWindowStyle = "Default Window Style";
         private const string DefaultImageStyle = "Default Image Style";
         private const string DefaultFlexibleImageStyle = "Default Flexible Image Style";
