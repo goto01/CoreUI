@@ -10,6 +10,7 @@ namespace UICore.Controls
         private bool _pressed;
         private int _order;
         private bool _active;
+        private bool _enabled;
         private float _verticalTopLimit;
         private float _verticalBottomLimit;
         private float _horizontalLeftLimit;
@@ -36,6 +37,12 @@ namespace UICore.Controls
                 _active = value;
                 _pressed = false;
             }
+        }
+        
+        public virtual bool Enabled
+        {
+            get { return _enabled; }
+            set { _enabled = value; }
         }
 
         public virtual int Order

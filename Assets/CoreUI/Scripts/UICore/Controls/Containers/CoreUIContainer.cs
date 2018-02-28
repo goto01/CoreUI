@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 
@@ -102,6 +103,31 @@ namespace UICore.Controls.Containers
 
         public int Count { get { return _elements.Count; } }
 
+        public override bool Active
+        {
+            get
+            {
+                return base.Active;
+            }
+            set
+            {
+                if (value == base.Active) return;
+                base.Active = value;
+                for (var index = 0; index < _elements.Count; index++) _elements[index].Active = value;
+            }
+        }
+
+        public override bool Enabled
+        {
+            get { return base.Enabled; }
+            set
+            {
+                if (value == base.Enabled) return;
+                base.Enabled = value;
+                for (var index = 0; index < _elements.Count; index++) _elements[index].Enabled = value;
+            }
+        }
+
         protected CoreUIContainer(BaseCoreUIMesh mesh) : base(mesh) 
         {
             _elements = new List<CoreUIElement>();
@@ -109,6 +135,8 @@ namespace UICore.Controls.Containers
 
         public void AddElement(CoreUIElement element)
         {
+            element.Active = Active;
+            element.Enabled = Enabled;
             _elements.Add(element);
             element.Order = Order + _elements.Count;
             element.Position += Position;
@@ -117,6 +145,8 @@ namespace UICore.Controls.Containers
 
         public void AddElementBefore(CoreUIElement element, CoreUIElement before)
         {
+            element.Active = Active;
+            element.Enabled = Enabled;
             for (var index = 0; index < _elements.Count; index++)
             {
                 if (_elements[index] == before)
@@ -132,13 +162,14 @@ namespace UICore.Controls.Containers
 
         public override bool Update(CoreUIEvent e)
         {
-            if (!Active) return false;
+            if (!Active || !Enabled) return false;
             var focused = base.Update(e);
             if (!focused) e.DropPointerData();
             for (var index = 0; index < _elements.Count; index++)
             {
-                if (!_elements[index].Active) continue;
-                var elementFocus = _elements[index].Update(e);
+                var element = _elements[index];
+                if (!element.Active || !element.Enabled) continue;
+                var elementFocus = element.Update(e);
                 focused = focused || elementFocus;
             }
             return focused;

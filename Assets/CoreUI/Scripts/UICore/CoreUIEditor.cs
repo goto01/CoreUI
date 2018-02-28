@@ -4,6 +4,7 @@ using UICore.Controls;
 using UICore.Controls.Containers;
 using UICore.Controls.Text;
 using UICore.Presentation;
+using UICore.Settings;
 using UICore.StylesSystem.Repository;
 using UICore.UICoreMeshes.Factory;
 using UICore.UICoreMeshes.Meshes;
@@ -35,6 +36,8 @@ namespace UICore
             var mesh = _factory.CreateWindow(rect, styleName);
             var element = new CoreUIWindow(mesh);
             CoreUIPresentation.Instance.CreateContainerPresentation(element);
+            element.Active = true;
+            element.Enabled = true;
             return element;
         }
 

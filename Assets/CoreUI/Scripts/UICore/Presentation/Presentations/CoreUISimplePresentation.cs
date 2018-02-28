@@ -14,7 +14,6 @@ namespace UICore.Presentation.Presentations
         private const string XLeftLimit = "_XLeftLimit";
         private const string XRightLimit = "_XRightLimit";
         private const string Color = "_Color";
-        private float _inactiveValue = .6f;
 
         private MeshFilter _mesh;
         private MeshRenderer _renderer;
@@ -24,6 +23,12 @@ namespace UICore.Presentation.Presentations
         {
             get { return _element.Active; }
             set { _element.Active = value; }
+        }
+
+        public bool Enabled
+        {
+            get { return _element.Enabled; }
+            set { _element.Enabled = value; }
         }
 
         public virtual void Init(CoreUIElement element)
@@ -68,9 +73,8 @@ namespace UICore.Presentation.Presentations
 
         private void UpdateActive()
         {
-            //_renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * _inactiveValue);
-            _renderer.material.SetColor(Color, _element.Color);
-            //_renderer.enabled = Active;
+            _renderer.material.SetColor(Color, Active ? _element.Color : _element.Color * CoreUIPresentation.Instance.InactiveTintColor);
+            _renderer.enabled = Enabled;
         }
 
         private void UpdateVertialLimit()
