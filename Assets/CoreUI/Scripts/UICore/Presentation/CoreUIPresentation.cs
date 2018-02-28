@@ -3,6 +3,7 @@ using Singleton;
 using UICore.Controls;
 using UICore.Controls.Containers;
 using UICore.Presentation.Presentations;
+using UICore.Settings;
 using UnityEngine;
 
 namespace UICore.Presentation
@@ -11,15 +12,17 @@ namespace UICore.Presentation
     {
         public const int CoreUIQueue = 3000;
 
+        [SerializeField] private PresentationSettings _presentationSettings;
         [SerializeField] private CoreUIPresentationParent _coreUiPresentationParentPrefab;
         [SerializeField] private CoreUISimplePresentation _presentationPrefab;
         [SerializeField] private CoreUIContainerPresentation _containerPrefab;
         [SerializeField] private int _containerOrder = 0;
         [SerializeField] private int _containerOrderStep = 100;
         private CoreUIContainer _defaultContainer;
-        [Space]
-        [SerializeField] private CoreUIPresentationParent _coreUiPresentationParent;
+        private CoreUIPresentationParent _coreUiPresentationParent;
 
+        public Color InactiveTintColor{get { return _presentationSettings.InactiveTintColor; }}
+        
         #if UNITY_EDITOR
         protected virtual void Reset()
         {
@@ -59,7 +62,6 @@ namespace UICore.Presentation
         {
             var presentation = CreateSimplePresentation();
             presentation.Init(element);
-            element.Active = true;
             return presentation;
         }
 
@@ -68,7 +70,6 @@ namespace UICore.Presentation
             var presentation = CreateContainerPresentation();
             presentation.Init(element);
             element.Order = GetContainerOrder();
-            element.Active = true;
             element.VerticalTopLimit = CoreUICameraHandler.Instance.VerticalTopLimit;
             element.VerticalBottomLimit = CoreUICameraHandler.Instance.VerticalBottomLimit;
             element.HorizontalLeftLimit = CoreUICameraHandler.Instance.HorizontalLeftLimit;

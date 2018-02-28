@@ -1,5 +1,6 @@
 ﻿using Assets.Editor.CoreUI.Windows.Font;
 using Editor.CoreUI.Windows.DialogWindows;
+using UICore.Settings;
 using UICore.StylesSystem.Repository;
 using UICore.StylesSystem.Styles;
 using UICore.StylesSystem.Styles.Font;
@@ -69,6 +70,12 @@ namespace Assets.Editor.CoreUI
         public static void CreateStylesRepository()
         {
             ObjectCreatorHelper.CreateAsset<StylesRepository>();
+        }
+
+        [MenuItem(CreateMenu + "/Settings container", false, 1001)]
+        public static void CreateSettingsContainer()
+        {
+            ObjectCreatorHelper.CreateAsset<PresentationSettings>();
         }
 
         [MenuItem(CoreUIWindows + "/Font editor", false, 0)]
