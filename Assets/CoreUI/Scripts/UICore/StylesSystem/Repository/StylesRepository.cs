@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UICore.StylesSystem.Styles;
 using UnityEngine;
 
@@ -20,6 +21,11 @@ namespace UICore.StylesSystem.Repository
 
         public void Init()
         {
+            if (_styles.Any(x => x == null))
+            {
+                Debug.LogError("Styles Repository has some none styles");
+                return;
+            }
             _stylesDictionary = new Dictionary<string, BaseStyle>();
             for (var index = 0; index < _styles.Length; index++)
             {
