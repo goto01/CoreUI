@@ -11,6 +11,8 @@ namespace UICore.Controls.Containers
         private float _viewWidth;
         private float _scrollVerticalValue;
         private float _scrollHorizontalValue;
+        private CoreUISlider _horizontalSlider;
+        private CoreUISlider _verticalSlider;
 
         public float OriginY
         {
@@ -46,12 +48,21 @@ namespace UICore.Controls.Containers
             }
         }
         
-        public CoreUIScroll(float viewWidth, float viewHeight, BaseCoreUIMesh mesh) : base(mesh)
+        public CoreUIScroll(float viewWidth, float viewHeight, BaseCoreUIMesh mesh, CoreUISlider horizontalSlider, CoreUISlider verticalSlider) : base(mesh)
         {
             _viewHeight = viewHeight;
             _viewWidth = viewWidth;
+            _horizontalSlider = horizontalSlider;
+            _verticalSlider = verticalSlider;
         }
 
+        public override bool Update(CoreUIEvent e)
+        {
+            var focus = base.Update(e);
+            if (_verticalSlider != null) ScrollVerticalValue = 1 - _verticalSlider.Value;
+            if (_horizontalSlider != null) ScrollHorizontalValue = _horizontalSlider.Value;
+            return focus;
+        }
 
         protected override bool Contains(Vector2 pos)
         {

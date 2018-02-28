@@ -107,26 +107,35 @@ namespace UICore
 
         public CoreUIScroll Scroll(Rect rect, float viewWidth, float viewHeight, string styleName = DefaultScrollStyle)
         {
+            return Scroll(rect, viewWidth, viewHeight, default(CoreUISlider), default(CoreUISlider), styleName);
+        }
+
+        public CoreUIScroll Scroll(Rect rect, float viewWidth, float viewHeight, CoreUISlider horizontalSlider, CoreUISlider verticalSlider, string styleName = DefaultScrollStyle)
+        {
             var mesh = _factory.CreateScroll(rect, styleName);
-            var element = new CoreUIScroll(viewWidth, viewHeight, mesh);    
+            var element = new CoreUIScroll(viewWidth, viewHeight, mesh, horizontalSlider, verticalSlider);    
             element.OriginY = element.Position.y;
             element.OriginX = element.Position.x;
-            Debug.Log(element.Position.x);
             CoreUIPresentation.Instance.CreateContainerPresentation(element);
             return element;
         }
 
         public CoreUIScroll Scroll(Rect rect, float viewWidth, float viewHeight, CoreUIContainer container, string styleName = DefaultScrollStyle)
         {
+            return Scroll(rect, viewWidth, viewHeight, null, null, container, styleName);
+        }
+
+        public CoreUIScroll Scroll(Rect rect, float viewWidth, float viewHeight, CoreUISlider horizontalSlider, CoreUISlider verticalSlider, CoreUIContainer container, string styleName = DefaultScrollStyle)
+        {
             var mesh = _factory.CreateScroll(rect, styleName);
-            var element = new CoreUIScroll(viewWidth, viewHeight, mesh);
+            var element = new CoreUIScroll(viewWidth, viewHeight, mesh, horizontalSlider, verticalSlider);
             container.AddElement(element);
             element.OriginY = element.Position.y;
             element.OriginX = element.Position.x;
             CoreUIPresentation.Instance.CreateSimplePresentation(element);
             return element;
         }
-
+        
         public CoreUILabel Label(Rect rect, string text, CoreUIContainer container, string fontName = DefaultFontName)
         {
             var mesh = _factory.CreateLabel(rect, text, fontName);
