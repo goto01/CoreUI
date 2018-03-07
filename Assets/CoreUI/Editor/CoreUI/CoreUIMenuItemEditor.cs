@@ -18,37 +18,37 @@ namespace Assets.Editor.CoreUI
         [MenuItem(CreateMenu + "/Window style", false, 1101)]
         public static void CreateWindowStyle()
         {
-            ObjectCreatorHelper.CreateAsset<WindowStyle>();
+            CoreUIStyleCreator.CreateStyle<WindowStyle>();
         }
 
         [MenuItem(CreateMenu + "/Image style", false, 1102)]
         public static void CreateImageStyle()
         {
-            ObjectCreatorHelper.CreateAsset<ImageStyle>();
+            CoreUIStyleCreator.CreateStyle<ImageStyle>();
         }
 
         [MenuItem(CreateMenu + "/Flexible image style", false, 1102)]
         public static void CreateFlexibleImageStyle()
         {
-            ObjectCreatorHelper.CreateAsset<FlexibleImageStyle>();
+            CoreUIStyleCreator.CreateStyle<FlexibleImageStyle>();
         }
 
         [MenuItem(CreateMenu + "/Slider style", false, 1103)]
         public static void CreateSliderStyle()
         {
-            ObjectCreatorHelper.CreateAsset<SliderStyle>();
+            CoreUIStyleCreator.CreateStyle<SliderStyle>();
         }
 
         [MenuItem(CreateMenu + "/Button style", false, 1104)]
         public static void CreateButtonStyle()
         {
-            ObjectCreatorHelper.CreateAsset<ButtonStyle>();
+            CoreUIStyleCreator.CreateStyle<ButtonStyle>();
         }
 
         [MenuItem(CreateMenu + "/Scroll style", false, 1105)]
         public static void CreateScrollStyle()
         {
-            ObjectCreatorHelper.CreateAsset<ScrollStyle>();
+            CoreUIStyleCreator.CreateStyle<ScrollStyle>();
         }
 
         [MenuItem(CreateMenu + "/Font", false, 1106)]
@@ -57,7 +57,7 @@ namespace Assets.Editor.CoreUI
             var window = Dialog.ShowDialog<CreateFontDialogWindow>("Create font", DialogType.YesNo);
             window.Yes += sender =>
             {
-                var font = ObjectCreatorHelper.CreateAsset<CoreUIFont>(sender.Name);
+                var font = CoreUIStyleCreator.CreateStyle<CoreUIFont>(sender.Name);
                 var material = new Material(Shader.Find("CoreUI/CoreUITextMeshShader"));
                 material.SetTexture("_MainTex", sender.Texture);
                 font.Material = material;

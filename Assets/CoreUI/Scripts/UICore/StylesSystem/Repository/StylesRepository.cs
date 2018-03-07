@@ -12,6 +12,13 @@ namespace UICore.StylesSystem.Repository
         [SerializeField] private BaseStyle[] _styles;
         private Dictionary<string, BaseStyle> _stylesDictionary;
 
+        public void AddStyle(BaseStyle style)
+        {
+            var styles = _styles.ToList();
+            styles.Add(style);
+            _styles = styles.ToArray();
+        }
+        
         public BaseStyle GetStyle(string styleName)
         {
             if (_stylesDictionary.ContainsKey(styleName)) return _stylesDictionary[styleName];
