@@ -108,6 +108,7 @@ namespace Assets.Editor.CoreUI.Windows.Font
 
         private void DrawAlphabetWindow(int id)
         {
+            if (_font == null) return;
             EditorGUILayout.BeginHorizontal();
             var buttonsInLine = (int) ( AlphabetGridWindowWidth - 7) / AlphabetGridButtonSize;
             var line = 0;
