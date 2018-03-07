@@ -31,6 +31,7 @@ namespace Assets.Editor.CoreUI
 
 		public static T CreateStyle<T>(string name) where T : BaseStyle
 		{
+			if (!Loaded) Load();
 			var style = ObjectCreatorHelper.CreateAsset<T>(name);
 			_stylesRepository.AddStyle(style);
 			EditorUtility.SetDirty(_stylesRepository);
@@ -39,8 +40,10 @@ namespace Assets.Editor.CoreUI
 		
 		public static T CreateStyle<T>() where T : BaseStyle
 		{
+			if (!Loaded) Load();
 			var style = ObjectCreatorHelper.CreateAsset<T>();
 			_stylesRepository.AddStyle(style);
+			EditorUtility.SetDirty(_stylesRepository);
 			return style;
 		}
 	}
