@@ -1,5 +1,6 @@
 ﻿using Assets.Editor.CoreUI.Windows.Font;
 using Editor.CoreUI.Windows.DialogWindows;
+using Editor.Windows.DialogWindows;
 using UICore.Settings;
 using UICore.StylesSystem.Repository;
 using UICore.StylesSystem.Styles;

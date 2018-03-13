@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Editor.CoreUI.Windows.DialogWindows
+namespace Editor.Windows.DialogWindows
 {
 	public sealed class YesNoDialogWindow : BaseDialogWindow<YesNoDialogWindow>
 	{

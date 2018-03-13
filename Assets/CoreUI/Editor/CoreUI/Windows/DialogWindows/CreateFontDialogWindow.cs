@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Editor.Windows.DialogWindows;
+using UnityEditor;
 using UnityEngine;
 
 namespace Editor.CoreUI.Windows.DialogWindows
