@@ -1,4 +1,5 @@
-﻿using UICore.StylesSystem.Repository;
+﻿using UICore.Controls;
+using UICore.StylesSystem.Repository;
 using UICore.StylesSystem.Styles;
 using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
@@ -66,6 +67,13 @@ namespace UICore.UICoreMeshes.Factory
             return label;
         }
 
+        public ButtonMesh CreateToggle(Rect rect, string styleName)
+        {
+            var toggle = new ButtonMesh();
+            toggle.Init(GetStyle(styleName), rect);
+            return toggle;
+        }
+        
         private BaseStyle GetStyle(string styleName)
         {
             return _repository.GetStyle(styleName);

@@ -7,6 +7,7 @@ using UICore.StylesSystem.Styles;
 using UICore.StylesSystem.Styles.Font;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Editor.CoreUI
 {
@@ -52,7 +53,13 @@ namespace Assets.Editor.CoreUI
             CoreUIStyleCreator.CreateStyle<ScrollStyle>();
         }
 
-        [MenuItem(CreateMenu + "/Font", false, 1106)]
+        [MenuItem(CreateMenu + "/Toggle style", false, 1106)]
+        public static void CreateToggleStyle()
+        {
+            CoreUIStyleCreator.CreateStyle<ButtonStyle>();
+        }
+        
+        [MenuItem(CreateMenu + "/Font", false, 1107)]
         public static void CreateFont()
         {
             var window = Dialog.ShowDialog<CreateFontDialogWindow>("Create font", DialogType.YesNo);

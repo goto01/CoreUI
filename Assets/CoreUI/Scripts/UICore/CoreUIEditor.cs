@@ -22,6 +22,7 @@ namespace UICore
         private const string DefaultButtonStyle = "Default Button Style";
         private const string DefaultScrollStyle = "Default Scroll Style";
         private const string DefaultFontName = "Default Font";
+        private const string DefaultToggleStyle = "Default Toggle Style";
 
         private MeshesFactory _factory;
         [SerializeField] private StylesRepository _repository;
@@ -150,6 +151,15 @@ namespace UICore
         {
             var mesh = _factory.CreateLabel(rect, text, fontName);
             var element = new CoreUILabel(mesh, sinPixelsOffset, sinOffsetSpeed, sinMultiplier, horizontalPixelsOffset, verticalPixelsOffset);
+            CoreUIPresentation.Instance.CreateSimplePresentation(element);
+            container.AddElement(element);
+            return element;
+        }
+
+        public CoreUIToggle Toggle(Rect rect, bool pressed, CoreUIContainer container, Action<bool> action, string styleName = DefaultToggleStyle)
+        {
+            var mesh = _factory.CreateToggle(rect, styleName);
+            var element = new CoreUIToggle(mesh, action, pressed);
             CoreUIPresentation.Instance.CreateSimplePresentation(element);
             container.AddElement(element);
             return element;
