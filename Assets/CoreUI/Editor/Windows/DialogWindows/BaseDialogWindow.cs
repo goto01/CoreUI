@@ -1,5 +1,5 @@
 ﻿using System;
-using CoreUIStaff;
+using Staff;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,8 +24,8 @@ namespace Editor.Windows.DialogWindows
 		protected bool _yesPossible;
 		protected bool _noPossible;
 		
-		public event CoreUIStaff.EventHandler<T> Yes;
-		public event CoreUIStaff.EventHandler<T> No;
+		public event Staff.EventHandler<T> Yes;
+		public event Staff.EventHandler<T> No;
 		
 		public void Init(DialogType dialogType, string yes, string no, bool closeOnYes, bool closeOnNo, Rect parentRect, Vector2 size)
 		{

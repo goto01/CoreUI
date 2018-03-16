@@ -1,4 +1,4 @@
-﻿namespace CoreUIStaff
+﻿namespace Staff
 {
 	public delegate void EventHandler<T>(T sender);
 	
