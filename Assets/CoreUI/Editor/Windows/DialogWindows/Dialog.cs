@@ -1,5 +1,4 @@
-﻿using Assets.Editor.CoreUI.Windows.Font;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace Editor.Windows.DialogWindows
