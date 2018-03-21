@@ -5,10 +5,21 @@ Simple UI system for Unity
 <p align="center">
   <img src="./Preview/Result.png" Height="350"/>
   <img src="./Preview/Raw.png" Height="350"/>
+  <img src="./Preview/ResultGif.gif" Height="350"/>
 </p>
 
 Render windows, buttons, slider, progress bars and ... as tiles.
 
+## Text
+CoreUIText and CoreUITextMesh(MonoBehaviour) based on custom text rendering.
+
+Text effects:
+- Sin effect
+- Shake effect
+<p align="center">
+  <img src="./Preview/TextEffect.gif" Height="350"/>
+  <img src="./Preview/TextMeshEditor.gif" Height="350"/>
+</p>
 Text rendering base on the texture of font. Easy font editor included.
 <p align="left">
   <img src="./Preview/FontEditor.png" Height="200"/>
@@ -22,6 +33,7 @@ Text rendering base on the texture of font. Easy font editor included.
 - Button
 - Scroll
 - Label
+- Toggle
 
 ## Development progress
 [workflowy](https://workflowy.com/s/HwM7.cApHYq98eb)
