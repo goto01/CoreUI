@@ -18,7 +18,6 @@ namespace UICore.Presentation
         [SerializeField] private CoreUIContainerPresentation _containerPrefab;
         [SerializeField] private int _containerOrder = 0;
         [SerializeField] private int _containerOrderStep = 100;
-        private CoreUIContainer _defaultContainer;
         private CoreUIPresentationParent _coreUiPresentationParent;
 
         public Color InactiveTintColor{get { return _presentationSettings.InactiveTintColor; }}
@@ -44,7 +43,6 @@ namespace UICore.Presentation
         {
             _coreUiPresentationParent = Instantiate(_coreUiPresentationParentPrefab);
             _coreUiPresentationParent.Init();
-            _defaultContainer = CoreUIEditor.Instance.Window(new Rect(0, 0, 0, 0), "Empty Window Style");
         }
 
         protected virtual void Update()

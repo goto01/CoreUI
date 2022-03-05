@@ -33,7 +33,7 @@ internal class CoreUITest: MonoBehaviour
     protected virtual void Start()
     {
         _window = CoreUIEditor.Instance.Window(new Rect(-150*_pixelSize, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
-        var w = CoreUIEditor.Instance.Window(new Rect(5*_pixelSize, -5*_pixelSize, _pixelSize * 290, _pixelSize * 290), _window, "Item Window Style");
+        var w = CoreUIEditor.Instance.Window(new Rect(5*_pixelSize, -5*_pixelSize, _pixelSize * 290, _pixelSize * 290), _window, "OS Window Style");
         var button = CoreUIEditor.Instance.Button(new Rect(5 * _pixelSize, -20 * _pixelSize, _pixelSize * 280, 0), w, Action);
         button.Id = 1;
         _label = CoreUIEditor.Instance.Label(new Rect(5 * _pixelSize, -5 * _pixelSize, 0, 0), 
@@ -43,7 +43,7 @@ internal class CoreUITest: MonoBehaviour
         _label.FontColor = Color.blue;
         StartCoroutine(Write());
         StartCoroutine(ChangeColor());
-
+        
         _secondWindow = CoreUIEditor.Instance.Window(new Rect(_pixelSize * 155, 0, _pixelSize * 300, _pixelSize * 300), "Item Window Style");
         _secondWindow.Enabled = false;
         CoreUIEditor.Instance.Label(new Rect(5 * _pixelSize, -5*_pixelSize, 0, 0), "±The quick brown fox jumps±", _secondWindow, 2, 1, 2, .3f, .3f, "Wave Font");
@@ -68,32 +68,38 @@ internal class CoreUITest: MonoBehaviour
         CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -60 * _pixelSize, 230 * _pixelSize, 0), _window0, ChangeActivityOfWindow0Below);
         _window0Below = CoreUIEditor.Instance.Window(new Rect(10 * _pixelSize, -80 * _pixelSize, 230 * _pixelSize, 110 * _pixelSize), _window0, "Item Window Style");
         CoreUIEditor.Instance.Toggle(new Rect(10 * _pixelSize, -195 * _pixelSize, 230 * _pixelSize, 0), false, _window0, i => Debug.Log(i));
-        var window0BelowScrollSlider = CoreUIEditor.Instance.Slider(new Rect(213*_pixelSize, -7*_pixelSize, 96 * _pixelSize, 0), _window0Below, CoreUIOrientation.Vertical, "RPG Slider Style");
-        var window0BelowScroll = CoreUIEditor.Instance.Scroll(new Rect(7 * _pixelSize, -7 * _pixelSize, 204 * _pixelSize, 200 * _pixelSize), 204 * _pixelSize, 96 * _pixelSize, null, window0BelowScrollSlider, _window0Below);
-        CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "The quick brown fox jumps\nover the lazy dog\n" +
+        var window0BelowScrollSlider0 = CoreUIEditor.Instance.Slider(new Rect(213*_pixelSize, -7*_pixelSize, 96 * _pixelSize, 0), _window0Below, CoreUIOrientation.Vertical, "RPG Slider Style");
+        var window0BelowScrollSlider1 = CoreUIEditor.Instance.Slider(new Rect(7*_pixelSize, -7*_pixelSize, 204 * _pixelSize, 0), _window0Below, CoreUIOrientation.Horizontal, "RPG Slider Style");
+        var window0BelowScroll = CoreUIEditor.Instance.Scroll(new Rect(7 * _pixelSize, -15 * _pixelSize, 500 * _pixelSize, 192 * _pixelSize), 204 * _pixelSize, 96 * _pixelSize, 
+            window0BelowScrollSlider1, window0BelowScrollSlider0, _window0Below);
+        var sl0 = CoreUIEditor.Instance.Slider(new Rect(197 * _pixelSize,  -50 * _pixelSize, 100 * _pixelSize, 100 * _pixelSize), window0BelowScroll, CoreUIOrientation.Vertical, "RPG Slider Style");
+        var sl1 = CoreUIEditor.Instance.Slider(new Rect(0,  -40 * _pixelSize, 197 * _pixelSize, 100 * _pixelSize), window0BelowScroll, CoreUIOrientation.Horizontal, "RPG Slider Style");
+        var sc0 = CoreUIEditor.Instance.Scroll(new Rect(0, -50 * _pixelSize, 300 * _pixelSize, 300 * _pixelSize), 197 * _pixelSize, 100 * _pixelSize, sl1, sl0, window0BelowScroll);
+        sc0.ScrollHorizontalValue = 0;
+        CoreUIEditor.Instance.Label(new Rect(100 * _pixelSize, 0, 0, 0), "The quick brown fox jumps\nover the lazy dog\n" +
                                                           "The quick brown fox jumps\nover the lazy dog\n" +
                                                           "The quick brown fox jumps\nover the lazy dog\n" +
                                                           "The quick brown fox jumps\nover the lazy dog\n" +
                                                           "The quick brown fox jumps\nover the lazy dog\n" +
                                                           "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n", window0BelowScroll, "Wave Font");
+                                                          "The quick brown fox jumps\nover the lazy dog\n", sc0, "Wave Font");
         
-        _window1 = CoreUIEditor.Instance.Window(new Rect(CoreUICameraHandler.Instance.LeftTopPosition + new Vector2(250 * _pixelSize, 0), new Vector2(250 * _pixelSize, 200 * _pixelSize)), "Item Window Style");
-        _window1.Enabled = false;
-        CoreUIEditor.Instance.Label(new Rect(10 * _pixelSize, -10 * _pixelSize, 0, 0), "Show left window", _window1, "Wave Font");
-        CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -25 * _pixelSize, 230 * _pixelSize, 0), _window1, ChangeVisibilityOfWindows);
-        CoreUIEditor.Instance.Label(new Rect(10 * _pixelSize, -45 * _pixelSize, 0, 0), "Activate/Disable window below", _window1, "Wave Font");
-        CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -60 * _pixelSize, 230 * _pixelSize, 0), _window1, ChangeActivityOfWindow1Below);
-        _window1Below = CoreUIEditor.Instance.Window(new Rect(10 * _pixelSize, -80 * _pixelSize, 230 * _pixelSize, 110 * _pixelSize), _window1, "Item Window Style");
-        window0BelowScrollSlider = CoreUIEditor.Instance.Slider(new Rect(7*_pixelSize, -95*_pixelSize, 216 * _pixelSize, 0), _window1Below, CoreUIOrientation.Horizontal, "RPG Slider Style");
-        window0BelowScroll = CoreUIEditor.Instance.Scroll(new Rect(7 * _pixelSize, -7 * _pixelSize, 400 * _pixelSize, 90 * _pixelSize), 216 * _pixelSize, 86 * _pixelSize, window0BelowScrollSlider, null, _window1Below);
-        CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n", window0BelowScroll, "Wave Font");
+        // _window1 = CoreUIEditor.Instance.Window(new Rect(CoreUICameraHandler.Instance.LeftTopPosition + new Vector2(250 * _pixelSize, 0), new Vector2(250 * _pixelSize, 200 * _pixelSize)), "Item Window Style");
+        // _window1.Enabled = false;
+        // CoreUIEditor.Instance.Label(new Rect(10 * _pixelSize, -10 * _pixelSize, 0, 0), "Show left window", _window1, "Wave Font");
+        // CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -25 * _pixelSize, 230 * _pixelSize, 0), _window1, ChangeVisibilityOfWindows);
+        // CoreUIEditor.Instance.Label(new Rect(10 * _pixelSize, -45 * _pixelSize, 0, 0), "Activate/Disable window below", _window1, "Wave Font");
+        // CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -60 * _pixelSize, 230 * _pixelSize, 0), _window1, ChangeActivityOfWindow1Below);
+        // _window1Below = CoreUIEditor.Instance.Window(new Rect(10 * _pixelSize, -80 * _pixelSize, 230 * _pixelSize, 110 * _pixelSize), _window1, "Item Window Style");
+        // window0BelowScrollSlider = CoreUIEditor.Instance.Slider(new Rect(7*_pixelSize, -95*_pixelSize, 216 * _pixelSize, 0), _window1Below, CoreUIOrientation.Horizontal, "RPG Slider Style");
+        // window0BelowScroll = CoreUIEditor.Instance.Scroll(new Rect(7 * _pixelSize, -7 * _pixelSize, 400 * _pixelSize, 90 * _pixelSize), 216 * _pixelSize, 86 * _pixelSize, window0BelowScrollSlider, null, _window1Below);
+        // CoreUIEditor.Instance.Label(new Rect(0, 0, 0, 0), "The quick brown fox jumps\nover the lazy dog\n" +
+        //                                                   "The quick brown fox jumps\nover the lazy dog\n" +
+        //                                                   "The quick brown fox jumps\nover the lazy dog\n" +
+        //                                                   "The quick brown fox jumps\nover the lazy dog\n" +
+        //                                                   "The quick brown fox jumps\nover the lazy dog\n" +
+        //                                                   "The quick brown fox jumps\nover the lazy dog\n" +
+        //                                                   "The quick brown fox jumps\nover the lazy dog\n", window0BelowScroll, "Wave Font");
     }
 
     private void ChangeVisibilityOfWindows(int i1)

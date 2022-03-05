@@ -11,10 +11,10 @@ namespace UICore.Controls
         private int _order;
         private bool _active;
         private bool _enabled;
-        private float _verticalTopLimit;
-        private float _verticalBottomLimit;
-        private float _horizontalLeftLimit;
-        private float _horizontalRightLimit;
+        protected float _verticalTopLimit;
+        protected float _verticalBottomLimit;
+        protected float _horizontalLeftLimit;
+        protected float _horizontalRightLimit;
         private Color _color;
 
         public virtual Color Color

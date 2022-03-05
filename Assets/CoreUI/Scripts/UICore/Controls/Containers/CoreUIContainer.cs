@@ -194,7 +194,7 @@ namespace UICore.Controls.Containers
             UpdateChildrenPosition(oldPosition, newPosition);
         }
 
-        private void ApplyChildrenLimits()
+        protected void ApplyChildrenLimits()
         {
             for (var index = 0; index < _elements.Count; index++)
             {

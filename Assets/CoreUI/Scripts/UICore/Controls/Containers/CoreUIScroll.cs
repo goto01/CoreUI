@@ -13,6 +13,10 @@ namespace UICore.Controls.Containers
         private float _scrollHorizontalValue;
         private CoreUISlider _horizontalSlider;
         private CoreUISlider _verticalSlider;
+        private float _parentVerticalBottomLimit;
+        private float _parentVerticalTopLimit;
+        private float _parentHorizontalLeftLimit;
+        private float _parentHorizontalRightLimit;
 
         public float OriginY
         {
@@ -46,6 +50,30 @@ namespace UICore.Controls.Containers
                 UpdateScrollPosition();
                 UpdateChildrenLimits();
             }
+        }
+        
+        public override float VerticalBottomLimit
+        {
+            get { return base.VerticalBottomLimit; }
+            set { _parentVerticalBottomLimit = value; }
+        }
+
+        public override float VerticalTopLimit
+        {
+            get { return base.VerticalTopLimit; }
+            set { _parentVerticalTopLimit = value; }
+        }
+
+        public override float HorizontalLeftLimit
+        {
+            get { return base.HorizontalLeftLimit; }
+            set { _parentHorizontalLeftLimit = value; }
+        }
+
+        public override float HorizontalRightLimit
+        {
+            get { return base.HorizontalRightLimit; }
+            set { _parentHorizontalRightLimit = value; }
         }
         
         public CoreUIScroll(float viewWidth, float viewHeight, BaseCoreUIMesh mesh, CoreUISlider horizontalSlider, CoreUISlider verticalSlider) : base(mesh)
@@ -84,17 +112,11 @@ namespace UICore.Controls.Containers
 
         private void UpdateChildrenLimits()
         {
-            VerticalTopLimit = _originY;
-            VerticalBottomLimit = _originY - _viewHeight;
-            HorizontalLeftLimit = _originX;
-            HorizontalRightLimit = _originX + _viewWidth;
-            //for (var index = 0; index < _elements.Count; index++)
-            //{
-            //    _elements[index].VerticalTopLimit = _originY;
-            //    _elements[index].VerticalBottomLimit = _originY - _viewHeight;
-            //    _elements[index].HorizontalLeftLimit = _originX;
-            //    _elements[index].HorizontalRightLimit = _originX + _viewWidth;
-            //}
+            _verticalTopLimit = Mathf.Min(_originY, _parentVerticalTopLimit);
+            _verticalBottomLimit = Mathf.Max(_originY - _viewHeight, _parentVerticalBottomLimit);
+            _horizontalLeftLimit = Mathf.Max(_originX, _parentHorizontalLeftLimit);
+            _horizontalRightLimit = Mathf.Min(_originX + _viewWidth, _parentHorizontalRightLimit);
+            ApplyChildrenLimits();
         }
 
         public override void ResetParentPosition(Vector2 oldPosition, Vector2 newPosition)
