@@ -37,11 +37,11 @@ namespace UICore.Controls.Text
 			_textMesh.TextGenerator.InitEffects(sinPixelsOffset, sinOffsetSpeed, sinMultiplier, horizontalPixelsOffset, verticalPixelsOffset);
 		}
 		
-		public override bool Update(CoreUIEvent e)
+		public override bool Update(ref CoreUIEvent e)
 		{
 			_textMesh.TextGenerator.Update();
 			_textMesh.ApplyTextMesh();
-			return base.Update(e);
+			return base.Update(ref e);
 		}
 
 		public void ShowSymbols(int start, int symbols)

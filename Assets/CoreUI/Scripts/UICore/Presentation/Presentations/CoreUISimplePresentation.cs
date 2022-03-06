@@ -40,7 +40,7 @@ namespace UICore.Presentation.Presentations
             InitMaterial();
         }
 
-        public virtual void UpdateSelf(CoreUIEvent e)
+        public virtual void UpdateSelf(ref CoreUIEvent e)
         {
             UpdateTexture();
             UpdateQueue();

@@ -129,7 +129,7 @@ namespace UICore.Controls
             set { _horizontalRightLimit = value; }
         }
 
-        public virtual bool Update(CoreUIEvent e)
+        public virtual bool Update(ref CoreUIEvent e)
         {
             var focus = Contains(e.PointerPosition);
             if (focus && e.PointerDown) _pressed = true;

@@ -84,9 +84,9 @@ namespace UICore.Controls.Containers
             _verticalSlider = verticalSlider;
         }
 
-        public override bool Update(CoreUIEvent e)
+        public override bool Update(ref CoreUIEvent e)
         {
-            var focus = base.Update(e);
+            var focus = base.Update(ref e);
             if (_verticalSlider != null) ScrollVerticalValue = 1 - _verticalSlider.Value;
             if (_horizontalSlider != null) ScrollHorizontalValue = _horizontalSlider.Value;
             return focus;

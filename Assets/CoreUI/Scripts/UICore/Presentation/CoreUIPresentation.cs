@@ -48,7 +48,7 @@ namespace UICore.Presentation
         protected virtual void Update()
         {
             var e = GetEvent();
-            UpdatePresentation(e);
+            UpdatePresentation(ref e);
         }
 
         protected virtual void LateUpdate()
@@ -95,21 +95,15 @@ namespace UICore.Presentation
 
         private CoreUIEvent GetEvent()
         {
-            return new CoreUIEvent()
-            {
-                PointerPosition = CoreUICameraHandler.Instance.PointerPosition,
-                ScrollDir = Input.mouseScrollDelta.y,
-                PointerDown = Input.GetMouseButtonDown(0),
-                PointerUp = Input.GetMouseButtonUp(0),
-            };
+            return new CoreUIEvent(CoreUICameraHandler.Instance.PointerPosition, Input.mouseScrollDelta.y, Input.GetMouseButtonDown(0), Input.GetMouseButtonUp(0));
         }
 
-        private void UpdatePresentation(CoreUIEvent e)
+        private void UpdatePresentation(ref CoreUIEvent e)
         {
             InitIfRequired();
             for (var index = 0; index < _coreUiPresentationParent.Presentations.Count; index++)
             {
-                _coreUiPresentationParent.Presentations[index].UpdateSelf(e);
+                _coreUiPresentationParent.Presentations[index].UpdateSelf(ref e);
             }
         }
 

@@ -160,16 +160,15 @@ namespace UICore.Controls.Containers
             ApplyLimits(element);
         }
 
-        public override bool Update(CoreUIEvent e)
+        public override bool Update(ref CoreUIEvent e)
         {
             if (!Active || !Enabled) return false;
-            var focused = base.Update(e);
-            if (!focused) e.DropPointerData();
-            for (var index = 0; index < _elements.Count; index++)
+            var focused = base.Update(ref e);
+            for (var index = _elements.Count - 1; index >= 0; index--)
             {
                 var element = _elements[index];
                 if (!element.Active || !element.Enabled) continue;
-                var elementFocus = element.Update(e);
+                var elementFocus = element.Update(ref e);
                 focused = focused || elementFocus;
             }
             return focused;

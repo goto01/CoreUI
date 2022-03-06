@@ -31,11 +31,11 @@ namespace UICore.Controls
             _value = orientation == CoreUIOrientation.Horizontal ? 0 : 1f;
         }
 
-        public override bool Update(CoreUIEvent e)
+        public override bool Update(ref CoreUIEvent e)
         {
-            var focus = base.Update(e);
-            if (focus) HandleEvent(e);
-            HandleMouse(e);
+            var focus = base.Update(ref e);
+            if (focus) HandleEvent(ref e);
+            HandleMouse(ref e);
             UpdatePointPosition();
             return focus;
         }
@@ -62,16 +62,18 @@ namespace UICore.Controls
             Point.CenterY = y;
         }
 
-        private void HandleEvent(CoreUIEvent e)
+        private void HandleEvent(ref CoreUIEvent e)
         {
             Value = Value + e.ScrollDir*_delta;
+            e.ReleaseScrollDir();
         }
 
-        private void HandleMouse(CoreUIEvent e)
+        private void HandleMouse(ref CoreUIEvent e)
         {
             if (!Point.Pressed) return;
             if (_orientation == CoreUIOrientation.Horizontal) Value = Mathf.InverseLerp(X + _borderWidth, X + Width - _borderWidth, e.PointerPosition.x);
             else Value = Mathf.InverseLerp(Y - Height + _borderWidth, Y - _borderWidth, e.PointerPosition.y);
+            e.ReleasePointerDown();
         }
     }
 }

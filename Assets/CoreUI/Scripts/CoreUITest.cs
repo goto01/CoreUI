@@ -64,6 +64,7 @@ internal class CoreUITest: MonoBehaviour
         _window0 = CoreUIEditor.Instance.Window(new Rect(CoreUICameraHandler.Instance.LeftTopPosition, new Vector2(250 * _pixelSize, 300 * _pixelSize)), "Item Window Style");
         CoreUIEditor.Instance.Label(new Rect(10 * _pixelSize, -10 * _pixelSize, 0, 0), "Show right window", _window0, "Wave Font");
         CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -25 * _pixelSize, 230 * _pixelSize, 0), _window0, ChangeVisibilityOfWindows);
+        CoreUIEditor.Instance.Button(new Rect(30 * _pixelSize, -25 * _pixelSize, 230 * _pixelSize, 0), _window0, ChangeVisibilityOfWindows);
         CoreUIEditor.Instance.Label(new Rect(10 * _pixelSize, -45 * _pixelSize, 0, 0), "Activate/Disable window below", _window0, "Wave Font");
         CoreUIEditor.Instance.Button(new Rect(10 * _pixelSize, -60 * _pixelSize, 230 * _pixelSize, 0), _window0, ChangeActivityOfWindow0Below);
         _window0Below = CoreUIEditor.Instance.Window(new Rect(10 * _pixelSize, -80 * _pixelSize, 230 * _pixelSize, 110 * _pixelSize), _window0, "Item Window Style");

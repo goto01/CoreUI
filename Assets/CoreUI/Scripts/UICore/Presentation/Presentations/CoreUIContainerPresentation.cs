@@ -17,10 +17,10 @@ namespace UICore.Presentation.Presentations
             base.Init(element);
         }
 
-        public override void UpdateSelf(CoreUIEvent e)
+        public override void UpdateSelf(ref CoreUIEvent e)
         {
-            base.UpdateSelf(e);
-            _element.Update(e);
+            base.UpdateSelf(ref e);
+            _element.Update(ref e);
         }
     }
 }

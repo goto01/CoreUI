@@ -36,18 +36,27 @@ namespace UICore.Controls
             _coreUIMesh.Texture = _unpressedTexture;
         }
 
-        public override bool Update(CoreUIEvent e)
+        public override bool Update(ref CoreUIEvent e)
         {
-            var focused = base.Update(e);
-            HandlePressing(e, focused);
+            var focused = base.Update(ref e);
+            HandlePressing(ref e, focused);
             _prevPressed = Pressed;
             return focused;
         }
 
-        private void HandlePressing(CoreUIEvent e, bool focused)
+        private void HandlePressing(ref CoreUIEvent e, bool focused)
         {
-            if (_prevPressed && e.PointerUp && focused) InvokePressing();
-            if (Pressed) _coreUIMesh.Texture = _pressedTexture;
+            if (_prevPressed && e.PointerUp && focused)
+            {
+                InvokePressing();
+                e.ReleasePointerUp();
+            }
+
+            if (Pressed)
+            {
+                _coreUIMesh.Texture = _pressedTexture;
+                e.ReleasePointerDown();
+            }
             else _coreUIMesh.Texture = _unpressedTexture;
         }
 

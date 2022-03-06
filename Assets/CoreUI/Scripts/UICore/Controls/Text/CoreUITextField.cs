@@ -24,9 +24,9 @@ namespace UICore.Controls.Text
 		{
 		}
 
-		public override bool Update(CoreUIEvent e)
+		public override bool Update(ref CoreUIEvent e)
 		{
-			var focus = base.Update(e);
+			var focus = base.Update(ref e);
 			if (focus && e.PointerDown) _focusedForEdit = true;
 			if (_focusedForEdit && !focus && e.PointerDown) _focusedForEdit = false;
 			if (_focusedForEdit)
