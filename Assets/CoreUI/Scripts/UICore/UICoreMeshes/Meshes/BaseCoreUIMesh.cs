@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UICore.StylesSystem;
 using UICore.StylesSystem.Styles;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace UICore.UICoreMeshes.Meshes
         private List<Vector2> _uv;
         private List<int> _triangles;
         private Texture2D _terxture;
+        private BaseStyle _style;
         protected float _pixelWidth;
 
         public bool TextureChanged { get; set; }
@@ -97,6 +99,8 @@ namespace UICore.UICoreMeshes.Meshes
             get { return _position.height; }
             set { _position.height = value; }
         }
+        
+        public BaseStyle Style { get { return _style; } }
 
         protected BaseCoreUIMesh()
         {
@@ -108,6 +112,7 @@ namespace UICore.UICoreMeshes.Meshes
 
         public virtual void Init(BaseStyle style, Rect rect)
         {
+            _style = style;
             _terxture = style.Texture;
             _pixelWidth = style.PixelWidth;
             _position = rect;

@@ -4,7 +4,7 @@ using TextMesh = UICore.UICoreMeshes.Meshes.Text.TextMesh;
 
 namespace UICore.Controls.Text
 {
-	public class CoreUIText : CoreUIElement
+	public abstract class CoreUIText : CoreUIElement
 	{
 		private TextMesh _textMesh;
 

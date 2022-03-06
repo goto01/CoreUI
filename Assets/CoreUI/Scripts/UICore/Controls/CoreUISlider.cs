@@ -6,7 +6,7 @@ namespace UICore.Controls
     public class CoreUISlider : CoreUIElement
     {
         private float _delta = .1f;
-        private float _value = .5f;
+        private float _value;
         private float _borderWidth;
         private CoreUIOrientation _orientation;
         private CoreUIElement _point;
@@ -28,6 +28,7 @@ namespace UICore.Controls
             _orientation = orientation;
             _borderWidth = mesh.BorderWidth;
             _point = point;
+            _value = orientation == CoreUIOrientation.Horizontal ? 0 : 1f;
         }
 
         public override bool Update(CoreUIEvent e)

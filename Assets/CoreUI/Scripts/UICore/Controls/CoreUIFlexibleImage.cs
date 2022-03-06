@@ -6,7 +6,7 @@ namespace UICore.Controls
     public class CoreUIFlexibleImage : CoreUIElement
     {
         private float _value;
-        private readonly float _originWidth;
+        private float _originWidth;
         
         public FlexibleImageMesh FlexibleImageMesh{get { return ((FlexibleImageMesh) _coreUIMesh); }}
         public float MinWidth{get { return FlexibleImageMesh.MinWidth; } }
@@ -21,7 +21,20 @@ namespace UICore.Controls
                 else
                     _coreUIMesh.Resize(_coreUIMesh.Width, Mathf.Max(_originWidth * _value, MinWidth));
             }
-        }        
+        }
+
+        public float OriginWidth
+        {
+            get { return _originWidth; }
+            set
+            {
+                _originWidth = value;
+                if (FlexibleImageMesh.Orientation == CoreUIOrientation.Horizontal) 
+                    _coreUIMesh.Resize(Mathf.Max(_originWidth * _value, MinWidth), _coreUIMesh.Height);
+                else
+                    _coreUIMesh.Resize(_coreUIMesh.Width, Mathf.Max(_originWidth * _value, MinWidth));
+            }
+        }
         
         public CoreUIFlexibleImage(FlexibleImageMesh mesh) : base(mesh)
         {

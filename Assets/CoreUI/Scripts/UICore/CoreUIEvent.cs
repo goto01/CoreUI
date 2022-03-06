@@ -12,7 +12,7 @@ namespace UICore
         public void DropPointerData()
         {
             ScrollDir = 0;
-            PointerDown = false;
+            //PointerDown = false;
         }
     }
 }

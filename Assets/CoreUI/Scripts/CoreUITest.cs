@@ -70,19 +70,13 @@ internal class CoreUITest: MonoBehaviour
         CoreUIEditor.Instance.Toggle(new Rect(10 * _pixelSize, -195 * _pixelSize, 230 * _pixelSize, 0), false, _window0, i => Debug.Log(i));
         var window0BelowScrollSlider0 = CoreUIEditor.Instance.Slider(new Rect(213*_pixelSize, -7*_pixelSize, 96 * _pixelSize, 0), _window0Below, CoreUIOrientation.Vertical, "RPG Slider Style");
         var window0BelowScrollSlider1 = CoreUIEditor.Instance.Slider(new Rect(7*_pixelSize, -7*_pixelSize, 204 * _pixelSize, 0), _window0Below, CoreUIOrientation.Horizontal, "RPG Slider Style");
-        var window0BelowScroll = CoreUIEditor.Instance.Scroll(new Rect(7 * _pixelSize, -15 * _pixelSize, 500 * _pixelSize, 192 * _pixelSize), 204 * _pixelSize, 96 * _pixelSize, 
+        var window0BelowScroll = CoreUIEditor.Instance.Scroll(new Rect(7 * _pixelSize, - 5 * _pixelSize, 500 * _pixelSize, 192 * _pixelSize), 204 * _pixelSize, 96 * _pixelSize, 
             window0BelowScrollSlider1, window0BelowScrollSlider0, _window0Below);
         var sl0 = CoreUIEditor.Instance.Slider(new Rect(197 * _pixelSize,  -50 * _pixelSize, 100 * _pixelSize, 100 * _pixelSize), window0BelowScroll, CoreUIOrientation.Vertical, "RPG Slider Style");
         var sl1 = CoreUIEditor.Instance.Slider(new Rect(0,  -40 * _pixelSize, 197 * _pixelSize, 100 * _pixelSize), window0BelowScroll, CoreUIOrientation.Horizontal, "RPG Slider Style");
         var sc0 = CoreUIEditor.Instance.Scroll(new Rect(0, -50 * _pixelSize, 300 * _pixelSize, 300 * _pixelSize), 197 * _pixelSize, 100 * _pixelSize, sl1, sl0, window0BelowScroll);
         sc0.ScrollHorizontalValue = 0;
-        CoreUIEditor.Instance.Label(new Rect(100 * _pixelSize, 0, 0, 0), "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n" +
-                                                          "The quick brown fox jumps\nover the lazy dog\n", sc0, "Wave Font");
+        CoreUIEditor.Instance.TextField(new Rect(0, 0, 0, 0), "Test", sc0, "TextFieldCursorFlexibleImageStyle","Wave Font");
         
         // _window1 = CoreUIEditor.Instance.Window(new Rect(CoreUICameraHandler.Instance.LeftTopPosition + new Vector2(250 * _pixelSize, 0), new Vector2(250 * _pixelSize, 200 * _pixelSize)), "Item Window Style");
         // _window1.Enabled = false;
@@ -104,8 +98,9 @@ internal class CoreUITest: MonoBehaviour
 
     private void ChangeVisibilityOfWindows(int i1)
     {
-        _window0.Enabled = !_window0.Enabled;
-        _window1.Enabled = !_window1.Enabled;
+        Debug.Log("CLICK");
+        // _window0.Enabled = !_window0.Enabled;
+        // _window1.Enabled = !_window1.Enabled;
     }
 
     private void ChangeActivityOfWindow0Below(int i)
@@ -120,8 +115,9 @@ internal class CoreUITest: MonoBehaviour
 
     private void Action(int id)
     {
-        _window.Enabled = !_window.Enabled;
-        _secondWindow.Enabled = !_secondWindow.Enabled;
+        Debug.Log("CLICK");
+        // _window.Enabled = !_window.Enabled;
+        // _secondWindow.Enabled = !_secondWindow.Enabled;
     }
 
     private IEnumerator Write()
@@ -148,6 +144,6 @@ internal class CoreUITest: MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) _window.Active = !_window.Active;
+        //if (Input.GetKeyDown(KeyCode.Space)) _window.Active = !_window.Active;
     }
 }

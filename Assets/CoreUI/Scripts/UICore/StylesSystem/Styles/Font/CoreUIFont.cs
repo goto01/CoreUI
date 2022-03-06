@@ -55,6 +55,13 @@ namespace UICore.StylesSystem.Styles.Font
             return null;
         }
 
+        public bool ContainsSymbol(char symbol)
+        {
+            if (_alphabetDictionary == null) InitSelf();
+            if (_alphabetDictionary.ContainsKey(symbol)) return true;
+            return false;
+        }
+
         public void RemoveSymbol(int symbolIndex)
         {
             var list = _alphabet.ToList();

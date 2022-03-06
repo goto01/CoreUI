@@ -65,6 +65,8 @@ namespace UICore.UICoreMeshes.Meshes.Text
                 vertices[index].x -= X;
                 vertices[index].y -= Y;
             }
+            Width = _mesh.bounds.size.x;
+            Height = _mesh.bounds.size.y;
         }
 
         protected override void ApplySize()
