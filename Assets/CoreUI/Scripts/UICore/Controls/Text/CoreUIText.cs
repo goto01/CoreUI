@@ -1,4 +1,5 @@
-﻿using UICore.UICoreMeshes.Meshes;
+﻿using UICore.UICoreMeshes.Generators;
+using UICore.UICoreMeshes.Meshes;
 using UnityEngine;
 using TextMesh = UICore.UICoreMeshes.Meshes.Text.TextMesh;
 
@@ -24,6 +25,8 @@ namespace UICore.Controls.Text
 				_textMesh.UpdateMeshInfo();
 			}
 		}
+		
+		protected CoreUITextGenerator TextGenerator { get { return _textMesh.TextGenerator; } }
 		
 		public CoreUIText(BaseCoreUIMesh mesh) : base(mesh)
 		{

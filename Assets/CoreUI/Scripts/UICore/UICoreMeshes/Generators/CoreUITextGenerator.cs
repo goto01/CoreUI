@@ -143,6 +143,25 @@ namespace UICore.UICoreMeshes.Generators
                 if (!CheckSymbolForHandler(_text[index])) GenerateColors(index*4, GetAlphaByIndex(index));
         }
 
+        public float GetTextWidth(int size)
+        {
+            var width = 0f;
+            var finish = Mathf.Min(Text.Length, size) - 1;
+            for (var index = 0; index <= finish; index++)
+            {
+                var c = Text[index];
+                if (Text[index] == ' ')
+                {
+                    width += _font.Space;
+                    continue;
+                }
+                var symbol = _font.GetSymbol(c);
+                width += symbol.Width;
+                if (index != finish) width += _font.Interval;
+            }
+            return width;
+        }
+
         private void ForceUpdateColors(Color color)
         {
             _color = color;

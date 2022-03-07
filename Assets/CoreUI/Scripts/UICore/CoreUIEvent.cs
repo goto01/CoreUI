@@ -11,6 +11,8 @@ namespace UICore
         private bool _pointerDown;
         private bool _pointerUp;
         private string _inputString;
+        private bool _leftArrowDown;
+        private bool _rightArrowDown;
         
         public Vector2 PointerPosition { get { return _pointerPosition; } }
         public bool HasPointerDown { get { return _hasPointerDown; } }
@@ -19,14 +21,18 @@ namespace UICore
         public bool PointerDown { get { return _pointerDown; } }
         public bool PointerUp { get { return _pointerUp; } }
         public string InputString { get { return _inputString; } }
+        public bool LeftArrowDown { get { return _leftArrowDown; } }
+        public bool RightArrowDown { get { return _rightArrowDown; } }
 
-        public CoreUIEvent(Vector2 pointerPosition, float scrollDir, bool pointerDown, bool pointerUp, string inputString)
+        public CoreUIEvent(Vector2 pointerPosition, float scrollDir, bool pointerDown, bool pointerUp, string inputString, bool leftArrowDown, bool rightArrowDown)
         {
             _pointerPosition = pointerPosition;
             _scrollDir = scrollDir;
             _hasPointerDown = _pointerDown = pointerDown;
             _hasPointerUp = _pointerUp = pointerUp;
             _inputString = inputString;
+            _leftArrowDown = leftArrowDown;
+            _rightArrowDown = rightArrowDown;
         }
         
         public void ReleasePointerDown()

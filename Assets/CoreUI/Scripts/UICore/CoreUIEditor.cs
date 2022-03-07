@@ -170,11 +170,11 @@ namespace UICore
             var cursorRect = rect;
             var cursor = FlexibleImage(cursorRect, container, CoreUIOrientation.Vertical, cursorStyle);
             cursor.Value = 1f;
-            cursor.Color = Color.blue;
+            cursor.Color = Color.black;
             var mesh = _factory.CreateLabel(rect, text, fontName);
             var element = new CoreUITextField(mesh, cursor);
             CoreUIPresentation.Instance.CreateSimplePresentation(element);
-            container.AddElement(element);
+            container.AddElementBefore(element, cursor);
             return element;
         }
     }
