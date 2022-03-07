@@ -95,7 +95,8 @@ namespace UICore.Presentation
 
         private CoreUIEvent GetEvent()
         {
-            return new CoreUIEvent(CoreUICameraHandler.Instance.PointerPosition, Input.mouseScrollDelta.y, Input.GetMouseButtonDown(0), Input.GetMouseButtonUp(0));
+            return new CoreUIEvent(CoreUICameraHandler.Instance.PointerPosition, Input.mouseScrollDelta.y, Input.GetMouseButtonDown(0), Input.GetMouseButtonUp(0),
+                Input.inputString);
         }
 
         private void UpdatePresentation(ref CoreUIEvent e)

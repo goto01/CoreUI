@@ -27,8 +27,12 @@ namespace UICore.Controls.Text
 		public override bool Update(ref CoreUIEvent e)
 		{
 			var focus = base.Update(ref e);
-			if (focus && e.PointerDown) _focusedForEdit = true;
-			if (_focusedForEdit && !focus && e.PointerDown) _focusedForEdit = false;
+			if (focus && e.PointerDown)
+			{
+				_focusedForEdit = true;
+				e.ReleasePointerDown();
+			}
+			if (_focusedForEdit && !focus && e.HasPointerDown) _focusedForEdit = false;
 			if (_focusedForEdit)
 			{
 				var text = Input.inputString;
@@ -53,6 +57,7 @@ namespace UICore.Controls.Text
 						_stringBuilder.Append(_symbols[index]);
 					Text += _stringBuilder.ToString();
 					_cursor.OriginWidth = _coreUIMesh.Mesh.bounds.size.y;
+					e.ReleaseInputString();
 				}
 			}
 			return focus;

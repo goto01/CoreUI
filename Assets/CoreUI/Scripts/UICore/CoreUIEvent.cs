@@ -4,34 +4,49 @@ namespace UICore
 {
     public struct CoreUIEvent
     {
-        public Vector2 PointerPosition;
-        public bool HasPointerDown;
-        public bool HasPointerUp;
-        public float ScrollDir;
-        public bool PointerDown;
-        public bool PointerUp;
+        private Vector2 _pointerPosition;
+        private bool _hasPointerDown;
+        private bool _hasPointerUp;
+        private float _scrollDir;
+        private bool _pointerDown;
+        private bool _pointerUp;
+        private string _inputString;
+        
+        public Vector2 PointerPosition { get { return _pointerPosition; } }
+        public bool HasPointerDown { get { return _hasPointerDown; } }
+        public bool HasPointerUp { get { return _hasPointerUp; } }
+        public float ScrollDir { get { return _scrollDir; } }
+        public bool PointerDown { get { return _pointerDown; } }
+        public bool PointerUp { get { return _pointerUp; } }
+        public string InputString { get { return _inputString; } }
 
-        public CoreUIEvent(Vector2 pointerPosition, float scrollDir, bool pointerDown, bool pointerUp)
+        public CoreUIEvent(Vector2 pointerPosition, float scrollDir, bool pointerDown, bool pointerUp, string inputString)
         {
-            PointerPosition = pointerPosition;
-            ScrollDir = scrollDir;
-            HasPointerDown = PointerDown = pointerDown;
-            HasPointerUp = PointerUp = pointerUp;
+            _pointerPosition = pointerPosition;
+            _scrollDir = scrollDir;
+            _hasPointerDown = _pointerDown = pointerDown;
+            _hasPointerUp = _pointerUp = pointerUp;
+            _inputString = inputString;
         }
         
         public void ReleasePointerDown()
         {
-            PointerDown = false;
+            _pointerDown = false;
         }
 
         public void ReleasePointerUp()
         {
-            PointerUp = false;
+            _pointerUp = false;
         }
 
         public void ReleaseScrollDir()
         {
-            ScrollDir = 0;
+            _scrollDir = 0;
+        }
+
+        public void ReleaseInputString()
+        {
+            _inputString = string.Empty;
         }
     }
 }
