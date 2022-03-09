@@ -14,6 +14,7 @@ namespace UICore
         private bool _leftArrowDown;
         private bool _rightArrowDown;
         private float _deltaTime;
+        private bool _deleteDown;
         
         public Vector2 PointerPosition { get { return _pointerPosition; } }
         public bool HasPointerDown { get { return _hasPointerDown; } }
@@ -25,8 +26,10 @@ namespace UICore
         public bool LeftArrowDown { get { return _leftArrowDown; } }
         public bool RightArrowDown { get { return _rightArrowDown; } }
         public float DeltaTime { get { return _deltaTime; } }
+        public bool DeleteDown { get { return _deleteDown; } }
 
-        public CoreUIEvent(float deltaTime, Vector2 pointerPosition, float scrollDir, bool pointerDown, bool pointerUp, string inputString, bool leftArrowDown, bool rightArrowDown)
+        public CoreUIEvent(float deltaTime, Vector2 pointerPosition, float scrollDir, bool pointerDown, bool pointerUp, string inputString, bool leftArrowDown, bool rightArrowDown,
+            bool deleteDown)
         {
             _pointerPosition = pointerPosition;
             _scrollDir = scrollDir;
@@ -36,6 +39,7 @@ namespace UICore
             _leftArrowDown = leftArrowDown;
             _rightArrowDown = rightArrowDown;
             _deltaTime = deltaTime;
+            _deleteDown = deleteDown;
         }
         
         public void ReleasePointerDown()
@@ -56,6 +60,21 @@ namespace UICore
         public void ReleaseInputString()
         {
             _inputString = string.Empty;
+        }
+
+        public void ReleaseLeftArrowDown()
+        {
+            _leftArrowDown = false;
+        }
+
+        public void ReleaseRightArrowDown()
+        {
+            _rightArrowDown = false;
+        }
+        
+        public void ReleaseDeleteDown()
+        {
+            _deleteDown = false;
         }
     }
 }

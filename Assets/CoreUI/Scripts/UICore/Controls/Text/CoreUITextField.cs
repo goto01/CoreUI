@@ -61,8 +61,16 @@ namespace UICore.Controls.Text
 					_timer = 0;
 					_cursor.Enabled = !_cursor.Enabled;
 				}
-				if (e.LeftArrowDown) _index = Mathf.Max(0, _index - 1);
-				if (e.RightArrowDown) _index = Mathf.Min(Text.Length, _index + 1);
+				if (e.LeftArrowDown)
+				{
+					_index = Mathf.Max(0, _index - 1);
+					e.ReleaseLeftArrowDown();
+				}
+				if (e.RightArrowDown)
+				{
+					_index = Mathf.Min(Text.Length, _index + 1);
+					e.ReleaseRightArrowDown();
+				}
 				var position = Position;
 				position.x += TextGenerator.GetTextWidth(_index);
 				position.y = _coreUIMesh.Mesh.bounds.center.y + _cursor.OriginWidth / 2f;
@@ -92,6 +100,14 @@ namespace UICore.Controls.Text
 					Text = _stringBuilder.ToString();
 					_cursor.OriginWidth = _coreUIMesh.Mesh.bounds.size.y * 1.5f;
 					e.ReleaseInputString();
+				}
+				if (e.DeleteDown && _index < Text.Length)
+				{
+					_stringBuilder.Clear();
+					_stringBuilder.Append(Text);
+					_stringBuilder.Remove(_index, 1);
+					Text = _stringBuilder.ToString();
+					e.ReleaseDeleteDown();
 				}
 			}
 			return focus;
