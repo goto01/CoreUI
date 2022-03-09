@@ -96,7 +96,8 @@ namespace UICore.Presentation
         private CoreUIEvent GetEvent()
         {
             return new CoreUIEvent(Time.deltaTime, CoreUICameraHandler.Instance.PointerPosition, Input.mouseScrollDelta.y, Input.GetMouseButtonDown(0), Input.GetMouseButtonUp(0),
-                Input.inputString, Input.GetKeyDown(KeyCode.LeftArrow), Input.GetKeyDown(KeyCode.RightArrow), Input.GetKeyDown(KeyCode.Delete));
+                Input.inputString, Input.GetKeyDown(KeyCode.LeftArrow), Input.GetKeyDown(KeyCode.RightArrow), Input.GetKeyDown(KeyCode.Delete), 
+                Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter));
         }
 
         private void UpdatePresentation(ref CoreUIEvent e)

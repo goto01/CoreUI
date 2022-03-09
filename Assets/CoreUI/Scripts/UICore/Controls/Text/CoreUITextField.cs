@@ -54,6 +54,11 @@ namespace UICore.Controls.Text
 			if (_focusedForEdit && !focus && e.HasPointerDown) _focusedForEdit = _cursor.Enabled = false;
 			if (_focusedForEdit)
 			{
+				if (e.EnterDown)
+				{
+					_focusedForEdit = _cursor.Enabled = false;
+					return focus;
+				}
 				_timer += e.DeltaTime;
 				_cursor.Value = Mathf.Pow(_timer / .2f, .2f);
 				if (_timer > .2f)
