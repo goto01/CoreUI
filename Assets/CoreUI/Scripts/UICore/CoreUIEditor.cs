@@ -165,12 +165,11 @@ namespace UICore
             return element;
         }
 
-        public CoreUITextField TextField(Rect rect, string text, CoreUIContainer container, string cursorStyle, string fontName = DefaultFontName)
+        public CoreUITextField TextField(Rect rect, string text, Color cursorColor, CoreUIContainer container, string cursorStyle, string fontName = DefaultFontName)
         {
             var cursorRect = rect;
             var cursor = FlexibleImage(cursorRect, container, CoreUIOrientation.Vertical, cursorStyle);
-            cursor.Value = 1f;
-            cursor.Color = Color.black;
+            cursor.Color = cursorColor;
             var mesh = _factory.CreateLabel(rect, text, fontName);
             var element = new CoreUITextField(mesh, cursor);
             CoreUIPresentation.Instance.CreateSimplePresentation(element);

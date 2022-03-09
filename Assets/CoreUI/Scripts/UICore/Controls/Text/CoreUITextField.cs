@@ -13,6 +13,7 @@ namespace UICore.Controls.Text
 		private bool _focusedForEdit;
 		private CoreUIFlexibleImage _cursor;
 		private int _index = 0;
+		private float _timer;
 		
 		public CoreUITextField(BaseCoreUIMesh mesh, CoreUIFlexibleImage cursor) : base(mesh)
 		{
@@ -20,6 +21,7 @@ namespace UICore.Controls.Text
 			_focusedForEdit = false;
 			_cursor.OriginWidth = _coreUIMesh.Mesh.bounds.size.y * 1.5f;
 			_cursor.Enabled = false;
+			_timer = 0;
 		}
 
 		public CoreUITextField(BaseCoreUIMesh mesh, int sinPixelsOffset, float sinOffsetSpeed, float sinMultiplier, float horizontalPixelsOffset, float verticalPixelsOffset) : 
@@ -33,12 +35,32 @@ namespace UICore.Controls.Text
 			if (focus && e.PointerDown)
 			{
 				_focusedForEdit = _cursor.Enabled = true;
+				_timer = 0;
 				e.ReleasePointerDown();
 				_index = Mathf.Max(0, Text.Length);
+				var minDelta = float.MaxValue;
+				var horizontalOffset = e.PointerPosition.x - Position.x;
+				for (var index = 0; index <= Text.Length; index++)
+				{
+					var delta = Mathf.Abs(horizontalOffset - TextGenerator.GetTextWidth(index));
+					if (minDelta < delta)
+					{
+						_index = index - 1;
+						break;
+					}
+					minDelta = delta;
+				}
 			}
 			if (_focusedForEdit && !focus && e.HasPointerDown) _focusedForEdit = _cursor.Enabled = false;
 			if (_focusedForEdit)
 			{
+				_timer += e.DeltaTime;
+				_cursor.Value = Mathf.Pow(_timer / .2f, .2f);
+				if (_timer > .2f)
+				{
+					_timer = 0;
+					_cursor.Enabled = !_cursor.Enabled;
+				}
 				if (e.LeftArrowDown) _index = Mathf.Max(0, _index - 1);
 				if (e.RightArrowDown) _index = Mathf.Min(Text.Length, _index + 1);
 				var position = Position;
