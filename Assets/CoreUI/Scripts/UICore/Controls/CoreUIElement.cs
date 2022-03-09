@@ -50,6 +50,8 @@ namespace UICore.Controls
             get { return _order; }
             set { _order = value; }
         }
+        
+        public bool Foocused { get { return _focused; } }
 
         public bool Pressed { get { return _pressed; } }
 
@@ -131,15 +133,22 @@ namespace UICore.Controls
 
         public virtual bool Update(ref CoreUIEvent e)
         {
-            var focus = Contains(e.PointerPosition);
-            if (focus && e.PointerDown) _pressed = true;
+            _focused = Contains(e.PointerPosition);
+            if (_focused && e.PointerDown) _pressed = true;
             if (e.PointerUp) _pressed = false;
-            return focus;
+            return _focused;
         }
 
         public virtual void ResetParentPosition(Vector2 oldPosition, Vector2 newPosition)
         {
             _coreUIMesh.ResetParentPosition(oldPosition, newPosition);
+        }
+
+        public void Resize(float width, float height)
+        {
+            Width = width;
+            Height = height;
+            _coreUIMesh.Resize(Width, Height);
         }
         
         protected CoreUIElement(BaseCoreUIMesh mesh)

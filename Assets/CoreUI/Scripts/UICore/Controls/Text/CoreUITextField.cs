@@ -11,17 +11,21 @@ namespace UICore.Controls.Text
 		private List<char> _symbols = new List<char>();
 		private StringBuilder _stringBuilder = new StringBuilder();
 		private bool _focusedForEdit;
-		private CoreUIFlexibleImage _cursor;
 		private int _index = 0;
 		private float _timer;
+		private CoreUIFlexibleImage _cursorImage;
+		private CoreUIImage _backgroundImage;
 		
-		public CoreUITextField(BaseCoreUIMesh mesh, CoreUIFlexibleImage cursor) : base(mesh)
+		public CoreUITextField(BaseCoreUIMesh mesh, CoreUIFlexibleImage cursorImage, CoreUIImage backgroundImage) : base(mesh)
 		{
-			_cursor = cursor;
+			_cursorImage = cursorImage;
 			_focusedForEdit = false;
-			_cursor.OriginWidth = _coreUIMesh.Mesh.bounds.size.y * 1.5f;
-			_cursor.Enabled = false;
+			_cursorImage.OriginWidth = _coreUIMesh.Mesh.bounds.size.y * 1.5f;
+			_cursorImage.Enabled = false;
 			_timer = 0;
+			backgroundImage.Resize(backgroundImage.Width, ((CoreUIFont) _coreUIMesh.Style).FontHeight);
+			_cursorImage.OriginWidth = backgroundImage.Height;
+			_backgroundImage = backgroundImage;
 		}
 
 		public CoreUITextField(BaseCoreUIMesh mesh, int sinPixelsOffset, float sinOffsetSpeed, float sinMultiplier, float horizontalPixelsOffset, float verticalPixelsOffset) : 
@@ -32,9 +36,10 @@ namespace UICore.Controls.Text
 		public override bool Update(ref CoreUIEvent e)
 		{
 			var focus = base.Update(ref e);
+			focus |= _backgroundImage.Foocused;
 			if (focus && e.PointerDown)
 			{
-				_focusedForEdit = _cursor.Enabled = true;
+				_focusedForEdit = _cursorImage.Enabled = true;
 				_timer = 0;
 				e.ReleasePointerDown();
 				_index = Mathf.Max(0, Text.Length);
@@ -51,20 +56,20 @@ namespace UICore.Controls.Text
 					minDelta = delta;
 				}
 			}
-			if (_focusedForEdit && !focus && e.HasPointerDown) _focusedForEdit = _cursor.Enabled = false;
+			if (_focusedForEdit && !focus && e.HasPointerDown) _focusedForEdit = _cursorImage.Enabled = false;
 			if (_focusedForEdit)
 			{
 				if (e.EnterDown)
 				{
-					_focusedForEdit = _cursor.Enabled = false;
+					_focusedForEdit = _cursorImage.Enabled = false;
 					return focus;
 				}
 				_timer += e.DeltaTime;
-				_cursor.Value = Mathf.Pow(_timer / .2f, .2f);
+				_cursorImage.Value = Mathf.Pow(_timer / .2f, .2f);
 				if (_timer > .2f)
 				{
 					_timer = 0;
-					_cursor.Enabled = !_cursor.Enabled;
+					_cursorImage.Enabled = !_cursorImage.Enabled;
 				}
 				if (e.LeftArrowDown)
 				{
@@ -78,8 +83,8 @@ namespace UICore.Controls.Text
 				}
 				var position = Position;
 				position.x += TextGenerator.GetTextWidth(_index);
-				position.y = _coreUIMesh.Mesh.bounds.center.y + _cursor.OriginWidth / 2f;
-				_cursor.Position = position;
+				//position.y = _coreUIMesh.Mesh.bounds.center.y + _cursor.OriginWidth / 2f;
+				_cursorImage.Position = position;
 				var text = e.InputString;
 				if (text.Length != 0)
 				{
@@ -103,7 +108,6 @@ namespace UICore.Controls.Text
 						_stringBuilder.Insert(_index, _symbols[index]);	
 					_index += _symbols.Count;
 					Text = _stringBuilder.ToString();
-					_cursor.OriginWidth = _coreUIMesh.Mesh.bounds.size.y * 1.5f;
 					e.ReleaseInputString();
 				}
 				if (e.DeleteDown && _index < Text.Length)

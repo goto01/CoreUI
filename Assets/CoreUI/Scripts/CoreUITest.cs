@@ -77,7 +77,7 @@ internal class CoreUITest: MonoBehaviour
         var sl1 = CoreUIEditor.Instance.Slider(new Rect(0,  -40 * _pixelSize, 197 * _pixelSize, 100 * _pixelSize), window0BelowScroll, CoreUIOrientation.Horizontal, "RPG Slider Style");
         var sc0 = CoreUIEditor.Instance.Scroll(new Rect(0, -50 * _pixelSize, 300 * _pixelSize, 300 * _pixelSize), 197 * _pixelSize, 100 * _pixelSize, sl1, sl0, window0BelowScroll);
         sc0.ScrollHorizontalValue = 0;
-        CoreUIEditor.Instance.TextField(new Rect(0, -5 * _pixelSize, 0, 0), "Test", new Color(.25f, .25f, .25f, 1f), sc0, "TextFieldCursorFlexibleImageStyle","Wave Font");
+        CoreUIEditor.Instance.TextField(new Rect(0, -5 * _pixelSize, 100 * _pixelSize, 0), "Test", new Color(.25f, .25f, .25f, 1f), sc0, "TextFieldCursorFlexibleImageStyle","Wave Font");
         
         // _window1 = CoreUIEditor.Instance.Window(new Rect(CoreUICameraHandler.Instance.LeftTopPosition + new Vector2(250 * _pixelSize, 0), new Vector2(250 * _pixelSize, 200 * _pixelSize)), "Item Window Style");
         // _window1.Enabled = false;
