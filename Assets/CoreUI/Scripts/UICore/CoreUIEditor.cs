@@ -165,9 +165,10 @@ namespace UICore
             return element;
         }
 
-        public CoreUITextField TextField(Rect rect, string text, Color cursorColor, CoreUIContainer container, string cursorStyle, string fontName = DefaultFontName)
+        public CoreUITextField TextField(Rect rect, string text, Color cursorColor, Color backgroundColor, CoreUIContainer container, string cursorStyle, string fontName = DefaultFontName)
         { 
             var backgroundImage = Image(rect, container, null);
+            backgroundImage.Color = backgroundColor;
             var cursorImage = FlexibleImage(rect, container, CoreUIOrientation.Vertical, cursorStyle);
             cursorImage.Color = cursorColor;
             var mesh = _factory.CreateLabel(rect, text, fontName);
