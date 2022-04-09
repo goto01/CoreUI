@@ -1,4 +1,4 @@
-﻿using UICore.StylesSystem.Styles;
+﻿using CoreUI;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,8 +1,7 @@
 ﻿using System;
+using CoreUI;
 using Editor.CoreUI.Windows.DialogWindows;
 using Editor.Windows.DialogWindows;
-using UICore.StylesSystem.Repository;
-using UICore.StylesSystem.Styles;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

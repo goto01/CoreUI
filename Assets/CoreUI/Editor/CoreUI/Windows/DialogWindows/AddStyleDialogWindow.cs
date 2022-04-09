@@ -1,5 +1,5 @@
-﻿using Editor.Windows.DialogWindows;
-using UICore.StylesSystem.Styles;
+﻿using CoreUI;
+using Editor.Windows.DialogWindows;
 using UnityEditor;
 using UnityEngine;
 

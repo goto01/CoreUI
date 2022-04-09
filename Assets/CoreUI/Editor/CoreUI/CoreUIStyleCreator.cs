@@ -1,5 +1,4 @@
-﻿using UICore.StylesSystem.Repository;
-using UICore.StylesSystem.Styles;
+﻿using CoreUI;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,5 +1,4 @@
-﻿using UICore.Components;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace CoreUI.Editor.ComponentEditors
