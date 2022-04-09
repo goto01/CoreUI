@@ -1,7 +1,6 @@
-﻿using CoreUI;
-using UnityEditor;
+﻿using UnityEditor;
 
-namespace Assets.Editor.CoreUI.StylesEditors
+namespace CoreUI
 {
     [CustomEditor(typeof(SliderStyle))]
     class SliderStyleEditor : FlexibleImageStyleEditor

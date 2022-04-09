@@ -1,12 +1,8 @@
-﻿using Assets.Editor.CoreUI.Windows.Font;
-using CoreUI;
-using Editor.CoreUI.Windows.DialogWindows;
-using Editor.Windows.DialogWindows;
+﻿using CoreUI.Windows.DialogWindows;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Assets.Editor.CoreUI
+namespace CoreUI
 {
     public class CoreUIMenuItemEditor : ScriptableObject
     {

@@ -1,8 +1,7 @@
-﻿using CoreUI;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor.CoreUI
+namespace CoreUI
 {
 	[InitializeOnLoad]
 	public static class CoreUIStyleCreator

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace CoreUI.Editor.ComponentEditors
+namespace CoreUI
 {
     [CustomEditor(typeof(CoreUITextMesh))]
     class CoreUITextMeshEditor : UnityEditor.Editor

@@ -1,8 +1,8 @@
-﻿using Editor.Windows.DialogWindows;
+﻿using CoreUI.Windows.DialogWindows;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.CoreUI.Windows.DialogWindows
+namespace CoreUI
 {
 	public class CreateFontDialogWindow : BaseDialogWindow<CreateFontDialogWindow>
 	{
@@ -21,4 +21,4 @@ namespace Editor.CoreUI.Windows.DialogWindows
 			_yesPossible = Texture != null && !string.IsNullOrEmpty(Name);
 		}
 	}
-}
+}	

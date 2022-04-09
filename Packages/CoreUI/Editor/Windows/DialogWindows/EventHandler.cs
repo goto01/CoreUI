@@ -1,4 +1,4 @@
-﻿namespace Staff
+﻿namespace CoreUI.Windows.DialogWindows
 {
 	public delegate void EventHandler<T>(T sender);
 	

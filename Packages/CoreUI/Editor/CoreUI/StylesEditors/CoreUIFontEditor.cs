@@ -1,8 +1,7 @@
-﻿using CoreUI;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor.CoreUI.StylesEditors
+namespace CoreUI
 {
     [CustomEditor(typeof(CoreUIFont))]
     class CoreUIFontEditor : BaseStyleEditor

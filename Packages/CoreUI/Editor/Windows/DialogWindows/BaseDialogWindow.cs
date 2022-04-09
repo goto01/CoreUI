@@ -1,9 +1,7 @@
-﻿using System;
-using Staff;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace Editor.Windows.DialogWindows
+namespace CoreUI.Windows.DialogWindows
 {
 	public enum DialogType
 	{
@@ -24,8 +22,8 @@ namespace Editor.Windows.DialogWindows
 		protected bool _yesPossible;
 		protected bool _noPossible;
 		
-		public event Staff.EventHandler<T> Yes;
-		public event Staff.EventHandler<T> No;
+		public event EventHandler<T> Yes;
+		public event EventHandler<T> No;
 		
 		public void Init(DialogType dialogType, string yes, string no, bool closeOnYes, bool closeOnNo, Rect parentRect, Vector2 size)
 		{

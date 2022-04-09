@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace CoreUI.Editor.ComponentEditors
+namespace CoreUI
 {
 	[CustomEditor(typeof(CoreUIEditor))]
 	public class CoreUIEditorEditor : UnityEditor.Editor

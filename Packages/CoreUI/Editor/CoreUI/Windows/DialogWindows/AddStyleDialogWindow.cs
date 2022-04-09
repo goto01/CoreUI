@@ -1,9 +1,7 @@
-﻿using CoreUI;
-using Editor.Windows.DialogWindows;
+﻿using CoreUI.Windows.DialogWindows;
 using UnityEditor;
-using UnityEngine;
 
-namespace Editor.CoreUI.Windows.DialogWindows
+namespace CoreUI
 {
 	public class AddStyleDialogWindow : BaseDialogWindow<AddStyleDialogWindow>
 	{

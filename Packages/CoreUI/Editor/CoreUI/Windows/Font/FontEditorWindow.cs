@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Xml;
-using CoreUI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor.CoreUI.Windows.Font
+namespace CoreUI
 {
     [Serializable]
     class FontEditorWindow : EditorWindow

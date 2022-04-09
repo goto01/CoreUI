@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor
+namespace CoreUI
 {
     public class ObjectCreatorHelper
     {

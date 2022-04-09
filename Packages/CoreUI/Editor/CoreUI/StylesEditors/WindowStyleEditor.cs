@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using CoreUI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor.CoreUI.StylesEditors
+namespace CoreUI
 {
     [CustomEditor(typeof(WindowStyle))]
     public class WindowStyleEditor : BaseStyleEditor

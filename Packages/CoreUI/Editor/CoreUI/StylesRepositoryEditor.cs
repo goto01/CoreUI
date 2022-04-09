@@ -1,12 +1,9 @@
-﻿using System;
-using CoreUI;
-using Editor.CoreUI.Windows.DialogWindows;
-using Editor.Windows.DialogWindows;
+﻿using CoreUI.Windows.DialogWindows;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Assets.Editor.CoreUI
+namespace CoreUI
 {
 	[CustomEditor(typeof(StylesRepository))]
 	public class StylesRepositoryEditor : UnityEditor.Editor
