@@ -7,7 +7,7 @@ namespace CoreUI
     {
         private float _borderWidth;
 
-        public float BorderWidth
+        private float BorderWidth
         {
             get { return _borderWidth; }
             set { _borderWidth = value; }
@@ -27,8 +27,9 @@ namespace CoreUI
         {
             BorderWidth = style.BorderWidth;
             CreateMesh();
-            if (style.Has9Tiles) ApplyUV9Laytout();
-            else ApplyUV3Laytout();
+            SetVertices();
+            if (style.Has9Tiles) ApplyUV9Layout();
+            else ApplyUV3Layout();
 
             Triangles = new List<int>()
             {
@@ -46,53 +47,53 @@ namespace CoreUI
 
         private void CreateMesh()
         {
-            PushVertice(0, - BorderWidth);
-            PushVertice(0, 0);
-            PushVertice(BorderWidth, 0);
-            PushVertice(BorderWidth, - BorderWidth);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(Width - BorderWidth, - BorderWidth);
-            PushVertice(Width - BorderWidth, 0);
-            PushVertice(Width, 0);
-            PushVertice(Width, - BorderWidth);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(0, 0 - Height);
-            PushVertice(0, 0 - Height + BorderWidth);
-            PushVertice(BorderWidth, - Height + BorderWidth);
-            PushVertice(BorderWidth, - Height);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(Width - BorderWidth, - Height);
-            PushVertice(Width - BorderWidth, - Height + BorderWidth);
-            PushVertice(Width, - Height + BorderWidth);
-            PushVertice(Width, - Height);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(0, - Height + BorderWidth);
-            PushVertice(0, - BorderWidth);
-            PushVertice(BorderWidth, - BorderWidth);
-            PushVertice(BorderWidth, - Height + BorderWidth);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(BorderWidth, - BorderWidth);
-            PushVertice(BorderWidth, 0);
-            PushVertice(Width - BorderWidth, 0);
-            PushVertice(Width - BorderWidth, 0 - BorderWidth);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(Width - BorderWidth, 0 - Height + BorderWidth);
-            PushVertice(Width - BorderWidth, 0 - BorderWidth);
-            PushVertice(Width, 0 - BorderWidth);
-            PushVertice(Width, 0 - Height + BorderWidth);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(BorderWidth, 0 - Height);
-            PushVertice(BorderWidth, 0 - Height + BorderWidth);
-            PushVertice(Width - BorderWidth, 0 - Height + BorderWidth);
-            PushVertice(Width - BorderWidth, 0 - Height);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
                         
-            PushVertice(BorderWidth, 0 - Height + BorderWidth);
-            PushVertice(BorderWidth, 0 - BorderWidth);
-            PushVertice(Width - BorderWidth, 0 - BorderWidth);
-            PushVertice(Width - BorderWidth, 0 - Height + BorderWidth);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
+            PushVertex(0, 0);
         }
 
-        private void ApplyUV3Laytout()
+        private void ApplyUV3Layout()
         {
             PushUV(.5f, .5f);
             PushUV(0, .5f);
@@ -140,7 +141,7 @@ namespace CoreUI
             PushUV(1, 0);
         }
 
-        private void ApplyUV9Laytout()
+        private void ApplyUV9Layout()
         {
             PushUV(0, .6f);
             PushUV(0, .8f);
@@ -187,10 +188,60 @@ namespace CoreUI
             PushUV(1, .2f);
             PushUV(1, 0);
         }
+
+        private void SetVertices()
+        {
+            var index = 0;
+            SetVertex(index++,new Vector2(0, - BorderWidth));
+            SetVertex(index++,new Vector2(0, 0));
+            SetVertex(index++,new Vector2(BorderWidth, 0));
+            SetVertex(index++,new Vector2(BorderWidth, - BorderWidth));
+            
+            SetVertex(index++,new Vector2(Width - BorderWidth, - BorderWidth));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0));
+            SetVertex(index++,new Vector2(Width, 0));
+            SetVertex(index++,new Vector2(Width, - BorderWidth));
+            
+            SetVertex(index++,new Vector2(0, 0 - Height));
+            SetVertex(index++,new Vector2(0, 0 - Height + BorderWidth));
+            SetVertex(index++,new Vector2(BorderWidth, - Height + BorderWidth));
+            SetVertex(index++,new Vector2(BorderWidth, - Height));
+            
+            SetVertex(index++,new Vector2(Width - BorderWidth, - Height));
+            SetVertex(index++,new Vector2(Width - BorderWidth, - Height + BorderWidth));
+            SetVertex(index++,new Vector2(Width, - Height + BorderWidth));
+            SetVertex(index++,new Vector2(Width, - Height));
+            
+            SetVertex(index++,new Vector2(0, - Height + BorderWidth));
+            SetVertex(index++,new Vector2(0, - BorderWidth));
+            SetVertex(index++,new Vector2(BorderWidth, - BorderWidth));
+            SetVertex(index++,new Vector2(BorderWidth, - Height + BorderWidth));
+            
+            SetVertex(index++,new Vector2(BorderWidth, - BorderWidth));
+            SetVertex(index++,new Vector2(BorderWidth, 0));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0 - BorderWidth));
+            
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0 - Height + BorderWidth));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0 - BorderWidth));
+            SetVertex(index++,new Vector2(Width, 0 - BorderWidth));
+            SetVertex(index++,new Vector2(Width, 0 - Height + BorderWidth));
+            
+            SetVertex(index++,new Vector2(BorderWidth, 0 - Height));
+            SetVertex(index++,new Vector2(BorderWidth, 0 - Height + BorderWidth));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0 - Height + BorderWidth));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0 - Height));
+            
+            SetVertex(index++,new Vector2(BorderWidth, 0 - Height + BorderWidth));
+            SetVertex(index++,new Vector2(BorderWidth, 0 - BorderWidth));
+            SetVertex(index++,new Vector2(Width - BorderWidth, 0 - BorderWidth));
+            SetVertex(index, new Vector2(Width - BorderWidth, 0 - Height + BorderWidth));
+        }
         
         protected override void ApplySize()
         {
-
+            SetVertices();
+            UpdateMeshInfo();
         }
     }
 }

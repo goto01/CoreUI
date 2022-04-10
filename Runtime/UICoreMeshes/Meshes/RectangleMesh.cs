@@ -35,10 +35,10 @@ namespace CoreUI
 
         private void GenerateVertices()
         {
-            PushVertice(0, 0);
-            PushVertice(Width, 0);
-            PushVertice(0, -Height);
-            PushVertice(Width, -Height);
+            PushVertex(0, 0);
+            PushVertex(Width, 0);
+            PushVertex(0, -Height);
+            PushVertex(Width, -Height);
         }
 
         private void GenerateUV()

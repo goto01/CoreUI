@@ -57,38 +57,38 @@ namespace CoreUI
 
         private void GenerateHorizontal()
         {
-            PushVertice(0, -_borderHeight);
-            PushVertice(0, 0);
-            PushVertice(0 + _borderWidth, 0);
-            PushVertice(0 + _borderWidth, - _borderHeight);
+            PushVertex(0, -_borderHeight);
+            PushVertex(0, 0);
+            PushVertex(0 + _borderWidth, 0);
+            PushVertex(0 + _borderWidth, - _borderHeight);
                         
-            PushVertice(0 + _borderWidth, - _borderHeight);
-            PushVertice(0 + _borderWidth, 0);
-            PushVertice(0 + Width - _borderWidth, 0);
-            PushVertice(0 + Width - _borderWidth, - _borderHeight);
+            PushVertex(0 + _borderWidth, - _borderHeight);
+            PushVertex(0 + _borderWidth, 0);
+            PushVertex(0 + Width - _borderWidth, 0);
+            PushVertex(0 + Width - _borderWidth, - _borderHeight);
                         
-            PushVertice(0 + Width - _borderWidth, - _borderHeight);
-            PushVertice(0 + Width - _borderWidth, 0);
-            PushVertice(0 + Width, 0);
-            PushVertice(0 + Width, - _borderHeight);
+            PushVertex(0 + Width - _borderWidth, - _borderHeight);
+            PushVertex(0 + Width - _borderWidth, 0);
+            PushVertex(0 + Width, 0);
+            PushVertex(0 + Width, - _borderHeight);
         }
 
         private void GenerateVertical()
         {
-            PushVertice(0, 0);
-            PushVertice(0 + Width, 0);
-            PushVertice(0 + Width, - _borderWidth);
-            PushVertice(0, - _borderWidth);
+            PushVertex(0, 0);
+            PushVertex(0 + Width, 0);
+            PushVertex(0 + Width, - _borderWidth);
+            PushVertex(0, - _borderWidth);
                         
-            PushVertice(0, - _borderWidth);
-            PushVertice(0 + Width, - _borderWidth);
-            PushVertice(0 + Width, - Height + _borderWidth);
-            PushVertice(0, - Height + _borderWidth);
+            PushVertex(0, - _borderWidth);
+            PushVertex(0 + Width, - _borderWidth);
+            PushVertex(0 + Width, - Height + _borderWidth);
+            PushVertex(0, - Height + _borderWidth);
                         
-            PushVertice(0, - Height + _borderWidth);
-            PushVertice(0 + Width, - Height + _borderWidth);
-            PushVertice(0 + Width, - Height);
-            PushVertice(0, - Height);
+            PushVertex(0, - Height + _borderWidth);
+            PushVertex(0 + Width, - Height + _borderWidth);
+            PushVertex(0 + Width, - Height);
+            PushVertex(0, - Height);
         }
 
         private void ApplyUV()

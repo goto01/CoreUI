@@ -148,25 +148,30 @@ namespace CoreUI
             _uv.Add(uv);    
         }
 
-        protected void PushVertice(float x, float y)
+        protected void PushVertex(float x, float y)
         {
-            PushVertice(new Vector3(x, y));
+            PushVertex(new Vector3(x, y));
         }
 
-        protected void PushVertice(Vector3 vertice)
+        protected void PushVertex(Vector3 vertex)
         {
-            _vertices.Add(vertice);    
+            _vertices.Add(vertex);    
         }
 
-        protected void PushVertice(float x, float y, float uvx, float uvy)
+        protected void PushVertex(float x, float y, float uvx, float uvy)
         {
-            PushVertice(new Vector3(x, y), new Vector2(uvx, uvy));
+            PushVertex(new Vector3(x, y), new Vector2(uvx, uvy));
         }
 
-        protected void PushVertice(Vector3 vertice, Vector2 uv)
+        protected void PushVertex(Vector3 vertex, Vector2 uv)
         {
-            _vertices.Add(vertice);
+            _vertices.Add(vertex);
             _uv.Add(uv);
+        }
+
+        protected void SetVertex(int index, Vector2 vertex)
+        {
+            _vertices[index] = vertex;
         }
 
         public void UpdateMeshInfo()
