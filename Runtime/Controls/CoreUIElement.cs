@@ -143,7 +143,7 @@ namespace CoreUI
             _coreUIMesh.ResetParentPosition(oldPosition, newPosition);
         }
 
-        public void Resize(float width, float height)
+        public virtual void Resize(float width, float height)
         {
             Width = width;
             Height = height;

@@ -124,5 +124,17 @@ namespace CoreUI
             OriginY = OriginY - oldPosition.y + newPosition.y;
             base.ResetParentPosition(oldPosition, newPosition);
         }
+
+        public override void Resize(float width, float height)
+        {
+            _viewHeight = height;
+            _viewWidth = width;
+            // base.Resize(width, height);
+        }
+
+        public void ResizeActualSize(float actualWidth, float actualHeight)
+        {
+            base.Resize(actualWidth, actualHeight);
+        }
     }
 }
