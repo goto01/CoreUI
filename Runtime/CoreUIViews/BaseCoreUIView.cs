@@ -8,7 +8,6 @@ namespace CoreUI
 	{
 		[SerializeField] private int _widthPixels;
 		[SerializeField] private int _heightPixels;
-		[SerializeField] private bool _overrideStyle;
 		[SerializeField] private string _style;
 		[SerializeField] private bool _overridePixelSize;
 		[SerializeField] private float _pixelSize;
@@ -64,7 +63,6 @@ namespace CoreUI
 
 		private void OnCreateContainer(object sender, BaseCoreUIView container)
 		{
-			if (!_overrideStyle) _style = container._style;
 			if (!_overridePixelSize) _pixelSize = container._pixelSize;
 			DrawElement(container);
 		}
