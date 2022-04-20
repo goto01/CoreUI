@@ -77,11 +77,42 @@ namespace CoreUI
 
 		protected abstract CoreUIElement DrawElementInternal(CoreUIContainer parentContainer);
 		
+#if UNITY_EDITOR
+
+		public int WidthPixels
+		{
+			get => _widthPixels;
+			set => _widthPixels = value;
+		}
+		
+		public int HeightPixels
+		{
+			get => _heightPixels;
+			set => _heightPixels = value;
+		}
+		
+		public float PixelSizeEditor => _pixelSize;
+		
 		private void OnDrawGizmos()
 		{
-			Handles.DrawSolidRectangleWithOutline(new Rect(transform.position + Vector3.down * Height, 
-					new Vector2(Width, Height)), 
-				new Color(.1f, .1f, .1f, .1f), Color.black);
+			// if (Selection.objects.Length == 1 && Selection.objects[0] == gameObject)
+			// {
+			// 	Handles.DrawSolidRectangleWithOutline(new Rect(transform.position + Vector3.down * Height,
+			// 			new Vector2(Width, Height)),
+			// 		new Color(.1f, .1f, .1f, .1f), Color.black);
+			// 	Handles.BeginGUI();
+			// 	if (GUI.Button(new Rect(transform.position, new Vector2(100, 30)), "test"))
+			// 		Selection.objects = new[] {gameObject};
+			// 	Handles.EndGUI();
+			// 	
+			// } 
+			// else
+			// {
+				Handles.DrawSolidRectangleWithOutline(new Rect(transform.position + Vector3.down * Height,
+						new Vector2(Width, Height)),
+					new Color(.1f, .1f, .1f, .01f), Color.black);
+			// }
 		}
+#endif		
 	}
 }
