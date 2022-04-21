@@ -174,6 +174,11 @@ namespace CoreUI
             _vertices[index] = vertex;
         }
 
+        protected void SetVertex(int index, float x, float y)
+        {
+            SetVertex(index, new Vector2(x, y));
+        }
+
         public void UpdateMeshInfo()
         {
             _mesh.Clear();
