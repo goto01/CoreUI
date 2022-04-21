@@ -1,6 +1,0 @@
-﻿namespace CoreUI
-{
-    class CoreUIStyles
-    {
-    }
-}
