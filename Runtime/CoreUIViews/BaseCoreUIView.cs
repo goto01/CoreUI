@@ -9,7 +9,6 @@ namespace CoreUI
 		[SerializeField] private int _widthPixels;
 		[SerializeField] private int _heightPixels;
 		[SerializeField] private string _style;
-		[SerializeField] private bool _overridePixelSize;
 		[SerializeField] private float _pixelSize;
 		private CoreUIElement _currentCoreUIElement;
 		private BaseCoreUIView _parentCoreUIView;
@@ -56,14 +55,21 @@ namespace CoreUI
 		{
 			_widthPixels = Mathf.Max(0, _widthPixels);
 			_heightPixels = Mathf.Max(0, _heightPixels);
-			_currentCoreUIElement.Resize(_widthPixels * PixelSize, _heightPixels * PixelSize);
+			TryResize();
 			if (_static) return;
 			_currentCoreUIElement.Position = Transform.position;
 		}
 
+		protected virtual void TryResize()
+		{
+			var width = _widthPixels * PixelSize;
+			var height = _heightPixels * PixelSize;
+			if (Mathf.Abs(_currentCoreUIElement.Width - width) > Mathf.Epsilon || Mathf.Abs(_currentCoreUIElement.Height - height) > Mathf.Epsilon)
+				_currentCoreUIElement.Resize(width, height);
+		}
+		
 		private void OnCreateContainer(object sender, BaseCoreUIView container)
 		{
-			if (!_overridePixelSize) _pixelSize = container._pixelSize;
 			DrawElement(container);
 		}
 

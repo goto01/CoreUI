@@ -9,6 +9,7 @@ namespace CoreUI
         
         public FlexibleImageMesh FlexibleImageMesh{get { return ((FlexibleImageMesh) _coreUIMesh); }}
         public float MinWidth{get { return FlexibleImageMesh.MinWidth; } }
+        
         public float Value
         {
             get { return _value; }
@@ -38,6 +39,11 @@ namespace CoreUI
         public CoreUIFlexibleImage(FlexibleImageMesh mesh) : base(mesh)
         {
             _originWidth = FlexibleImageMesh.Orientation == CoreUIOrientation.Horizontal ? mesh.Width : mesh.Height;
+        }
+
+        public void ResizeOriginSize(float width, float height)
+        {
+            _originWidth = FlexibleImageMesh.Orientation == CoreUIOrientation.Horizontal ? width : height;
         }
     }
 }
