@@ -9,7 +9,6 @@ namespace CoreUI
 		[SerializeField] private int _widthPixels;
 		[SerializeField] private int _heightPixels;
 		[SerializeField] private string _style;
-		[SerializeField] private bool _overridePixelSize;
 		[SerializeField] private float _pixelSize;
 		private CoreUIElement _currentCoreUIElement;
 		private BaseCoreUIView _parentCoreUIView;
@@ -56,14 +55,21 @@ namespace CoreUI
 		{
 			_widthPixels = Mathf.Max(0, _widthPixels);
 			_heightPixels = Mathf.Max(0, _heightPixels);
-			_currentCoreUIElement.Resize(_widthPixels * PixelSize, _heightPixels * PixelSize);
+			TryResize();
 			if (_static) return;
 			_currentCoreUIElement.Position = Transform.position;
 		}
 
+		protected virtual void TryResize()
+		{
+			var width = _widthPixels * PixelSize;
+			var height = _heightPixels * PixelSize;
+			if (Mathf.Abs(_currentCoreUIElement.Width - width) > Mathf.Epsilon || Mathf.Abs(_currentCoreUIElement.Height - height) > Mathf.Epsilon)
+				_currentCoreUIElement.Resize(width, height);
+		}
+		
 		private void OnCreateContainer(object sender, BaseCoreUIView container)
 		{
-			if (!_overridePixelSize) _pixelSize = container._pixelSize;
 			DrawElement(container);
 		}
 
@@ -77,11 +83,42 @@ namespace CoreUI
 
 		protected abstract CoreUIElement DrawElementInternal(CoreUIContainer parentContainer);
 		
+#if UNITY_EDITOR
+
+		public int WidthPixels
+		{
+			get => _widthPixels;
+			set => _widthPixels = value;
+		}
+		
+		public int HeightPixels
+		{
+			get => _heightPixels;
+			set => _heightPixels = value;
+		}
+		
+		public float PixelSizeEditor => _pixelSize;
+		
 		private void OnDrawGizmos()
 		{
-			Handles.DrawSolidRectangleWithOutline(new Rect(transform.position + Vector3.down * Height, 
-					new Vector2(Width, Height)), 
-				new Color(.1f, .1f, .1f, .1f), Color.black);
+			// if (Selection.objects.Length == 1 && Selection.objects[0] == gameObject)
+			// {
+			// 	Handles.DrawSolidRectangleWithOutline(new Rect(transform.position + Vector3.down * Height,
+			// 			new Vector2(Width, Height)),
+			// 		new Color(.1f, .1f, .1f, .1f), Color.black);
+			// 	Handles.BeginGUI();
+			// 	if (GUI.Button(new Rect(transform.position, new Vector2(100, 30)), "test"))
+			// 		Selection.objects = new[] {gameObject};
+			// 	Handles.EndGUI();
+			// 	
+			// } 
+			// else
+			// {
+				Handles.DrawSolidRectangleWithOutline(new Rect(transform.position + Vector3.down * Height,
+						new Vector2(Width, Height)),
+					new Color(.1f, .1f, .1f, .01f), Color.black);
+			// }
 		}
+#endif		
 	}
 }

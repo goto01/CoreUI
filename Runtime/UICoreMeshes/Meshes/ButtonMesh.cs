@@ -14,8 +14,8 @@ namespace CoreUI
             var buttonStyle = style as ButtonStyle;
             Height = buttonStyle.Height;
             _unpressedTexture = buttonStyle.UnpressedTexture;
-            GenerateVertices(buttonStyle.TileWidth);
-
+            GenerateVertices();
+            SetVertices(buttonStyle.TileWidth);
             Triangles = new List<int>()
             {
                 0, 1, 2, 0, 2, 3,
@@ -26,32 +26,59 @@ namespace CoreUI
             };
         }
 
-        private void GenerateVertices(float tileWidth)
+        private void GenerateVertices()
         {
-            PushVertex(0, - Height, 0, 0);
+            PushVertex(0, 0, 0, 0);
             PushVertex(0, 0, 0, 1);
-            PushVertex(tileWidth, 0, .25f, 1);
-            PushVertex(tileWidth, - Height, .25f, 0);
+            PushVertex(0, 0, .25f, 1);
+            PushVertex(0, 0, .25f, 0);
 
-            PushVertex(Width / 2f - tileWidth / 2f, 0, .5f, 1);
-            PushVertex(Width / 2f - tileWidth / 2f, - Height, .5f, 0);
+            PushVertex(0, 0, .5f, 1);
+            PushVertex(0, 0, .5f, 0);
 
-            PushVertex(Width / 2f + tileWidth / 2f, 0, .75f, 1);
-            PushVertex(Width / 2f + tileWidth / 2f, -Height, .75f, 0);
+            PushVertex(0, 0, .75f, 1);
+            PushVertex(0, 0, .75f, 0);
 
-            PushVertex(Width / 2f + tileWidth / 2f, - Height, .25f, 0);
-            PushVertex(Width / 2f + tileWidth / 2f, 0, .25f, 1);
-            PushVertex(Width - tileWidth, 0, .5f, 1);
-            PushVertex(Width - tileWidth, - Height, .5f, 0);
+            PushVertex(0, 0, .25f, 0);
+            PushVertex(0, 0, .25f, 1);
+            PushVertex(0, 0, .5f, 1);
+            PushVertex(0, 0, .5f, 0);
 
-            PushVertex(Width - tileWidth, - Height, .75f, 0);
-            PushVertex(Width - tileWidth, 0, .75f, 1);
-            PushVertex(Width, 0, 1, 1);
-            PushVertex(Width, - Height, 1, 0);
+            PushVertex(0, 0, .75f, 0);
+            PushVertex(0, 0, .75f, 1);
+            PushVertex(0, 0, 1, 1);
+            PushVertex(0, 0, 1, 0);
+        }
+        
+        private void SetVertices(float tileWidth)
+        {
+            var index = 0;
+            SetVertex(index++, 0, - Height);
+            SetVertex(index++, 0, 0);
+            SetVertex(index++, tileWidth, 0);
+            SetVertex(index++, tileWidth, - Height);
+            
+            SetVertex(index++, Width / 2f - tileWidth / 2f, 0);
+            SetVertex(index++, Width / 2f - tileWidth / 2f, - Height);
+            
+            SetVertex(index++, Width / 2f + tileWidth / 2f, 0);
+            SetVertex(index++, Width / 2f + tileWidth / 2f, -Height);
+            
+            SetVertex(index++, Width / 2f + tileWidth / 2f, - Height);
+            SetVertex(index++, Width / 2f + tileWidth / 2f, 0);
+            SetVertex(index++, Width - tileWidth, 0);
+            SetVertex(index++, Width - tileWidth, - Height);
+            
+            SetVertex(index++, Width - tileWidth, - Height);
+            SetVertex(index++, Width - tileWidth, 0);
+            SetVertex(index++, Width, 0);
+            SetVertex(index, Width, - Height);
         }
 
         protected override void ApplySize()
         {
+            var buttonStyle = (ButtonStyle) Style;
+            SetVertices(buttonStyle.TileWidth);
         }
     }
 }

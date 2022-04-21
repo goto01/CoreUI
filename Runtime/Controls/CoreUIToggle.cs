@@ -8,7 +8,11 @@ namespace CoreUI
 		private bool _pressed;
 		private Action<bool> _action;
 
-		public bool Toggled {get { return _pressed; }}
+		public bool Toggled
+		{
+			get { return _pressed; }
+			set { _pressed = value; }
+		}
 		
 		public override Texture2D Texture
 		{
